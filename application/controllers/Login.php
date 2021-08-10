@@ -8,23 +8,24 @@ class Login extends CI_Controller
 	{
 		$this->load->view('login');
 	}
-
-	public function dashboard()
-	{
-		$this->load->view('login-khusus');
-	}
-
+	
 	// Controller Aksi Login
 	public function CekLogin()
 	{
 
 		$user = $this->input->post('user');
 		$pass = $this->input->post('pass');
-		$dimana = array(
+		$dimanaSiswa = array(
 			'user' => ($user),
 			'pass' => md5($pass)
 		);
-		$cekSiswa = $this->m_login->cekSiswa('tb_siswa', $dimana)->num_rows();
+
+		$dimana = array(
+			'user' => $user,
+			'pass' => $pass
+		);
+
+		$cekSiswa = $this->m_login->cekSiswa('tb_siswa', $dimanaSiswa)->num_rows();
 		$cekAdmin = $this->m_login->cekAdmin('tb_admin', $dimana)->num_rows();
 		$cekGuru = $this->m_login->cekGuru('tb_guru', $dimana)->num_rows();
 		if ($cekSiswa > 0) {
@@ -34,33 +35,16 @@ class Login extends CI_Controller
 			);
 
 			$this->session->set_userdata($data_session);
-			$this->session->set_flashdata('login_siswa', 'Anda berhasil login sebagai siswa!');
+			$this->session->set_tempdata('login_siswa', 'Anda berhasil login sebagai siswa!', 1);
 			redirect('siswa');
-		} else {
-			$this->session->set_flashdata('login_gagal', 'Maaf username atau password tidak terdaftar!');
-			redirect('login');
-		}
-	}
-
-	public function cekSpesial()
-	{
-		$user = $this->input->post('user');
-		$pass = $this->input->post('pass');
-		$dimana = array(
-			'user' => $user,
-			'pass' => $pass
-		);
-		$cekSiswa = $this->m_login->cekSiswa('tb_siswa', $dimana)->num_rows();
-		$cekAdmin = $this->m_login->cekAdmin('tb_admin', $dimana)->num_rows();
-		$cekGuru = $this->m_login->cekGuru('tb_guru', $dimana)->num_rows();
-		if ($cekAdmin > 0) {
+		} else if ($cekAdmin > 0) {
 			$data_session = array(
 				'nama' => $user,
 				'status' => 'admin',
 			);
 
 			$this->session->set_userdata($data_session);
-			$this->session->set_flashdata('login_admin', 'Anda berhasil login sebagai admin!');
+			$this->session->set_tempdata('login_admin', 'Anda berhasil login sebagai admin!', 1);
 			redirect('admin');
 		} else if ($cekGuru > 0) {
 			$data_session = array(
@@ -69,11 +53,11 @@ class Login extends CI_Controller
 			);
 
 			$this->session->set_userdata($data_session);
-			$this->session->set_flashdata('login_guru', 'Anda berhasil login sebagai guru!');
+			$this->session->set_tempdata('login_guru', 'Anda berhasil login sebagai guru!', 0);
 			redirect('guru');
 		} else {
-			$this->session->set_flashdata('login_gagal', 'Maaf username atau password tidak terdaftar!');
-			redirect('login/dashboard');
+			$this->session->set_tempdata('login_gagal', 'Maaf username atau password tidak terdaftar!');
+			redirect('login');
 		}
 	}
 

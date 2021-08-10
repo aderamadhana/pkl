@@ -41,12 +41,12 @@ if ($this->session->flashdata('login_gagal') == TRUE) { ?>
 <body>
 	<?php
 
-	if ($this->session->flashdata('login_gagal') == TRUE) { ?>
+	if ($this->session->tempdata('login_gagal') == TRUE) { ?>
 	<script>
 		Swal.fire({
 			type: 'error',
 			title: 'Login Gagal!',
-			text: '<?php echo $this->session->flashdata('login_gagal'); ?>'
+			text: '<?php echo $this->session->tempdata('login_gagal'); ?>'
 		});
 	</script>
 	<?php }
@@ -61,39 +61,41 @@ if ($this->session->flashdata('login_gagal') == TRUE) { ?>
 		</div>
 		<form action="<?php echo base_url('login/CekLogin') ?>" method="POST">
 			<div class="col-dua">
-				<p class="judul-login">Login!</p>
-				<div class="row">
-					<div class="col-md-1"></div>
-					<div class="col-md-10" id="input">
-						<div class="form-group">
-							<div class="input-group input-group-alternative mb-4">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="ni ni-circle-08"></i></span>
+				<div class="cover">
+					<p class="judul-login">Login!</p>
+					<div class="row">
+						<div class="col-md-1"></div>
+						<div class="col-md-10" id="input">
+							<div class="form-group">
+								<div class="input-group input-group-alternative mb-4">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i class="ni ni-circle-08"></i></span>
+									</div>
+									<input class="form-control form-control-alternative" placeholder="Username" type="text" name="user">
 								</div>
-								<input class="form-control form-control-alternative" placeholder="Username" type="text" name="user">
 							</div>
 						</div>
 					</div>
-				</div>
 
-				<div class="row">
-					<div class="col-md-1"></div>
-					<div class="col-md-10" id="input">
-						<div class="form-group">
-							<div class="input-group input-group-alternative mb-4">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="ni ni-key-25"></i></span>
+					<div class="row">
+						<div class="col-md-1"></div>
+						<div class="col-md-10" id="input">
+							<div class="form-group">
+								<div class="input-group input-group-alternative mb-4">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i class="ni ni-key-25"></i></span>
+									</div>
+									<input class="form-control form-control-alternative" placeholder="Password" type="password" name="pass">
 								</div>
-								<input class="form-control form-control-alternative" placeholder="Password" type="text" name="pass">
 							</div>
 						</div>
 					</div>
-				</div>
 
-				<div class="row">
-					<div class="col-1"></div>
-					<div class="col-10">
-						<button type="submit" class="btn-login">Login</button>
+					<div class="row">
+						<div class="col-1"></div>
+						<div class="col-10">
+							<button type="submit" class="btn-login">Login</button>
+						</div>
 					</div>
 				</div>
 			</div>

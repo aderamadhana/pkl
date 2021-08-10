@@ -18,10 +18,15 @@ body {
 }
 
 .kotak {
+	position: fixed; /* or absolute */
+	top: 50%;
+	left: 50%;
+	/* bring your own prefixes */
+	transform: translate(-50%, -50%);
 	width: 70%;
-	height: 500px;
-	margin: -45% auto 0 auto;
-	position: relative;
+	/* height: 500px;
+	margin: -45% auto 0 auto; */
+	/* position: relative; */
 	border-radius: 15px;
 	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 
@@ -36,8 +41,13 @@ body {
 .col-satu {
 	width: 50%;
 	float: left;
+	height: 500px;
 	background-image: radial-gradient(circle farthest-corner at 0.5% 3%, rgba(98, 50, 122, 1) 0%, rgba(56, 0, 92, 1) 90.1%);
 	border-radius: 15px 0 0 15px;
+}
+
+.cover{
+	margin-top: 25%;
 }
 
 .col-dua {
@@ -72,7 +82,7 @@ body {
 }
 
 .btn-login:hover {
-	width: 80%;
+	width: 100%;
 	transition: all 0.5s ease;
 }
 
@@ -85,35 +95,74 @@ body {
 		overflow-y: scroll;
 	}
 
-	#foto-sekolah {
-		width: 150px;
-		height: 150px;
-		margin: 16% 0 20% 25.5%;
-	}
-
 	.kotak {
-		margin: 10% auto 0 auto;
+		margin: 0 auto;
 		border-radius: none;
 		width: 90%;
+	}
+	
+	.cover{
+		margin-top: 10%;
 	}
 
 	#input {
 		width: 90%;
-		margin-left: 5%;
 	}
 
 	.col-satu {
-		width: 100%;
-		border-radius: 15px 15px 0 0;
+		display:none;
 	}
 
 	.col-dua {
 		width: 100%;
 		border-radius: 0 0 15px 15px;
-		height: 310px;
+		height: 400px;
+		margin: 0;
+  		position: absolute;
+  		top: 50%;
+  		-ms-transform: translateY(-50%);
+  		transform: translateY(-50%);
 	}
-
+	
 	.btn-login {
 		width: 100%;
 	}
+}
+
+@media screen and (max-width: 769px) {
+
+	.cover{
+		margin-top: 5%;
+	}
+
+	#input {
+		width: 90%;
+		margin-left:5%;
+	}
+
+	.col-satu {
+		display:none;
+	}
+
+	.col-dua {
+		width: 100%;
+		border-radius: 0 0 15px 15px;
+		padding-top: 2%;
+		padding-bottom: 2%;
+	}
+
+	.judul-login{
+		margin-left:5%;	
+	}
+
+	.btn-login {
+		width: 90%;
+		margin-left:5%;
+	}
+
+	.btn-login:hover {
+		width: 90%;
+		transition: all 0.5s ease;
+	}
+	
 }

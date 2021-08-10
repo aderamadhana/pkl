@@ -27,12 +27,12 @@
 <body style="overflow-x: hidden;">
   <?php
 
-  if ($this->session->flashdata('login_admin') == TRUE) { ?>
+  if ($this->session->tempdata('login_admin') == TRUE) { ?>
     <script>
       Swal.fire({
         type: "success",
         title: "Selamat datang!",
-        text: "<?php echo $this->session->flashdata('login_admin') ?>"
+        text: "<?php echo $this->session->tempdata('login_admin') ?>"
       });
     </script>
   <?php }

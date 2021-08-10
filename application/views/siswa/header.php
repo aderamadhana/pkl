@@ -32,12 +32,12 @@
 </head>
 
 <body class="profile" style="background-color: #e9ecef;">
-  <?php if ($this->session->flashdata('login_siswa') == TRUE) : ?>
+  <?php if ($this->session->tempdata('login_siswa') == TRUE) : ?>
     <script>
       Swal.fire({
         type: "success",
         title: "Login berhasil!",
-        text: <?php echo $this->session->flashdata('login_siswa') ?>
+        text: <?php echo $this->session->tempdata('login_siswa') ?>
       });
     </script>
   <?php endif; ?>

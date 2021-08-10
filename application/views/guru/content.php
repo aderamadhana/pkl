@@ -1,22 +1,22 @@
 <?php
 
-if ($this->session->flashdata('login_guru') == TRUE) { ?>
+if ($this->session->tempdata('login_guru') == TRUE) { ?>
     <script>
         Swal.fire({
             type: "success",
             title: "Selamat Datang!",
-            text: "<?= $this->session->flashdata('login_guru') ?>"
+            text: "<?= $this->session->tempdata('login_guru') ?>"
         });
     </script>
     <?php $url = $_SERVER['REQUEST_URI'];
     header("Refresh: 1; URL=$url");
 }
-if ($this->session->flashdata('pesan') == TRUE) { ?>
+if ($this->session->tempdata('pesan') == TRUE) { ?>
     <script>
         Swal.fire({
             type: "success",
             title: "Selamat!",
-            text: "<?= $this->session->flashdata('pesan') ?>"
+            text: "<?= $this->session->tempdata('pesan') ?>"
         });
     </script>
     <?php $url = $_SERVER['REQUEST_URI'];
