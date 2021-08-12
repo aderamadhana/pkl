@@ -1,36 +1,36 @@
-<?php if ($this->session->flashdata('tambah_rekomendasi') == TRUE) : ?>
+<?php if ($this->session->tempdata('tambah_rekomendasi') == TRUE) : ?>
   <script>
     Swal.fire({
       type: 'success',
       title: 'Berhasil Ditambah!',
-      text: '<?php echo $this->session->flashdata('tambah_rekomendasi') ?>'
+      text: '<?php echo $this->session->tempdata('tambah_rekomendasi') ?>'
     });
   </script>
   <?php $url = $_SERVER['REQUEST_URI'];
-  header("Refresh: 1; URL=$url");
+  header("Refresh: 2; URL=$url");
 endif; ?>
 
-<?php if ($this->session->flashdata('update_rekomendasi') == TRUE) : ?>
+<?php if ($this->session->tempdata('update_rekomendasi') == TRUE) : ?>
   <script>
     Swal.fire({
       type: 'success',
       title: 'Update Berhasil!',
-      text: '<?php echo $this->session->flashdata('update_rekomendasi') ?>'
+      text: '<?php echo $this->session->tempdata('update_rekomendasi') ?>'
     });
   </script>
   <?php $url = $_SERVER['REQUEST_URI'];
-  header("Refresh: 1; URL=$url");
+  header("Refresh: 2; URL=$url");
 endif; ?>
-<?php if ($this->session->flashdata('delete_rekomendasi') == TRUE) : ?>
+<?php if ($this->session->tempdata('delete_rekomendasi') == TRUE) : ?>
   <script>
     Swal.fire({
       type: 'success',
       title: 'Hapus Berhasil!',
-      text: '<?php echo $this->session->flashdata('delete_rekomendasi') ?>'
+      text: '<?php echo $this->session->tempdata('delete_rekomendasi') ?>'
     });
   </script>
   <?php $url = $_SERVER['REQUEST_URI'];
-  header("Refresh: 1; URL=$url");
+  header("Refresh: 2; URL=$url");
 endif; ?>
 
 <div class="main-content">

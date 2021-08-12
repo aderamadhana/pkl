@@ -93,7 +93,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-key-25"></i></span>
                 </div>
-                <input class="form-control form-control-alternative" placeholder="Masukan Password Siswa" type="text" name="pass" required>
+                <input class="form-control form-control-alternative" placeholder="Masukan Password Siswa" type="password" name="pass" required>
               </div>
             </div>
           </div>

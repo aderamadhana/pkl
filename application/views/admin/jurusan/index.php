@@ -1,9 +1,9 @@
-<?php if ($this->session->flashdata('tambah_jurusan') == TRUE) : ?>
+<?php if ($this->session->tempdata('tambah_jurusan') == TRUE) : ?>
   <script>
     Swal.fire({
       type: 'success',
       title: 'Berhasil Ditambah!',
-      text: '<?php echo $this->session->flashdata('tambah_jurusan') ?>'
+      text: '<?php echo $this->session->tempdata('tambah_jurusan') ?>'
     });
   </script>
   <?php
@@ -11,12 +11,12 @@
   header("Refresh: 1; URL=$url");
 endif; ?>
 
-<?php if ($this->session->flashdata('update_jurusan') == TRUE) : ?>
+<?php if ($this->session->tempdata('update_jurusan') == TRUE) : ?>
   <script>
     Swal.fire({
       type: 'success',
       title: 'Update Berhasil!',
-      text: '<?php echo $this->session->flashdata('update_jurusan') ?>'
+      text: '<?php echo $this->session->tempdata('update_jurusan') ?>'
     });
   </script>
   <?php
@@ -24,12 +24,12 @@ endif; ?>
   header("Refresh: 1; URL=$url");
 endif; ?>
 
-<?php if ($this->session->flashdata('delete_jurusan') == TRUE) : ?>
+<?php if ($this->session->tempdata('delete_jurusan') == TRUE) : ?>
   <script>
     Swal.fire({
       type: 'success',
       title: 'Data Terhapus!',
-      text: '<?php echo $this->session->flashdata('delete_jurusan') ?>'
+      text: '<?php echo $this->session->tempdata('delete_jurusan') ?>'
     });
   </script>
   <?php

@@ -56,7 +56,7 @@
             <i class="ni ni-paper-diploma"></i> Nilai Pkl Siswa
           </a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <?php
           $cuy  = $this->db->query("SELECT * FROM tb_ngungsi")->num_rows();
           if ($cuy > 0) { ?>
@@ -69,7 +69,7 @@
             <i class="fa fa-comments"></i> Chat
           </a>
           <?php } ?>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link" id="navv" href="<?php echo base_url('admin/daftarGuru') ?>">
             <i class="ni ni-circle-08"></i> Daftar Guru

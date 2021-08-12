@@ -1,28 +1,42 @@
-<?php if ($this->session->flashdata('tambah_siswa') == TRUE) : ?>
+<?php if ($this->session->tempdata('tambah_siswa') == TRUE) : ?>
   <script>
     Swal.fire({
       type: 'success',
       title: 'Berhasil Ditambah!',
-      text: '<?php echo $this->session->flashdata('tambah_siswa') ?>'
+      text: '<?php echo $this->session->tempdata('tambah_siswa') ?>'
     });
   </script>
   <?php
   $url = $_SERVER['REQUEST_URI'];
-  header("Refresh: 1; URL=$url");
+  header("Refresh: 2; URL=$url");
 endif; ?>
 
-<?php if ($this->session->flashdata('update_siswa') == TRUE) : ?>
+<?php if ($this->session->tempdata('update_siswa') == TRUE) : ?>
   <script>
     Swal.fire({
       type: 'success',
       title: 'Update Berhasil!',
-      text: '<?php echo $this->session->flashdata('update_siswa') ?>'
+      text: '<?php echo $this->session->tempdata('update_siswa') ?>'
     });
   </script>
   <?php
   $url = $_SERVER['REQUEST_URI'];
-  header("Refresh: 1; URL=$url");
+  header("Refresh: 2; URL=$url");
 endif; ?>
+
+<?php if ($this->session->tempdata('delete_siswa') == TRUE) : ?>
+  <script>
+    Swal.fire({
+      type: 'success',
+      title: 'Delete Berhasil!',
+      text: '<?php echo $this->session->tempdata('delete_siswa') ?>'
+    });
+  </script>
+  <?php
+  $url = $_SERVER['REQUEST_URI'];
+  header("Refresh: 2; URL=$url");
+endif; ?>
+
 <div class="main-content">
   <!-- Navbar -->
   <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">

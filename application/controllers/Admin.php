@@ -108,7 +108,7 @@ class Admin extends CI_Controller
 
 
 			$this->m_admin->tambahSiswa('tb_siswa', $data);
-			$this->session->set_flashdata('tambah_siswa', 'Siswa Berhasil Di tambah');
+			$this->session->set_tempdata('tambah_siswa', 'Siswa Berhasil Di tambah', 0);
 			redirect('admin/daftarSiswa');
 		} else {
 			$nis 		= $this->input->post('nis');
@@ -133,7 +133,7 @@ class Admin extends CI_Controller
 			);
 
 			$this->m_admin->tambahSiswa('tb_siswa', $data);
-			$this->session->set_flashdata('tambah_siswa', 'Siswa Berhasil Di tambah');
+			$this->session->set_tempdata('tambah_siswa', 'Siswa Berhasil Di tambah', 0);
 			redirect('admin/daftarSiswa');
 		}
 	}
@@ -182,7 +182,7 @@ class Admin extends CI_Controller
 			);
 
 			$this->m_admin->updateSiswa($data, $dimana);
-			$this->session->set_flashdata('update_siswa', 'Data Berhasil Di Update!');
+			$this->session->set_tempdata('update_siswa', 'Data Berhasil Di Update!', 0);
 			redirect('admin/daftarSiswa');
 		} else {
 			$id = $this->input->post('id');
@@ -209,7 +209,7 @@ class Admin extends CI_Controller
 			);
 
 			$this->m_admin->updateSiswa($data, $dimana);
-			$this->session->set_flashdata('update_siswa', 'Data Berhasil Di Update!');
+			$this->session->set_tempdata('update_siswa', 'Data Berhasil Di Update!', 0);
 			redirect('admin/daftarSiswa');
 		}
 	}
@@ -218,7 +218,7 @@ class Admin extends CI_Controller
 	{
 		$dimana = array("id_siswa" => $id);
 		$this->m_admin->deleteSiswa($dimana);
-		$this->session->set_flashdata('delete_siswa', 'Data Berhasil Di Hapus!');
+		$this->session->set_tempdata('delete_siswa', 'Data Berhasil Di Hapus!', 0);
 		redirect('admin/daftarSiswa');
 	}
 
@@ -291,7 +291,7 @@ class Admin extends CI_Controller
 		);
 
 		$this->m_admin->updateTempat($dimana, $data);
-		$this->session->set_flashdata('update_tempat', 'Data Berhasil Di Update!');
+		$this->session->set_tempdata('update_tempat', 'Data Berhasil Di Update!', 0);
 		redirect('admin/tempatSiswa');
 	}
 
@@ -368,11 +368,11 @@ class Admin extends CI_Controller
 				'file_berkas' => $berkas['file_name']
 			);
 			$this->m_admin->tambahBerkas($data);
-			$this->session->set_flashdata('tambah_berkas', 'Berkas Berhasil di tambah!');
+			$this->session->set_tempdata('tambah_berkas', 'Berkas Berhasil di tambah!', 0);
 			$this->load->view('admin/sidebar');
 			redirect('admin/daftarBerkas');
 		} else {
-			$this->session->set_flashdata('gagal_berkas', 'Tipe Berkas File tidak di dukung!');
+			$this->session->set_tempdata('gagal_berkas', 'Tipe Berkas File tidak di dukung!', 0);
 			redirect('admin/daftarBerkas');
 		}
 	}
@@ -407,7 +407,7 @@ class Admin extends CI_Controller
 			);
 
 			$this->m_admin->updateBerkas($dimana, $data);
-			$this->session->set_flashdata('update_berkas', 'Berkas Berhasil di Update!');
+			$this->session->set_tempdata('update_berkas', 'Berkas Berhasil di Update!', 0);
 			redirect('admin/daftarBerkas');
 		} else {
 			$id = $this->input->post('id');
@@ -422,7 +422,7 @@ class Admin extends CI_Controller
 			);
 
 			$this->m_admin->updateBerkas($dimana, $data);
-			$this->session->set_flashdata('update_berkas', 'Berkas Berhasil di Update!');
+			$this->session->set_tempdata('update_berkas', 'Berkas Berhasil di Update!', 0);
 			redirect('admin/daftarBerkas');
 		}
 	}
@@ -432,7 +432,7 @@ class Admin extends CI_Controller
 
 		$dimana = array('id_berkas' => $id);
 		$this->m_admin->deleteBerkas('tb_berkas', $dimana);
-
+		$this->session->set_tempdata('delete_berkas', 'Berkas Berhasil di Hapus!', 0);
 		redirect('admin/daftarBerkas');
 	}
 	// START FUNCTION TEMPAT REKOMENDASI
@@ -524,7 +524,7 @@ class Admin extends CI_Controller
 
 			$this->m_admin->tambahRekomendasi('tb_tempat_rekomendasi', $data);
 
-			$this->session->set_flashdata('tambah_rekomendasi', 'Data berhasil di tambah!');
+			$this->session->set_tempdata('tambah_rekomendasi', 'Data berhasil di tambah!', 0);
 
 			redirect('admin/tempatRekomendasi');
 		}
@@ -585,7 +585,7 @@ class Admin extends CI_Controller
 			$dimana = array('id_rekomendasi' => $id);
 
 			$this->m_admin->updateRekomendasi($dimana, $data);
-			$this->session->set_flashdata('update_rekomendasi', 'Data Berhasil di Update!');
+			$this->session->set_tempdata('update_rekomendasi', 'Data Berhasil di Update!', 0);
 			redirect('admin/tempatRekomendasi');
 		} else {
 			$id = $this->input->post('id');
@@ -620,7 +620,7 @@ class Admin extends CI_Controller
 			$dimana = array('id_rekomendasi' => $id);
 
 			$this->m_admin->updateRekomendasi($dimana, $data);
-			$this->session->set_flashdata('update_rekomendasi', 'Data Berhasil di Update!');
+			$this->session->set_tempdata('update_rekomendasi', 'Data Berhasil di Update!', 0);
 			redirect('admin/tempatRekomendasi');
 		}
 	}
@@ -629,7 +629,7 @@ class Admin extends CI_Controller
 	{
 		$dimana = array('id_rekomendasi' => $id);
 		$this->m_admin->deleteRekomendasi('tb_tempat_rekomendasi', $dimana);
-		$this->session->set_flashdata('delete_rekomendasi', 'Data Berhasil di Hapus!');
+		$this->session->set_tempdata('delete_rekomendasi', 'Data Berhasil di Hapus!', 0);
 		redirect('admin/tempatRekomendasi');
 	}
 	// START FUNCTION JURUSAN
@@ -691,7 +691,7 @@ class Admin extends CI_Controller
 			'nama_panjang' => $panjang
 		);
 		$this->m_admin->tambahJurusan($data);
-		$this->session->set_flashdata('tambah_jurusan', 'Data Berhasil di Tambah!');
+		$this->session->set_tempdata('tambah_jurusan', 'Data Berhasil di Tambah!', 0);
 		redirect('admin/jurusan');
 	}
 
@@ -717,7 +717,7 @@ class Admin extends CI_Controller
 			'nama_panjang' => $panjang
 		);
 		$this->m_admin->updateJurusan($dimana, $data);
-		$this->session->set_flashdata('update_jurusan', 'Data Berhasil di Update!');
+		$this->session->set_tempdata('update_jurusan', 'Data Berhasil di Update!', 0);
 		redirect('admin/jurusan');
 	}
 
@@ -725,7 +725,7 @@ class Admin extends CI_Controller
 	{
 		$dimana = array('id_jurusan' => $id);
 		$this->m_admin->deleteJurusan($dimana);
-		$this->session->set_flashdata('delete_jurusan', 'Data Berhasil di Hapus!');
+		$this->session->set_tempdata('delete_jurusan', 'Data Berhasil di Hapus!', 0);
 		redirect('admin/jurusan');
 	}
 
@@ -799,7 +799,7 @@ class Admin extends CI_Controller
 
 		$this->m_admin->kirimPesan($data);
 		$this->db->delete('tb_sementara', $dimana);
-		$this->session->set_flashdata('kirim_pesan', 'Pesan anda telah di kirim ke siswa!');
+		$this->session->set_tempdata('kirim_pesan', 'Pesan anda telah di kirim ke siswa!', 0);
 		redirect('admin/notif');
 	}
 
@@ -866,7 +866,7 @@ class Admin extends CI_Controller
 		$this->m_siswa->tambah('tb_notif', $kepo);
 		$this->m_siswa->tambah('tb_tempat_siswa', $data);
 		$this->db->delete('tb_sementara', $dimana);
-		$this->session->set_flashdata('oke', 'Siswa telah di konfirmasi');
+		$this->session->set_tempdata('oke', 'Siswa telah di konfirmasi', 0);
 		redirect('admin/notif');
 	}
 
@@ -970,7 +970,7 @@ class Admin extends CI_Controller
 		$query				= $this->db->query("SELECT * FROM tb_absensi_manual WHERE id_siswa = '$id' AND bulan = '$bulan' ");
 
 		if ($query->num_rows() > 0) {
-			$this->session->set_flashdata('bulan_sama', 'Maaf untuk bulan ini anda sudah menginputkan data!');
+			$this->session->set_tempdata('bulan_sama', 'Maaf untuk bulan ini anda sudah menginputkan data!', 0);
 			redirect('admin/absensi');
 		} else {
 			$data				= array(
@@ -983,7 +983,7 @@ class Admin extends CI_Controller
 			);
 
 			$this->db->insert('tb_absensi_manual', $data);
-			$this->session->set_flashdata('input_absen', 'Data berhasil di tambah!');
+			$this->session->set_tempdata('input_absen', 'Data berhasil di tambah!', 0);
 			redirect('admin/absensi');
 		}
 	}
@@ -1031,12 +1031,12 @@ class Admin extends CI_Controller
 		);
 		$cek				= $this->db->query("SELECT bulan FROM tb_absensi_manual WHERE id_siswa = '$id' AND bulan = '$bulan' ")->num_rows();
 		if ($cek > 0) {
-			$this->session->set_flashdata('gagal_ubah', 'Maaf bulan yang ingin anda ubah sudah ada datanya!');
+			$this->session->set_tempdata('gagal_ubah', 'Maaf bulan yang ingin anda ubah sudah ada datanya!', 0);
 			redirect('admin/absensi');
 		} else {
 
 			$this->db->query("UPDATE tb_absensi_manual SET bulan = '$bulan', masuk = '$masuk', ijin = '$ijin', sakit = '$sakit' WHERE id_siswa = '$id' AND bulan = '$kepo' ");
-			$this->session->set_flashdata('ubah_manu', 'Data berhasil di ubah!');
+			$this->session->set_tempdata('ubah_manu', 'Data berhasil di ubah!', 0);
 			redirect('admin/absensi');
 		}
 	}
@@ -1102,7 +1102,7 @@ class Admin extends CI_Controller
 		);
 
 		$this->m_admin->addGuru($data);
-		$this->session->set_flashdata('tambah_guru', 'Guru Berhasil di tambah!');
+		$this->session->set_tempdata('tambah_guru', 'Guru Berhasil di tambah!', 0);
 		redirect('admin/daftarGuru');
 	}
 
@@ -1131,7 +1131,7 @@ class Admin extends CI_Controller
 			'pass'	=> $pass,
 		);
 		$this->m_admin->updateGuru($dimana, $data);
-		$this->session->set_flashdata('update_guru', 'Data guru berhasil di update!');
+		$this->session->set_tempdata('update_guru', 'Data guru berhasil di update!', 0);
 		redirect('admin/daftarGuru');
 	}
 
@@ -1139,7 +1139,7 @@ class Admin extends CI_Controller
 	{
 		$dimana = array('id_guru' => $id);
 		$this->db->delete('tb_guru', $dimana);
-		$this->session->set_flashdata('delete_guru', 'Data Guru telah terhapus!');
+		$this->session->set_tempdata('delete_guru', 'Data Guru telah terhapus!', 0);
 		redirect('admin/daftarGuru');
 	}
 
@@ -1309,7 +1309,7 @@ class Admin extends CI_Controller
 		);
 
 		$this->m_admin->tambahRekomendasi('tb_nilai', $data);
-		$this->session->set_flashdata('input_nilai', 'Nilai Berhasil di Tambah!');
+		$this->session->set_tempdata('input_nilai', 'Nilai Berhasil di Tambah!', 0);
 		redirect('admin/nilaiSiswa');
 	}
 
@@ -1335,7 +1335,7 @@ class Admin extends CI_Controller
 			$this->load->view('admin/nilai/edit', $data);
 		} else {
 			$this->m_admin->ubahDataNilaiSiswa();
-			$this->session->set_flashdata('flash', 'Ditambahkan');
+			$this->session->set_tempdata('flash', 'Ditambahkan', 0);
 			redirect('admin/nilaiSiswa');
 		}
 	}
@@ -1364,7 +1364,7 @@ class Admin extends CI_Controller
 		);
 
 		$this->m_admin->updateNilai($dimana, $data);
-		$this->session->set_flashdata('ubah_nilai', 'Nilai Berhasil di Ubah!');
+		$this->session->set_tempdata('ubah_nilai', 'Nilai Berhasil di Ubah!', 0);
 		redirect('admin/nilaiSiswa');
 	}
 

@@ -36,6 +36,10 @@
               </div>
             </a>
             <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+              <a href="" class="dropdown-item">
+                <i class="ni ni-circle-08"></i>
+                <span>Update Profil</span>
+              </a>
               <a href="<?php echo base_url('admin/notif') ?>" class="dropdown-item">
                 <i class="ni ni-notification-70"></i>
                 <span>Notifikasi (<?php echo $baris; ?>)</span>
