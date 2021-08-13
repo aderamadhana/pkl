@@ -83,7 +83,7 @@ class Guru extends CI_Controller
         );
 
         $this->m_guru->insert('tb_monitoring', $data);
-        $this->session->set_flashdata('pesan', 'Pesan anda telah tersampaikan ke admin');
+        $this->session->set_tempdata('pesan', 'Pesan anda telah tersampaikan ke admin', 0);
         redirect('guru');
     }
     public function kejadian()

@@ -1,6 +1,6 @@
 <?php
 
-if ($this->session->flashdata('absen') ==  TRUE) { ?>
+if ($this->session->tempdata('absen') ==  TRUE) { ?>
 <?php
     $url = $_SERVER['REQUEST_URI'];
     header("Refresh: 1; URL=$url");

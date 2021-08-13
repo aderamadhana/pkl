@@ -1,32 +1,32 @@
-<?php if ($this->session->flashdata('tambah_siswa') == TRUE) : ?>
+<?php if ($this->session->tempdata('tambah_siswa') == TRUE) : ?>
   <script>
     Swal.fire({
       type: 'success',
       title: 'Berhasil Ditambah!',
-      text: '<?php echo $this->session->flashdata('tambah_siswa') ?>'
+      text: '<?php echo $this->session->tempdata('tambah_siswa') ?>'
     });
   </script>
   <?php $url = $_SERVER['REQUEST_URI'];
   header("Refresh: 1; URL=$url");
 endif; ?>
 
-<?php if ($this->session->flashdata('update_tempat') == TRUE) : ?>
+<?php if ($this->session->tempdata('update_tempat') == TRUE) : ?>
   <script>
     Swal.fire({
       type: 'success',
       title: 'Update Berhasil!',
-      text: '<?php echo $this->session->flashdata('update_tempat') ?>'
+      text: '<?php echo $this->session->tempdata('update_tempat') ?>'
     });
   </script>
   <?php $url = $_SERVER['REQUEST_URI'];
   header("Refresh: 1; URL=$url");
 endif; ?>
-<?php if ($this->session->flashdata('delete_siswa') == TRUE) : ?>
+<?php if ($this->session->tempdata('delete_siswa') == TRUE) : ?>
   <script>
     Swal.fire({
       type: 'success',
       title: 'Hapus Berhasil!',
-      text: '<?php echo $this->session->flashdata('delete_siswa') ?>'
+      text: '<?php echo $this->session->tempdata('delete_siswa') ?>'
     });
   </script>
   <?php $url = $_SERVER['REQUEST_URI'];

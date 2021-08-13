@@ -1,41 +1,41 @@
 <div class="main-content">
     <?php
 
-    if ($this->session->flashdata('input_absen') == TRUE) { ?>
+    if ($this->session->tempdata('input_absen') == TRUE) { ?>
         <script>
             Swal.fire({
                 type: 'success',
                 title: 'Selamat!',
-                text: '<?= $this->session->flashdata('input_absen') ?>'
+                text: '<?= $this->session->tempdata('input_absen') ?>'
             });
         </script>
     <?php }
 
-    if ($this->session->flashdata('bulan_sama') == TRUE) { ?>
+    if ($this->session->tempdata('bulan_sama') == TRUE) { ?>
         <script>
             Swal.fire({
                 type: 'error',
                 title: 'Input Gagal!',
-                text: '<?= $this->session->flashdata('bulan_sama') ?>'
+                text: '<?= $this->session->tempdata('bulan_sama') ?>'
             });
         </script>
     <?php }
 
-    if ($this->session->flashdata('ubah_manu') == TRUE) { ?>
+    if ($this->session->tempdata('ubah_manu') == TRUE) { ?>
         <script>
             Swal.fire({
                 type: 'success',
                 title: 'Selamat!',
-                text: '<?= $this->session->flashdata('ubah_manu') ?>'
+                text: '<?= $this->session->tempdata('ubah_manu') ?>'
             });
         </script>
     <?php }
-    if ($this->session->flashdata('gagal_ubah') == TRUE) { ?>
+    if ($this->session->tempdata('gagal_ubah') == TRUE) { ?>
         <script>
             Swal.fire({
                 type: 'error',
                 title: 'Maaf!',
-                text: '<?= $this->session->flashdata('gagal_ubah') ?>'
+                text: '<?= $this->session->tempdata('gagal_ubah') ?>'
             });
         </script>
     <?php }

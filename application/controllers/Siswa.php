@@ -94,7 +94,7 @@ class Siswa extends CI_Controller
 			);
 
 			$this->m_siswa->update($dimana, $data, 'tb_siswa');
-			$this->session->set_flashdata('update_profile', 'Profile Berhasil di Update!');
+			$this->session->set_tempdata('update_profile', 'Profile Berhasil di Update!', 0);
 			$data_session = array(
 				'nama_siswa' => $nama,
 				'status' => 'login'
@@ -114,7 +114,7 @@ class Siswa extends CI_Controller
 			);
 
 			$this->m_siswa->update($dimana, $data, 'tb_siswa');
-			$this->session->set_flashdata('update_profile', 'Profile Berhasil di Update!');
+			$this->session->set_tempdata('update_profile', 'Profile Berhasil di Update!', 0);
 			$data_session = array(
 				'nama_siswa' => $nama,
 				'status' => 'login'
@@ -209,7 +209,7 @@ class Siswa extends CI_Controller
 			);
 
 			$this->m_siswa->tambah('tb_sementara', $data);
-			$this->session->set_flashdata('unggah_bukti', 'Tunggu Konfirmasi Selanjutnya ya!');
+			$this->session->set_tempdata('unggah_bukti', 'Tunggu Konfirmasi Selanjutnya ya!', 0);
 
 			redirect('siswa');
 		}
@@ -231,7 +231,7 @@ class Siswa extends CI_Controller
 		$eko	= $this->db->query("SELECT nama_siswa FROM tb_siswa WHERE id_siswa = '$id' ");
 		$ho 	= $eko->row();
 		$this->db->delete('tb_notif', $dimana);
-		$this->session->set_flashdata('oke', ' silahkan di coba lagi ya, ' . $ho->nama_siswa);
+		$this->session->set_tempdata('oke', ' silahkan di coba lagi ya, ' . $ho->nama_siswa, 0);
 		redirect('siswa/notif/' . $id);
 	}
 
@@ -276,7 +276,7 @@ class Siswa extends CI_Controller
 			);
 
 			$this->m_siswa->tambah('tb_sementara', $data);
-			$this->session->set_flashdata('tambah_daf', 'Tunggu konfirmasi dulu ya');
+			$this->session->set_tempdata('tambah_daf', 'Tunggu konfirmasi dulu ya', 0);
 			redirect('siswa');
 		}
 	}
@@ -312,7 +312,7 @@ class Siswa extends CI_Controller
 		);
 
 		$res			= $this->m_siswa->insert($data);
-		$this->session->set_flashdata('absen', 'Anda telah absen hari ini');
+		$this->session->set_tempdata('absen', 'Anda telah absen hari ini', 0);
 		echo json_encode($res);
 	}
 
@@ -332,7 +332,7 @@ class Siswa extends CI_Controller
 		);
 
 		$this->m_siswa->update($dimana, $data, 'tb_siswa');
-		$this->session->set_flashdata('tamdesk', 'Diskripsi Telah Di Tambah!');
+		$this->session->set_tempdata('tamdesk', 'Diskripsi Telah Di Tambah!', 0);
 		redirect(base_url('siswa/profile/') . $id);
 	}
 

@@ -1,6 +1,6 @@
 <?php
 
-if ($this->session->flashdata('tamdesk') ==  TRUE) : ?>
+if ($this->session->tempdata('tamdesk') ==  TRUE) : ?>
 <script>
 	Swal.fire({
 		type: "success",

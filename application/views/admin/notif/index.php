@@ -1,11 +1,11 @@
 <?php
 
-if ($this->session->flashdata('kirim_pesan') == TRUE) : ?>
+if ($this->session->tempdata('kirim_pesan') == TRUE) : ?>
   <script>
     Swal.fire({
       type: "success",
       title: "Pesan Terkirim!",
-      text: "<?php echo $this->session->flashdata('kirim_pesan') ?>"
+      text: "<?php echo $this->session->tempdata('kirim_pesan') ?>"
     });
   </script>
   <?php
@@ -13,12 +13,12 @@ if ($this->session->flashdata('kirim_pesan') == TRUE) : ?>
   $url = $_SERVER['REQUEST_URI'];
   header("Refresh: 1; URL=$url");
 endif;
-if ($this->session->flashdata('oke') == TRUE) : ?>
+if ($this->session->tempdata('oke') == TRUE) : ?>
 
   <script>
     Swal.fire({
       type: "success",
-      title: "<?= $this->session->flashdata('oke') ?>"
+      title: "<?= $this->session->tempdata('oke') ?>"
     })
   </script>
 

@@ -1,35 +1,35 @@
 <?php
 
-if ($this->session->flashdata('tambah_guru') == TRUE) : ?>
+if ($this->session->tempdata('tambah_guru') == TRUE) : ?>
 <script>
     Swal.fire({
         type: "success",
         title: "Selamat!",
-        text: "<?= $this->session->flashdata('tambah_guru') ?>"
+        text: "<?= $this->session->tempdata('tambah_guru') ?>"
     })
 </script>
 <?php $url = $_SERVER['REQUEST_URI'];
     header("Refresh: 2; URL=$url");
 endif;
 
-if ($this->session->flashdata('update_guru') == TRUE) : ?>
+if ($this->session->tempdata('update_guru') == TRUE) : ?>
 <script>
     Swal.fire({
         type: "success",
         title: "Update Berhasil!",
-        text: "<?= $this->session->flashdata('update_guru') ?>"
+        text: "<?= $this->session->tempdata('update_guru') ?>"
     })
 </script>
 <?php $url = $_SERVER['REQUEST_URI'];
     header("Refresh: 2; URL=$url");
 endif;
 
-if ($this->session->flashdata('delete_guru') == TRUE) : ?>
+if ($this->session->tempdata('delete_guru') == TRUE) : ?>
 <script>
     Swal.fire({
         type: "success",
         title: "Delete Berhasil!",
-        text: "<?= $this->session->flashdata('delete_guru') ?>"
+        text: "<?= $this->session->tempdata('delete_guru') ?>"
     })
 </script>
 <?php $url = $_SERVER['REQUEST_URI'];

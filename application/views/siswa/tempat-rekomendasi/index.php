@@ -4,12 +4,12 @@
 // $select  = $this->db->query("SELECT * FROM tb_siswa INNER JOIN tb_jurusan ON tb_siswa.jurusan = tb_jurusan.nama_singkat WHERE user = '$session' ");
 // $r   = $select->row();
 
-if ($this->session->flashdata('update_profile') == TRUE) { ?>
+if ($this->session->tempdata('update_profile') == TRUE) { ?>
 <script>
 	Swal.fire({
 		type: 'success',
 		title: 'Update Berhasil!',
-		text: '<?php echo $this->session->flashdata('update_profile') ?>'
+		text: '<?php echo $this->session->tempdata('update_profile') ?>'
 	});
 </script>
 <?php }

@@ -1,23 +1,23 @@
 <?php
 
-if ($this->session->flashdata('input_nilai') == TRUE) { ?>
+if ($this->session->tempdata('input_nilai') == TRUE) { ?>
     <script>
         Swal.fire({
             type: "success",
             title: "Sukses!",
-            text: "<?= $this->session->flashdata('input_nilai') ?>"
+            text: "<?= $this->session->tempdata('input_nilai') ?>"
         });
     </script>
 <?php $url = $_SERVER['REQUEST_URI'];
     header("Refresh: 1; URL=$url");
 } ?>
 
-<?php if ($this->session->flashdata('ubah_nilai') == TRUE) { ?>
+<?php if ($this->session->tempdata('ubah_nilai') == TRUE) { ?>
     <script>
         Swal.fire({
             type: "success",
             title: "Sukses!",
-            text: "<?= $this->session->flashdata('ubah_nilai') ?>"
+            text: "<?= $this->session->tempdata('ubah_nilai') ?>"
         });
     </script>
 <?php $url = $_SERVER['REQUEST_URI'];
