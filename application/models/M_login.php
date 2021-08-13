@@ -10,6 +10,9 @@
 		public function cekGuru($table, $dimana){
 			return $this->db->get_where($table, $dimana);
 		}
+		public function cekIndustri($table, $dimana){
+			return $this->db->get_where($table, $dimana);
+		}
 	}
 
 ?>

@@ -28,6 +28,7 @@ class Login extends CI_Controller
 		$cekSiswa = $this->m_login->cekSiswa('tb_siswa', $dimanaSiswa)->num_rows();
 		$cekAdmin = $this->m_login->cekAdmin('tb_admin', $dimana)->num_rows();
 		$cekGuru = $this->m_login->cekGuru('tb_guru', $dimana)->num_rows();
+		$cekIndustri = $this->m_login->cekIndustri('tb_tempat_rekomendasi', $dimana)->num_rows();
 		if ($cekSiswa > 0) {
 			$data_session = array(
 				'user' => $user,
@@ -55,7 +56,16 @@ class Login extends CI_Controller
 			$this->session->set_userdata($data_session);
 			$this->session->set_tempdata('login_guru', 'Anda berhasil login sebagai guru!', 0);
 			redirect('guru');
-		} else {
+		} else if ($cekIndustri > 0) {
+			$data_session = array(
+				'industri' => $user,
+				'status' => 'industri',
+			);
+
+			$this->session->set_userdata($data_session);
+			$this->session->set_tempdata('login_industri', 'Anda berhasil login sebagai industri!', 0);
+			redirect('industri');
+		}else {
 			$this->session->set_tempdata('login_gagal', 'Maaf username atau password tidak terdaftar!');
 			redirect('login');
 		}
