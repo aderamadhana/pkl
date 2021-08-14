@@ -27,6 +27,20 @@ class m_admin extends CI_Model
 		return $oke->result();
 	}
 
+	public function ambil_waktu($query, $perPage, $offset)
+	{
+		// $this->db->select("*");
+		// $this->db->from('tb_siswa');
+		if ($query != "") {
+			$oke = $this->db->query("SELECT * FROM tb_periode WHERE tgl_start LIKE '%" . $query . "%' ORDER BY id_periode ASC");
+		} else {
+			$oke = $this->db->get('tb_periode', $perPage, $offset);
+			$this->db->order_by('tgl_start', 'ASC');
+		}
+
+		return $oke->result();
+	}
+
 	// Start Function All Jurusan
 	public function allJurusan($table, $perPage, $offset)
 	{
@@ -315,5 +329,27 @@ class m_admin extends CI_Model
 	public function showCetakNilai()
 	{
 		return $this->db->get('tb_absensi')->result();
+	}
+
+	public function tambahWaktuPKL($table, $data)
+	{
+		$this->db->insert($table, $data);
+	}
+
+	public function waktuTer($table, $dimana)
+	{
+		return $this->db->get_where($table, $dimana);
+	}
+
+	public function updateWaktuPKL($data, $dimana)
+	{
+		$this->db->where($dimana);
+		$this->db->update('tb_periode', $data);
+	}
+
+	public function deleteWaktuPKL($dimana)
+	{
+		$this->db->where($dimana);
+		$this->db->delete('tb_periode');
 	}
 }

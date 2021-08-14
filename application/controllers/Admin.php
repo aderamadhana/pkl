@@ -507,6 +507,8 @@ class Admin extends CI_Controller
 			$foto       = $this->upload->data();
 			$visi		= $this->input->post('visi');
 			$misi		= $this->input->post('misi');
+			$user		= $this->input->post('user');
+			$pass		= $this->input->post('pass');
 			$jumlah     = implode(", ", $jurusan);
 
 
@@ -517,7 +519,9 @@ class Admin extends CI_Controller
 				'foto'    => $foto['file_name'],
 				'cp'      => $cp,
 				'misi'	  => $misi,
-				'visi'	  => $visi
+				'visi'	  => $visi,
+				'user'	  => $user,
+				'pass'	  => $pass
 			);
 
 
@@ -559,6 +563,8 @@ class Admin extends CI_Controller
 			$foto 		= $this->input->post('gambar');
 			$visi		= $this->input->post('visi');
 			$misi		= $this->input->post('misi');
+			$user		= $this->input->post('user');
+			$pass		= $this->input->post('pass');
 			$jumlah 	= implode(", ", $jurusan);
 
 			if ($jumlah == "") {
@@ -569,7 +575,9 @@ class Admin extends CI_Controller
 					'jurusan_perusahaan' => $jurusan,
 					'foto' => $foto,
 					'misi'	  => $misi,
-					'visi'	  => $visi
+					'visi'	  => $visi,
+					'user'	  => $user,
+					'pass'	  => $pass
 				);
 			} else {
 				$data = array(
@@ -579,7 +587,9 @@ class Admin extends CI_Controller
 					'jurusan_perusahaan' => $jumlah,
 					'foto' => $foto,
 					'misi'	  => $misi,
-					'visi'	  => $visi
+					'visi'	  => $visi,
+					'user'	  => $user,
+					'pass'	  => $pass
 				);
 			}
 			$dimana = array('id_rekomendasi' => $id);
@@ -1383,5 +1393,109 @@ class Admin extends CI_Controller
 		$this->pdf->setPaper('A4', 'potrait');
 		$this->pdf->filename = "laporan-petanikode.pdf";
 		$this->pdf->load_view('laporan_pdf', $data);
+	}
+
+	public function aturWaktuPKL($offset = 0)
+	{
+		$query = $this->input->post('cari');
+
+		$kepo = $this->db->get('tb_periode');
+		$config['total_rows'] = $kepo->num_rows();
+		$config['base_url'] = base_url() . 'admin/aturWaktuPKL';
+		$config['per_page'] = 5;
+
+		$config['first_link']       = '<i class="fa fa-angle-double-left"></i>';
+		$config['last_link']        = '<i class="fa fa-angle-double-right"></i>';
+		$config['next_link']        = '<i class="fa fa-angle-right"></i>
+        <span class="sr-only">Next</span>';
+		$config['prev_link']        = '<i class="fa fa-angle-left"></i>
+        <span class="sr-only">Previous</span>';
+		$config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
+		$config['full_tag_close']   = '</ul></nav></div>';
+		$config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
+		$config['num_tag_close']    = '</span></li>';
+		$config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';
+		$config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
+		$config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
+		$config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
+		$config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
+		$config['prev_tagl_close']  = '</span>Next</li>';
+		$config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
+		$config['first_tagl_close'] = '</span></li>';
+		$config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
+		$config['last_tagl_close']  = '</span></li>';
+
+
+		$this->pagination->initialize($config);
+		$data['halaman'] = $this->pagination->create_links();
+		$data['offset'] = $offset;
+
+
+		$data['aturWaktu'] = $this->m_admin->ambil_waktu($query, $config['per_page'], $offset);
+
+		// $data['siswa'] = $this->m_admin->allSiswa();
+
+		$this->load->view('admin/index');
+		$this->load->view('admin/sidebar');
+		$this->load->view('admin/atur-waktu/index', $data);
+	}
+
+	public function tambahWaktuPKL(){
+		$this->load->view('admin/index');
+		$this->load->view('admin/sidebar');
+		$this->load->view('admin/atur-waktu/tambah');
+	}
+
+	public function doTambahWaktuPKL(){
+		$data = $_POST;
+
+		$tgl_start = $this->input->post('tgl_start');
+		$tgl_end = $this->input->post('tgl_end');
+
+		if($tgl_end < $tgl_start){
+			$this->session->set_tempdata('error_waktu', 'Waktu PKL Gagal Di tambah', 0);
+			redirect('admin/aturWaktuPKL');
+		}else{
+			$this->m_admin->tambahWaktuPKL('tb_periode', $data);
+			$this->session->set_tempdata('tambah_waktu', 'Waktu PKL Berhasil Di tambah', 0);
+			redirect('admin/aturWaktuPKL');
+		}
+	}
+
+	public function editWaktuPKL($id){
+		$dimana = array('id_periode' => $id);
+		$data['data_periode'] = $this->m_admin->waktuTer('tb_periode', $dimana)->result();
+		
+		$this->load->view('admin/index');
+		$this->load->view('admin/sidebar');
+		$this->load->view('admin/atur-waktu/update', $data);
+	}
+
+	public function updateWaktuPKL(){
+		$data = $_POST;
+
+		$tgl_start = $this->input->post('tgl_start');
+		$tgl_end = $this->input->post('tgl_end');
+
+		$where = array(
+			'id_periode' => $this->input->post('id_periode')
+		);
+
+		if($tgl_end < $tgl_start){
+			$this->session->set_tempdata('error_waktu', 'Waktu PKL Gagal Di update', 0);
+			redirect('admin/aturWaktuPKL');
+		}else{
+			$this->m_admin->updateWaktuPKL($data, $where);
+			$this->session->set_tempdata('update_waktu', 'Waktu PKL Berhasil Di update', 0);
+			redirect('admin/aturWaktuPKL');
+		}
+	}
+
+	public function deleteWaktuPKL($id)
+	{
+		$dimana = array("id_periode" => $id);
+		$this->m_admin->deleteWaktuPKL($dimana);
+		$this->session->set_tempdata('delete_waktu', 'Data Berhasil Di Hapus!', 0);
+		redirect('admin/aturWaktuPKL');
 	}
 }

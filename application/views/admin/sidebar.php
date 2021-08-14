@@ -47,6 +47,11 @@
           <?php } ?>
         </li>
         <li class="nav-item">
+          <a class="nav-link" id="navv" href="<?php echo base_url('admin/aturWaktuPKL') ?>">
+            <i class="ni ni-watch-time"></i> Atur Waktu PKL
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" id="navv" href="<?php echo base_url('admin/daftarSiswa') ?>">
             <i class="ni ni-single-02"></i> Daftar Siswa
           </a>

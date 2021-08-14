@@ -77,6 +77,34 @@
 
 
         </div>
+
+        <div class="row">
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
+                </div>
+                <input class="form-control form-control-alternative" placeholder="Masukan Username Perusahaan" type="text" name="user" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-key-25"></i></span>
+                </div>
+                <input class="form-control form-control-alternative" placeholder="Masukan Password" type="password" name="pass" required>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">

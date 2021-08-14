@@ -39,3 +39,7 @@
     border-radius: 50%;
     background-color: salmon;
 }
+
+label .label-input{
+	color: #ffffff;
+}
