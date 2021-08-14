@@ -23,7 +23,12 @@
                 
                 <div class="media-body ml-2 d-none d-lg-block">
                   <?php 
-                    $cek    = $this->db->get('tb_sementara');
+                    $this->db->select('*');
+                    $this->db->from('tb_sementara');
+                    $this->db->join('tb_tempat_rekomendasi', 'tb_tempat_rekomendasi.id_rekomendasi = tb_sementara.id_rekomendasi');
+                    $this->db->where('tb_tempat_rekomendasi.user', $this->session->userdata('industri'));
+                    $this->db->where('status_pkl', 1);
+                    $cek    = $this->db->get();
                     $baris  = $cek->num_rows();
 
                     if($baris == 0){

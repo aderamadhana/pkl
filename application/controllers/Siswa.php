@@ -172,8 +172,11 @@ class Siswa extends CI_Controller
 
 	public function tambahRekomen($id)
 	{
-		$dimana 		 = array('id_rekomendasi' => $id);
-		$data['rekomen'] = $this->m_siswa->get_satu('tb_tempat_rekomendasi', $dimana);
+		$dimana 		 	= array('id_rekomendasi' => $id);
+		$status 		 	= array('status_periode' => 1);
+		$data['rekomen'] 	= $this->m_siswa->get_satu('tb_tempat_rekomendasi', $dimana);
+		$data['periode'] 	= $this->m_siswa->get_periode('tb_periode', $status);
+		$data['guru'] 		= $this->m_siswa->get_guru('tb_guru');
 		$this->load->view('siswa/header');
 		$this->load->view('siswa/tempat-rekomendasi/tambah', $data);
 		$this->load->view('siswa/footer');
@@ -181,38 +184,31 @@ class Siswa extends CI_Controller
 
 	public function tambahRekomendasi()
 	{
-		$config['upload_path']		= './assets/uploads/daftar-rekomendasi';
-		$config['allowed_types']	= 'png|jpg|pdf|doc|docx';
-		$config['max_size']         = 0;
-		$config['max_height']		= 0;
-		$config['max_width']		= 0;
+		$id 			= $this->input->post('id');
+		$id_rekomendasi = $this->input->post('id_rekomendasi');
+		$jurusan		= $this->input->post('jurusan');
+		$alamat			= $this->input->post('alamat');
+		$cp 			= $this->input->post('cp');
+		$pimpinan   	= $this->input->post('pimpinan');
+		$id_guru 		= $this->input->post('id_guru');
+		$id_periode   	= $this->input->post('id_periode');
 
-		$this->load->library('upload', $config);
+		$data = array(
+			'id_siswa'		  		=> $id,
+			'id_rekomendasi' 		=> $id_rekomendasi,
+			'jurusan_perusahaan' 	=> $jurusan,
+			'alamat'		  		=> $alamat,
+			'cp'			  		=> $cp,
+			'nama_pimpinan'	  		=> $pimpinan,
+			'id_guru'				=> $id_guru,
+			'id_periode'			=> $id_periode
+		);
 
-		if ($this->upload->do_upload('bukti')) {
-			$id 		= $this->input->post('id');
-			$perusahaan = $this->input->post('perusahaan');
-			$jurusan	= $this->input->post('jurusan');
-			$file 		= $this->upload->data();
-			$alamat		= $this->input->post('alamat');
-			$cp 		= $this->input->post('cp');
-			$pimpinan   = $this->input->post('pimpinan');
+		$this->m_siswa->tambah('tb_sementara', $data);
+		$this->session->set_tempdata('unggah_bukti', 'Pendaftaran PKL Berhasil, Tunggu Konfirmasi Selanjutnya ya!', 0);
 
-			$data = array(
-				'nama_perusahaan' => $perusahaan,
-				'jurusan_perusahaan' => $jurusan,
-				'bukti'			  => $file['file_name'],
-				'id_siswa'		  => $id,
-				'nama_pimpinan'	  => $pimpinan,
-				'alamat'		  => $alamat,
-				'cp'			  => $cp
-			);
-
-			$this->m_siswa->tambah('tb_sementara', $data);
-			$this->session->set_tempdata('unggah_bukti', 'Tunggu Konfirmasi Selanjutnya ya!', 0);
-
-			redirect('siswa');
-		}
+		redirect('siswa');
+		
 	}
 
 	public function notif($id)

@@ -36,7 +36,7 @@
         </li>
         <li class="nav-item">
           <?php
-          $ambil = $this->db->query('SELECT * FROM tb_sementara');
+          $ambil = $this->db->query('SELECT * FROM tb_sementara WHERE status_pkl = 0');
           $baris = $ambil->num_rows();
           if ($baris > 0) {
             ?>

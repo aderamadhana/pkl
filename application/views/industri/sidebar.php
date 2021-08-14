@@ -31,12 +31,17 @@
       <!-- Navigation -->
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="<?php echo base_url('admin') ?>"> <i class="ni ni-tv-2"></i> Dashboard
+          <a class="nav-link" href="<?php echo base_url('industri') ?>"> <i class="ni ni-tv-2"></i> Dashboard
           </a>
         </li>
         <li class="nav-item">
           <?php
-          $ambil = $this->db->query('SELECT * FROM tb_sementara');
+          $this->db->select('*');
+          $this->db->from('tb_sementara');
+          $this->db->join('tb_tempat_rekomendasi', 'tb_tempat_rekomendasi.id_rekomendasi = tb_sementara.id_rekomendasi');
+          $this->db->where('tb_tempat_rekomendasi.user', $this->session->userdata('industri'));
+          $this->db->where('status_pkl', 1);
+          $ambil    = $this->db->get();
           $baris = $ambil->num_rows();
           if ($baris > 0) {
             ?>
@@ -56,20 +61,7 @@
             <i class="ni ni-paper-diploma"></i> Nilai Pkl Siswa
           </a>
         </li>
-        <!-- <li class="nav-item">
-          <?php
-          $cuy  = $this->db->query("SELECT * FROM tb_ngungsi")->num_rows();
-          if ($cuy > 0) { ?>
-          <a class="nav-link" id="navv" href="<?php echo base_url('industri/chat') ?>">
-            <i class="fa fa-comments"></i> Chat (<?= $cuy ?>)
-          </a>
-          <?php } else { ?>
-
-          <a class="nav-link" id="navv" href="<?php echo base_url('industri/chat') ?>">
-            <i class="fa fa-comments"></i> Chat
-          </a>
-          <?php } ?>
-        </li> -->
+        
         <li class="nav-item">
           <a class="nav-link" id="navv" href="<?php echo base_url('industri/daftarGuru') ?>">
             <i class="ni ni-circle-08"></i> Data Guru
@@ -77,12 +69,7 @@
         </li>
         
         <li class="nav-item">
-          <a class="nav-link " href="<?php echo base_url('industri/absensi') ?>">
-            <i class="ni ni-calendar-grid-58"></i> Nilai
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="<?php echo base_url('industri/daftarBerkas') ?>">
+          <a class="nav-link " href="<?php echo base_url('industri/laporan') ?>">
             <i class="ni ni-folder-17"></i> Laporan
           </a>
         </li>

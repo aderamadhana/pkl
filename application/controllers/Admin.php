@@ -823,6 +823,17 @@ class Admin extends CI_Controller
 		$this->load->view('admin/sidebar');
 	}
 
+	public function pklOke($id)
+	{
+		$dimana 		= array('id_siswa' => $id);
+		$data 			= array('status_pkl'=> 1);
+		
+		$this->m_admin->updateStatusPKL($data, $dimana);
+
+		$this->session->set_tempdata('oke', 'PKL telah berhasil divalidasi!', 0);
+		redirect('admin/notif');
+	}
+
 	public function oke($id)
 	{
 		$oke 		= $this->db->query("SELECT * FROM tb_sementara WHERE id = '$id' ");

@@ -1,40 +1,43 @@
-<?php if ($this->session->tempdata('tambah_rekomendasi') == TRUE) : ?>
+<?php if ($this->session->tempdata('tambah_siswa') == TRUE) : ?>
   <script>
     Swal.fire({
       type: 'success',
       title: 'Berhasil Ditambah!',
-      text: '<?php echo $this->session->tempdata('tambah_rekomendasi') ?>'
+      text: '<?php echo $this->session->tempdata('tambah_siswa') ?>'
     });
   </script>
-  <?php $url = $_SERVER['REQUEST_URI'];
+  <?php
+  $url = $_SERVER['REQUEST_URI'];
   header("Refresh: 2; URL=$url");
 endif; ?>
 
-<?php if ($this->session->tempdata('update_rekomendasi') == TRUE) : ?>
+<?php if ($this->session->tempdata('update_siswa') == TRUE) : ?>
   <script>
     Swal.fire({
       type: 'success',
       title: 'Update Berhasil!',
-      text: '<?php echo $this->session->tempdata('update_rekomendasi') ?>'
+      text: '<?php echo $this->session->tempdata('update_siswa') ?>'
     });
   </script>
-  <?php $url = $_SERVER['REQUEST_URI'];
+  <?php
+  $url = $_SERVER['REQUEST_URI'];
   header("Refresh: 2; URL=$url");
 endif; ?>
-<?php if ($this->session->tempdata('delete_rekomendasi') == TRUE) : ?>
+
+<?php if ($this->session->tempdata('delete_siswa') == TRUE) : ?>
   <script>
     Swal.fire({
       type: 'success',
-      title: 'Hapus Berhasil!',
-      text: '<?php echo $this->session->tempdata('delete_rekomendasi') ?>'
+      title: 'Delete Berhasil!',
+      text: '<?php echo $this->session->tempdata('delete_siswa') ?>'
     });
   </script>
-  <?php $url = $_SERVER['REQUEST_URI'];
+  <?php
+  $url = $_SERVER['REQUEST_URI'];
   header("Refresh: 2; URL=$url");
 endif; ?>
 
 <div class="main-content">
-
   <!-- Navbar -->
   <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
     <div class="container-fluid">
@@ -59,14 +62,19 @@ endif; ?>
 
               <div class="media-body ml-2 d-none d-lg-block">
                 <?php
-                $cek    = $this->db->get_where('tb_sementara', array('status_pkl' => 0));
+                $this->db->select('*');
+                $this->db->from('tb_sementara');
+                $this->db->join('tb_tempat_rekomendasi', 'tb_tempat_rekomendasi.id_rekomendasi = tb_sementara.id_rekomendasi');
+                $this->db->where('tb_tempat_rekomendasi.user', $this->session->userdata('industri'));
+                $this->db->where('status_pkl', 1);
+                $cek    = $this->db->get();
                 $baris  = $cek->num_rows();
 
                 if ($baris == 0) {
                   ?>
-                  <span class="mb-0 text-sm  font-weight-bold">Selamat Datang, <b><?php echo $this->session->userdata('nama') ?></b></span>
+                  <span class="mb-0 text-sm  font-weight-bold">Selamat Datang, <b><?php echo $this->session->userdata('industri') ?></b></span>
                 <?php } else { ?>
-                  <span class="mb-0 text-sm  font-weight-bold">*Selamat Datang, <b><?php echo $this->session->userdata('nama') ?></b></span>
+                  <span class="mb-0 text-sm  font-weight-bold">*Selamat Datang, <b><?php echo $this->session->userdata('industri') ?></b></span>
                 <?php } ?>
               </div>
             </div>
@@ -90,26 +98,25 @@ endif; ?>
   <div class="header bg-gradient-info pb-8 pt-5 pt-md-8">
     <div class="container-fluid">
       <div class="header-body">
-        <form action="<?php echo base_url('admin/tempatRekomendasi') ?>" method="post">
+        <form action="<?php echo base_url('industri/daftarSiswa') ?>" method="post">
           <div class="row">
 
+            <div class="col-md-3">
+              <h1 class="display-4 text-white text-uppercase">Tabel Siswa</h1>
+            </div>
+
+            <div class="col-md-4 ml--6">
+              
+            </div>
+
+
             <div class="col-md-5">
-              <h1 class="display-4 text-white text-uppercase">Tabel Tempat Rekomendasi</h1>
-            </div>
-
-            <div class="col-md-1 ml--5">
-              <a href="<?php echo base_url('admin/tambahRekomendasi') ?>" class="btn btn-default text-white" type="submit" data-toggle="tooltip" data-placement="top" title="Tambah Siswa">
-                <span class="btn-inner--icon"><i class="ni ni-fat-add fa-lg"></i></span>
-              </a>
-            </div>
-
-            <div class="col-md-5 ml-5">
               <div class="form-group pr">
                 <div class="input-group input-group-alternative mb-4">
                   <!-- <div class="input-group-prepend">
                     <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
                   </div> -->
-                  <input class="form-control form-control-alternative" placeholder="Cari nama perusahaan" type="text" name="cari" id="cari">
+                  <input class="form-control form-control-alternative" placeholder="Cari nama siswa" type="text" name="cari" id="cari">
                 </div>
               </div>
             </div>
@@ -136,56 +143,52 @@ endif; ?>
                         No
                       </th>
                       <th scope="col">
-                        Nama Perusahaan
+                        Nis
+                      </th>
+                      <th scope="col">
+                        Nama Siswa
+                      </th>
+                      <th scope="col">Foto</th>
+                      <th scope="col">
+                        Kelas
                       </th>
                       <th scope="col">Jurusan</th>
-                      <th scope="col">Alamat</th>
-                      <th scope="col">Cp</th>
-                      <th>Aksi</th>
-
+                      <th scope="col">Jenis Kelamin</th>
+                      
                     </tr>
                   </thead>
 
                   <tbody class="list">
-                    <?php $no = $offset;
-                    foreach ($rekomendasi as $s) : ?>
+                    <?php $no = 1;
+                    foreach ($siswa as $s) : ?>
                       <tr>
-                        <td><?php echo ++$no; ?></td>
-                        <th class="name"><?php echo $s->nama_perusahaan ?></th>
-                        <!-- <td>      
-                                            <div class="media align-items-center">
-                                              <a href="#" class="avatar rounded-circle mr-3">
-                                                <img alt="Image placeholder" src="<?php //echo base_url('assets/uploads/profile-siswa/').$s->foto 
-                                                                                  ?>">
-                                              </a>        
-                                            </div>
+                        <td><?php echo $no++; ?></td>
+                        <td><?php echo $s->nis ?></td>
+                        <th scope="row" class="name">
+                          <?php echo $s->nama_siswa ?>
+                        </th>
+                        <td>
 
-                                          </td> -->
-                        <td scope="row">
-                          <?php echo $s->jurusan_perusahaan ?>
+                          <div class="media align-items-center">
+                            <a href="#" class="avatar rounded-circle mr-3">
+                              <img alt="Image placeholder" src="<?php echo base_url('assets/uploads/profile-siswa/') . $s->foto ?>">
+                            </a>
+
+                          </div>
+
                         </td>
-
                         <td class="budget">
-                          <?php echo $s->alamat ?>
+                          <?php echo $s->kelas ?>
                         </td>
                         <td class="status">
                           <span class="badge badge-dot mr-4">
-                            <?php echo $s->cp ?>
+                            <?php echo $s->jurusan ?>
                           </span>
                         </td>
 
-
-
-
-                        <td class="text-right">
-                          <div class="dropdown">
-                            <a class="btn btn-sm btn-icon-only text-light" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              <i class="fas fa-ellipsis-v"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                              <a class="dropdown-item" href="<?php echo base_url('admin/updateRekomendasi/') . $s->id_rekomendasi ?>">Edit</a>
-                              <a class="dropdown-item" href="<?php echo base_url('admin/deleteRekomendasi/') . $s->id_rekomendasi ?>" onclick="return confirm('Yakin?')">Hapus</a>
-                            </div>
+                        <td class="completion">
+                          <div class="d-flex align-items-center">
+                            <span class="mr-2"><?php echo $s->jk ?></span>
                           </div>
                         </td>
                       </tr>
@@ -210,7 +213,7 @@ endif; ?>
 
           <div class="col-md-2">
 
-            <a href="<?php echo base_url('admin') ?>" class="btn btn-default" style="margin-top: 10%; float: right;">Kembali</a>
+            <a href="<?php echo base_url('industri') ?>" class="btn btn-default" style="margin-top: 10%; float: right;">Kembali</a>
           </div>
         </div>
 

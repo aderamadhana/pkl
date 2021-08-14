@@ -91,7 +91,7 @@
 
                             <div class="media-body ml-2 d-none d-lg-block">
                                 <?php
-                                $cek    = $this->db->get('tb_sementara');
+                                $cek    = $this->db->get_where('tb_sementara', array('status_pkl' => 0));
                                 $baris  = $cek->num_rows();
 
                                 if ($baris == 0) {

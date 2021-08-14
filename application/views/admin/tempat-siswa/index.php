@@ -58,7 +58,7 @@ endif; ?>
 
               <div class="media-body ml-2 d-none d-lg-block">
                 <?php
-                $cek    = $this->db->query("SELECT * FROM tb_sementara");
+                $cek    = $this->db->get_where('tb_sementara', array('status_pkl' => 0));
                 $baris  = $cek->num_rows();
 
                 if ($baris == 0) {
@@ -141,8 +141,7 @@ endif; ?>
                         Nama Perusahaan
                       </th>
                       <th scope="col">Nama Pembimbing</th>
-                      <th scope="col">Alamat</th>
-                      <th scope="col">Cp</th>
+                      <th scope="col">Periode</th>
                     </tr>
                   </thead>
 
@@ -155,7 +154,7 @@ endif; ?>
                         <td>
                           <div class="media align-items-center">
                             <a href="#" class="avatar rounded-circle mr-3">
-                              <img alt="Image placeholder" src="<?php echo base_url('assets/uploads/profile-siswa/') . $s->foto ?>">
+                              <img alt="Image placeholder" src="<?php echo base_url('assets/uploads/profile-siswa/') . $s->foto_siswa ?>">
                             </a>
                           </div>
 
@@ -174,23 +173,14 @@ endif; ?>
                         </td>
 
                         <td>
-                          <?= $s->nama_pembimbing; ?>
+                          <?= $s->nama; ?>
                         </td>
 
                         <td class="completion">
                           <div class="d-flex align-items-center">
-                            <span class="mr-2"><?php echo $s->alamat ?></span>
+                            <span class="mr-2"><?php echo $s->tgl_start ?> - <?php echo $s->tgl_end ?></span>
                           </div>
                         </td>
-
-                        <td class="completion">
-                          <div class="d-flex align-items-center">
-                            <span class="mr-2"><?php echo $s->cp ?></span>
-                          </div>
-                        </td>
-
-
-
                       </tr>
 
                     <?php endforeach; ?>

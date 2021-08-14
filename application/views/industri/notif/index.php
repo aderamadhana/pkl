@@ -43,14 +43,19 @@ endif; ?>
 
               <div class="media-body ml-2 d-none d-lg-block">
                 <?php
-                $cek    = $this->db->get_where('tb_sementara', array('status_pkl' => 0));
-                $baris  = $cek->num_rows();
+                $this->db->select('*');
+                $this->db->from('tb_sementara');
+                $this->db->join('tb_tempat_rekomendasi', 'tb_tempat_rekomendasi.id_rekomendasi = tb_sementara.id_rekomendasi');
+                $this->db->where('tb_tempat_rekomendasi.user', $this->session->userdata('industri'));
+                $this->db->where('status_pkl', 1);
+                $ambil    = $this->db->get();
+                $baris = $ambil->num_rows();
 
                 if ($baris == 0) {
                   ?>
-                  <span class="mb-0 text-sm  font-weight-bold">Selamat Datang, <b><?php echo $this->session->userdata('nama') ?></b></span>
+                  <span class="mb-0 text-sm  font-weight-bold">Selamat Datang, <b><?php echo $this->session->userdata('industri') ?></b></span>
                 <?php } else { ?>
-                  <span class="mb-0 text-sm  font-weight-bold">*Selamat Datang, <b><?php echo $this->session->userdata('nama') ?></b></span>
+                  <span class="mb-0 text-sm  font-weight-bold">*Selamat Datang, <b><?php echo $this->session->userdata('industri') ?></b></span>
                 <?php } ?>
               </div>
             </div>
@@ -102,9 +107,7 @@ endif; ?>
                 <th scope="col">No</th>
                 <th scope="col">Nama Siswa</th>
                 <th scope="col">Jurusan</th>
-                <th scope="col">Nama Perusahaan</th>
                 <th scope="col">Nama Pembimbing</th>
-                <th scope="col">Jurusan yang di butuhkan</th>
                 <th scope="col">Periode PKL</th>
                 <th scope="col text-right">
                   Aksi
@@ -120,9 +123,7 @@ endif; ?>
                   <td><?php echo $no++ ?></td>
                   <th scope="row" class="name"><?php echo $n->nama_siswa ?></th>
                   <td class="budget"><?php echo $n->jurusan ?></td>
-                  <td class="budget"><?php echo $n->nama_perusahaan ?></td>
                   <td><?= $n->nama; ?></td>
-                  <td>
                     <?php
                     $joy = $n->id;
                     $coy = $this->db->query("SELECT * FROM tb_sementara WHERE id = '$joy' ");
@@ -132,19 +133,11 @@ endif; ?>
                     $si  = $this->db->query("SELECT * FROM tb_siswa WHERE nama_siswa = '$ho' ");
                     $oi  = $si->row();
                     $bb  = $oi->id_siswa;
-
-                    if ($rek != "") {
-                      echo $n->jurusan_perusahaan;
-                    } else {
-                      echo "Bukan Perusahaan Rekomendasi Sekolahan";
-                    }
-
                     ?>
-                  </td>
                   
                   <td><?= $n->tgl_start ?> sd <?= $n->tgl_end ?></td>
                   <td>
-                    <a href="<?= base_url('admin/pklOke/' . $bb) ?>" class="btn-sm btn-success">Oke</a>
+                    <a href="<?= base_url('industri/taOke/' . $bb) ?>" class="btn-sm btn-success">Oke</a>
                     <a href="<?php echo base_url('admin/tolakRekomen/') . $n->id ?>" class="btn-sm btn-danger">Tidak</a>
                   </td>
                 </tr>

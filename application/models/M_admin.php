@@ -21,7 +21,7 @@ class m_admin extends CI_Model
 			$oke = $this->db->query("SELECT * FROM tb_siswa WHERE nama_siswa LIKE '%" . $query . "%' ");
 		} else {
 			$oke = $this->db->get('tb_siswa', $perPage, $offset);
-			$this->db->order_by('jurusan', 'ASC');
+			// $this->db->order_by('jurusan', 'ASC');
 		}
 
 		return $oke->result();
@@ -35,7 +35,7 @@ class m_admin extends CI_Model
 			$oke = $this->db->query("SELECT * FROM tb_periode WHERE tgl_start LIKE '%" . $query . "%' ORDER BY id_periode ASC");
 		} else {
 			$oke = $this->db->get('tb_periode', $perPage, $offset);
-			$this->db->order_by('tgl_start', 'ASC');
+			
 		}
 
 		return $oke->result();
@@ -74,10 +74,10 @@ class m_admin extends CI_Model
 	public function allTempat($query, $perPage, $offset)
 	{
 		if ($query != "") {
-			$oke = $this->db->query("SELECT * FROM tb_tempat_siswa INNER JOIN tb_siswa ON tb_tempat_siswa.id_siswa = tb_siswa.id_siswa WHERE nama_siswa LIKE '%" . $query . "%' ");
+			$oke = $this->db->query("SELECT tb_siswa.foto as foto_siswa, tb_siswa.*, tb_tempat_siswa.*, tb_tempat_rekomendasi.*, tb_guru.*, tb_periode.* FROM tb_tempat_siswa JOIN tb_siswa ON tb_tempat_siswa.id_siswa = tb_siswa.id_siswa JOIN tb_tempat_rekomendasi ON tb_tempat_rekomendasi.id_rekomendasi = tb_tempat_siswa.id_rekomendasi JOIN tb_guru ON tb_guru.id_guru = tb_tempat_siswa.id_guru JOIN tb_periode ON tb_periode.id_periode = tb_tempat_siswa.id_periode WHERE nama_siswa LIKE '%" . $query . "%' ");
 		} else {
-			$oke = $this->db->query("SELECT * FROM tb_tempat_siswa INNER JOIN tb_siswa ON tb_tempat_siswa.id_siswa = tb_siswa.id_siswa LIMIT $offset, $perPage ");
-			$this->db->order_by('jurusan', 'ASC');
+			$oke = $this->db->query("SELECT tb_siswa.foto as foto_siswa, tb_siswa.*, tb_tempat_siswa.*, tb_tempat_rekomendasi.*, tb_guru.*, tb_periode.* FROM tb_tempat_siswa JOIN tb_siswa ON tb_tempat_siswa.id_siswa = tb_siswa.id_siswa JOIN tb_tempat_rekomendasi ON tb_tempat_rekomendasi.id_rekomendasi = tb_tempat_siswa.id_rekomendasi JOIN tb_guru ON tb_guru.id_guru = tb_tempat_siswa.id_guru JOIN tb_periode ON tb_periode.id_periode = tb_tempat_siswa.id_periode LIMIT $offset, $perPage ");
+			// $this->db->order_by('jurusan', 'ASC');
 		}
 
 		return $oke;
@@ -143,7 +143,7 @@ class m_admin extends CI_Model
 		} else {
 			$hmm = $this->db->get('tb_tempat_rekomendasi', $perPage, $offset);
 		}
-		$this->db->order_by('jurusan', 'ASC');
+		// $this->db->order_by('jurusan', 'ASC');
 
 		return $hmm->result();
 	}
@@ -197,7 +197,14 @@ class m_admin extends CI_Model
 	// START FUNCTION NOTIF 
 	public function allNotif($perPage, $offset)
 	{
-		return $this->db->query("SELECT id, nama_siswa, nama_pimpinan, nama_pembimbing, jurusan, jurusan_perusahaan, nama_perusahaan, bukti FROM tb_siswa INNER JOIN tb_sementara ON tb_siswa.id_siswa = tb_sementara.id_siswa LIMIT $offset, $perPage ");
+		$this->db->select('*');
+		$this->db->from('tb_siswa');
+		$this->db->join('tb_sementara', 'tb_siswa.id_siswa = tb_sementara.id_siswa');
+		$this->db->join('tb_tempat_rekomendasi', 'tb_tempat_rekomendasi.id_rekomendasi = tb_sementara.id_rekomendasi');
+		$this->db->join('tb_guru', 'tb_guru.id_guru = tb_sementara.id_guru');
+		$this->db->join('tb_periode', 'tb_periode.id_periode = tb_sementara.id_periode');
+		$this->db->where('status_pkl', 0);
+		return $this->db->get();
 	}
 	public function ambilPesan($dimana)
 	{
@@ -361,5 +368,10 @@ class m_admin extends CI_Model
 	public function updateProfilSekolah($data, $dimana){
 		$this->db->where($dimana);
 		$this->db->update('tb_sekolah', $data);
+	}
+
+	public function updateStatusPKL($data, $dimana){
+		$this->db->where($dimana);
+		$this->db->update('tb_sementara', $data);
 	}
 }

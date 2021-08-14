@@ -49,4 +49,14 @@ class M_siswa extends CI_Model
 		$this->db->insert('tb_absensi', $data);
 		return $this->db->insert_id();
 	}
+
+	public function get_guru($tabel)
+	{
+		return $this->db->get($tabel)->result();
+	}
+
+	public function get_periode($tabel, $dimana)
+	{
+		return $this->db->get_where($tabel, $dimana)->result();
+	}
 }

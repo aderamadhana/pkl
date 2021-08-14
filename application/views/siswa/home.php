@@ -1,4 +1,16 @@
 <?php
+
+if ($this->session->tempdata('unggah_bukti') == TRUE) : ?>
+    <script>
+        Swal.fire({
+            type: "success",
+            title: "Selamat!",
+            text: "<?= $this->session->tempdata('unggah_bukti') ?>"
+        })
+    </script>
+    <?php 
+endif;
+
 $session = $this->session->userdata('user');
 $select = $this->db->query("SELECT * FROM tb_siswa INNER JOIN tb_jurusan ON tb_siswa.jurusan = tb_jurusan.nama_singkat WHERE user = '$session' ");
 $fetch = $select->row();
@@ -42,7 +54,7 @@ $fetch = $select->row();
                     <h2 class="judul-icon">Profile</h2>
                     <p class="des-menu">Ini adalah menu profile, disini anda dapet melihat profile anda. Anda juga bisa menambahkan sedikit diskripsi tentang anda</p>
                     <!-- Btn menu -->
-                    <a href="<?= base_url('siswa/profile/') . $fetch->id_siswa ?>" class="btn-menu animated infinite bounce delay-2s">Cobo Nonton!</a>
+                    <a href="<?= base_url('siswa/profile/') . $fetch->id_siswa ?>" class="btn-menu animated infinite bounce delay-2s">Lihat Detail!</a>
                 </div>
 
                 <div class="colom">
@@ -60,7 +72,7 @@ $fetch = $select->row();
                     if ($tgl == $now) {
                         ?>
                     <a href="" class="btn-menu animated infinite bounce delay-2s" data-toggle="modal" data-target="#modal-notificationtiga">
-                        Cobo Nonton!
+                        Lihat Detail!
                     </a>
                     <div class="modal fade" id="modal-notificationtiga" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
                         <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
@@ -93,7 +105,7 @@ $fetch = $select->row();
 
                     <?php } else if ($coy->num_rows() == 0) { ?>
                     <a href="" class="btn-menu animated infinite bounce delay-2s" data-toggle="modal" data-target="#modal-notificationempat">
-                        Cobo Nonton!
+                        Lihat Detail!
                     </a>
                     <div class="modal fade" id="modal-notificationempat" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
                         <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
@@ -125,114 +137,33 @@ $fetch = $select->row();
                     </div>
                     <?php } else { ?>
                     <a href="<?= base_url('siswa/absensi/') . $fetch->id_siswa; ?>" class="btn-menu animated infinite bounce delay-2s">
-                        Cobo Nonton!
+                        Lihat Detail!
                     </a>
                     <?php } ?>
                 </div>
-
-                <div class="colom">
-                    <i class="ni ni-fat-add" id="icon"></i>
-                    <h2 class="judul-icon">Daftar Tempat</h2>
-                    <p class="des-menu">Ini adalah menu daftar tempat prakerin, anda dapat mendaftarkan tempat prakerin anda yang telah di terima di sini.</p>
-                    <!-- Btn menu -->
-                    <?php
+                <?php
                     $idR    = $fetch->id_siswa;
-                    $cekSe     = $this->db->query("SELECT * FROM tb_tempat_siswa WHERE id_siswa = '$idR' ");
-                    $cekOy     = $this->db->query("SELECT * FROM tb_sementara WHERE id_siswa = '$idR' ");
-                    $bar    = $cekSe->num_rows();
-                    if ($bar > 0) { ?>
-                    <a href="" class="btn-menu animated infinite bounce delay-2s" data-toggle="modal" data-target="#modal-notificationsatu">
-                        Cobo Nonton!
-                    </a>
-                    <div class="modal fade" id="modal-notificationsatu" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
-                        <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
-                            <div class="modal-content bg-gradient-danger">
-
-                                <div class="modal-header">
-                                    <h6 class="modal-title" id="modal-title-notification">Pemberitahuan</h6>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                </div>
-
-                                <div class="modal-body">
-
-                                    <div class="py-3 text-center">
-                                        <i class="ni ni-bell-55 ni-3x"></i>
-                                        <h4 class="heading mt-4">Menu tidak dapat di akses!</h4>
-                                        <p style="font-size: 13px;">Maaf kamu sudah mendapatkan tempat prakerin </p>
-                                    </div>
-
-                                </div>
-
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Oke, Saya paham</button>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <?php } else if ($cekOy->num_rows() > 0) { ?>
-                    <a href="" class="btn-menu animated infinite bounce delay-2s" data-toggle="modal" data-target="#modal-notificationaku">
-                        <i class="fa fa-hospital" style="font-size: 50px;"></i><br>Daftar
-                    </a>
-                    <div class="modal fade" id="modal-notificationaku" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
-                        <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
-                            <div class="modal-content bg-gradient-danger">
-
-                                <div class="modal-header">
-                                    <h6 class="modal-title" id="modal-title-notification">Pemberitahuan</h6>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                </div>
-
-                                <div class="modal-body">
-
-                                    <div class="py-3 text-center">
-                                        <i class="ni ni-bell-55 ni-3x"></i>
-                                        <h4 class="heading mt-4">Menu tidak dapat di akses!</h4>
-                                        <p style="font-size: 13px;">Sementara menu ini belum dapat di akses ya, sampai tempat prakerin yang kamu daftarkan terkonfirmasi hehe </p>
-                                    </div>
-
-                                </div>
-
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Oke, Saya paham</button>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <?php } else {
-                        ?>
-
-                    <a href="<?php echo base_url('siswa/daftarPkl/') . $fetch->id_siswa; ?>" class="btn-menu animated infinite bounce delay-2s">
-                        Cobo Nonton!
-                    </a>
-
-                    <?php } ?>
-
-                </div>
+                ?>
+                
 
                 <div class="colom">
                     <i class="ni ni-building" id="icon"></i>
-                    <h2 class="judul-icon">Rekomendasi</h2>
-                    <p class="des-menu">Ini adalah menu rekomendasi, menu ini berisi tempat-tempat rekomendasi dari sekolah yang dapat anda pertimbangkan</p>
+                    <h2 class="judul-icon">Daftar Tempat</h2>
+                    <p class="des-menu">Ini adalah daftar tempat PKL, menu ini berisi tempat-tempat rekomendasi dari sekolah yang dapat anda pertimbangkan</p>
                     <!-- Btn menu -->
                     <?php
 
-                    $sess     = $this->session->userdata('user');
-                    $cekSes = $this->db->query("SELECT * FROM tb_siswa WHERE user = '$sess' ");
-                    $pecah     = $cekSes->row();
-                    $id        = $pecah->id_siswa;
-                    $kue    = $this->db->query("SELECT * FROM tb_tempat_siswa WHERE id_siswa = '$id' ");
-                    $ou     = $this->db->query("SELECT * FROM tb_sementara WHERE id_siswa = '$idR' ");
-                    $angka    = $kue->num_rows();
+                    $sess                           = $this->session->userdata('user');
+                    $cekSes                         = $this->db->query("SELECT * FROM tb_siswa WHERE user = '$sess' ");
+                    $pecah                          = $cekSes->row();
+                    $id                             = $pecah->id_siswa;
+                    $sudahDapatTempatPKL            = $this->db->query("SELECT * FROM tb_tempat_siswa WHERE id_siswa = '$id' ");
+                    $PKLBelumDiverifikasi           = $this->db->query("SELECT * FROM tb_sementara WHERE id_siswa = '$idR' ");
+                    $angka                          = $sudahDapatTempatPKL->num_rows();
 
                     if ($angka > 0) { ?>
                     <a href="" class="btn-menu animated infinite bounce delay-2s" data-toggle="modal" data-target="#modal-notificationsatu">
-                        Cobo Nonton!
+                        Lihat Detail!
                     </a>
                     <div class="modal fade" id="modal-notificationsatu" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
                         <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
@@ -262,9 +193,9 @@ $fetch = $select->row();
                             </div>
                         </div>
                     </div>
-                    <?php } else if ($ou->num_rows() > 0) { ?>
+                    <?php } else if ($PKLBelumDiverifikasi->num_rows() > 0) { ?>
                     <a href="" class="btn-menu animated infinite bounce delay-2s" data-toggle="modal" data-target="#modal-notificationa">
-                        Cobo Nonton!
+                        Lihat Detail!
                     </a>
                     <div class="modal fade" id="modal-notificationa" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
                         <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
@@ -296,42 +227,268 @@ $fetch = $select->row();
                     </div>
                     <?php } else { ?>
                     <a href="<?php echo base_url('siswa/rekomendasi') ?>" class="btn-menu animated infinite bounce delay-2s">
-                        Cobo Nonton!
+                        Lihat Detail!
                     </a>
-                    <?php }
-
-                    ?>
-
-                </div>
-
-                <div class="colom">
-                    <i class="ni ni-bell-55" id="icon"></i>
-                    <h2 class="judul-icon">Notifikasi</h2>
-                    <p class="des-menu">Ini adalah menu notifikasi, disinilah anda dapat melihat pemberitahuan-pemberitahuan seputar prakerin</p>
-                    <!-- Btn menu -->
-                    <?php
-                    $oo     = $fetch->id_siswa;
-                    $cek     = $this->db->query("SELECT * FROM tb_notif WHERE id_siswa = '$oo' ");
-                    $joo    = $cek->row();
-
-                    if ($cek->num_rows() > 0) {
-                        ?>
-
-                    <a href="<?php echo base_url('siswa/notif/') . $fetch->id_siswa ?>" class="btn-menu animated infinite bounce delay-2s">
-                        Cobo Nonton!
-                    </a>
-
-                    <?php } else { ?>
-
-                    <a href="<?php echo base_url('siswa/notif/') . $fetch->id_siswa ?>" class="btn-menu animated infinite bounce delay-2s">
-                        Cobo Nonton!
-                    </a>
-
+                    
                     <?php } ?>
 
                 </div>
+                
+                <!-- Tempat PKL -->
+                <div class="colom">
+                    <i class="ni ni-building" id="icon"></i>
+                    <h2 class="judul-icon">Tempat PKL</h2>
+                    <p class="des-menu">Ini adalah menu tempat PKL, menu ini berisi tempat PKL kamu yang telah disetujui oleh perusahaan dan pihak sekolah </p>
+                    <!-- Btn menu -->
+                    <?php
 
+                    $sess                       = $this->session->userdata('user');
+                    $cekSes                     = $this->db->query("SELECT * FROM tb_siswa WHERE user = '$sess' ");
+                    $pecah                      = $cekSes->row();
+                    $id                         = $pecah->id_siswa;
+                    $sudahDapatTempatPKL        = $this->db->query("SELECT * FROM tb_tempat_siswa WHERE id_siswa = '$id' ");
+                    $PKLBelumDiverifikasi       = $this->db->query("SELECT * FROM tb_sementara WHERE id_siswa = '$idR' ");
+                    $angka                      = $sudahDapatTempatPKL->num_rows();
 
+                    if ($angka > 0) { ?>
+                    <a href="" class="btn-menu animated infinite bounce delay-2s" data-toggle="modal" data-target="#modal-notificationsatu">
+                        Lihat Detail!
+                    </a>
+                    <div class="modal fade" id="modal-notificationsatu" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+                        <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+                            <div class="modal-content bg-gradient-danger">
+
+                                <div class="modal-header">
+                                    <h6 class="modal-title" id="modal-title-notification">Pemberitahuan</h6>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body">
+
+                                    <div class="py-3 text-center">
+                                        <i class="ni ni-bell-55 ni-3x"></i>
+                                        <h4 class="heading mt-4">Menu tidak dapat di akses!</h4>
+                                        <p style="font-size: 13px;">Maaf kamu sudah mendapatkan tempat prakerin </p>
+                                    </div>
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Oke, Saya paham</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <?php } else { ?>
+                    <a href="" class="btn-menu animated infinite bounce delay-2s" data-toggle="modal" data-target="#modal-notificationa">
+                        Lihat Detail!
+                    </a>
+                    <div class="modal fade" id="modal-notificationa" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+                        <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+                            <div class="modal-content bg-gradient-danger">
+
+                                <div class="modal-header">
+                                    <h6 class="modal-title" id="modal-title-notification">Pemberitahuan</h6>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body">
+
+                                    <div class="py-3 text-center">
+                                        <i class="ni ni-bell-55 ni-3x"></i>
+                                        <h4 class="heading mt-4">Menu tidak dapat di akses!</h4>
+                                        <p style="font-size: 13px;">Sementara menu ini belum dapat di akses ya, sampai tempat prakerin yang kamu daftarkan terkonfirmasi hehe </p>
+                                    </div>
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Oke, Saya paham</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <?php }
+
+                    ?>
+                </div>
+                <!-- Laporan Kegiatan -->
+                <div class="colom">
+                    <i class="ni ni-folder-17" id="icon"></i>
+                    <h2 class="judul-icon">Laporan Kegiatan</h2>
+                    <p class="des-menu">Ini adalah menu laporan kegiatan PKL, menu ini wajib diisi kegiatan selama PKL berlangsung setiap harinya </p>
+                    <!-- Btn menu -->
+                    <?php
+
+                    $sess                       = $this->session->userdata('user');
+                    $cekSes                     = $this->db->query("SELECT * FROM tb_siswa WHERE user = '$sess' ");
+                    $pecah                      = $cekSes->row();
+                    $id                         = $pecah->id_siswa;
+                    $sudahDapatTempatPKL        = $this->db->query("SELECT * FROM tb_tempat_siswa WHERE id_siswa = '$id' ");
+                    $PKLBelumDiverifikasi       = $this->db->query("SELECT * FROM tb_sementara WHERE id_siswa = '$idR' ");
+                    $angka                      = $sudahDapatTempatPKL->num_rows();
+
+                    if ($angka > 0) { ?>
+                    <a href="" class="btn-menu animated infinite bounce delay-2s" data-toggle="modal" data-target="#modal-notificationsatu">
+                        Lihat Detail!
+                    </a>
+                    <div class="modal fade" id="modal-notificationsatu" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+                        <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+                            <div class="modal-content bg-gradient-danger">
+
+                                <div class="modal-header">
+                                    <h6 class="modal-title" id="modal-title-notification">Pemberitahuan</h6>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body">
+
+                                    <div class="py-3 text-center">
+                                        <i class="ni ni-bell-55 ni-3x"></i>
+                                        <h4 class="heading mt-4">Menu tidak dapat di akses!</h4>
+                                        <p style="font-size: 13px;">Maaf kamu sudah mendapatkan tempat prakerin </p>
+                                    </div>
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Oke, Saya paham</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <?php } else { ?>
+                    <a href="" class="btn-menu animated infinite bounce delay-2s" data-toggle="modal" data-target="#modal-notificationa">
+                        Lihat Detail!
+                    </a>
+                    <div class="modal fade" id="modal-notificationa" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+                        <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+                            <div class="modal-content bg-gradient-danger">
+
+                                <div class="modal-header">
+                                    <h6 class="modal-title" id="modal-title-notification">Pemberitahuan</h6>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body">
+
+                                    <div class="py-3 text-center">
+                                        <i class="ni ni-bell-55 ni-3x"></i>
+                                        <h4 class="heading mt-4">Menu tidak dapat di akses!</h4>
+                                        <p style="font-size: 13px;">Sementara menu ini belum dapat di akses ya, sampai tempat prakerin yang kamu daftarkan terkonfirmasi hehe </p>
+                                    </div>
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Oke, Saya paham</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <?php }
+
+                    ?>
+                </div>
+                <!-- Nilai PKL -->
+                <div class="colom">
+                    <i class="ni ni-hat-3" id="icon"></i>
+                    <h2 class="judul-icon">Nilai PKL</h2>
+                    <p class="des-menu">Ini adalah menu nilai PKL, menu ini berisi nilai PKL kamu yang diberikan oleh perusahaan dan pihak sekolah </p>
+                    <!-- Btn menu -->
+                    <?php
+
+                    $sess                       = $this->session->userdata('user');
+                    $cekSes                     = $this->db->query("SELECT * FROM tb_siswa WHERE user = '$sess' ");
+                    $pecah                      = $cekSes->row();
+                    $id                         = $pecah->id_siswa;
+                    $sudahDapatTempatPKL        = $this->db->query("SELECT * FROM tb_tempat_siswa WHERE id_siswa = '$id' ");
+                    $PKLBelumDiverifikasi       = $this->db->query("SELECT * FROM tb_sementara WHERE id_siswa = '$idR' ");
+                    $angka                      = $sudahDapatTempatPKL->num_rows();
+
+                    if ($angka > 0) { ?>
+                    <a href="" class="btn-menu animated infinite bounce delay-2s" data-toggle="modal" data-target="#modal-notificationsatu">
+                        Lihat Detail!
+                    </a>
+                    <div class="modal fade" id="modal-notificationsatu" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+                        <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+                            <div class="modal-content bg-gradient-danger">
+
+                                <div class="modal-header">
+                                    <h6 class="modal-title" id="modal-title-notification">Pemberitahuan</h6>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body">
+
+                                    <div class="py-3 text-center">
+                                        <i class="ni ni-bell-55 ni-3x"></i>
+                                        <h4 class="heading mt-4">Menu tidak dapat di akses!</h4>
+                                        <p style="font-size: 13px;">Maaf kamu sudah mendapatkan tempat prakerin </p>
+                                    </div>
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Oke, Saya paham</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <?php } else { ?>
+                    <a href="" class="btn-menu animated infinite bounce delay-2s" data-toggle="modal" data-target="#modal-notificationa">
+                        Lihat Detail!
+                    </a>
+                    <div class="modal fade" id="modal-notificationa" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+                        <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+                            <div class="modal-content bg-gradient-danger">
+
+                                <div class="modal-header">
+                                    <h6 class="modal-title" id="modal-title-notification">Pemberitahuan</h6>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body">
+
+                                    <div class="py-3 text-center">
+                                        <i class="ni ni-bell-55 ni-3x"></i>
+                                        <h4 class="heading mt-4">Menu tidak dapat di akses!</h4>
+                                        <p style="font-size: 13px;">Sementara menu ini belum dapat di akses ya, sampai tempat prakerin yang kamu daftarkan terkonfirmasi hehe </p>
+                                    </div>
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Oke, Saya paham</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <?php }
+
+                    ?>
+                </div>
             </div>
         </div>
     </div>

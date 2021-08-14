@@ -4,18 +4,16 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Unggah Bukti</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
             <div class="modal-body">
                 <div class="alert alert-default" role="alert">
-                    <strong>Informasi!</strong> Bukti bisa berupa dokumen pdf, doc atau bisa juga berupa gambar yang ber format png atau jpg. Jika bukti yang anda upload adalah gambar, pastikan terlihat jelas!
+                    <strong>Informasi!</strong> Pastikan data terisi dengan benar, data yang sudah terisi tidak dapat diubah!
                 </div>
                 <?php echo form_open_multipart('siswa/tambahRekomendasi')  ?>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
+                            <label>Nama Pemimpin Perusahaan</label>
                             <div class="input-group input-group-alternative mb-4">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-building"></i></span>
@@ -24,36 +22,51 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-
+                    <div class="col-md-12">
                         <div class="form-group">
-
-                            <?php
-                            $user  = $this->session->userdata('user');
-                            $ambil = $this->db->query("SELECT * FROM tb_siswa WHERE user = '$user' ");
-                            $satu  = $ambil->row();
-                            foreach ($rekomen as $r) :
-                                ?>
-                                <!-- Data Siswa Hidden -->
-                                <input type="hidden" name="id" value="<?php echo $satu->id_siswa; ?>">
-                                <input type="hidden" name="perusahaan" value="<?php echo $r->nama_perusahaan ?>">
-                                <input type="hidden" name="jurusan" value="<?php echo $r->jurusan_perusahaan; ?>">
-                                <input type="hidden" name="alamat" value="<?php echo $r->alamat ?>">
-                                <input type="hidden" name="cp" value="<?= $r->cp ?>">
-                                <div class="input-group input-group-alternative mb-4">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="ni ni-folder-17"></i></span>
-                                    </div>
-                                    <div class="custom-file">
-                                        <input type="file" name="bukti" class="custom-file-input" id="customFile">
-                                        <label class="custom-file-label" for="customFile">Unggah Bukti Di Terima</label>
-                                    </div>
+                            <label>Guru Pendamping</label>
+                            <div class="input-group input-group-alternative mb-4">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ni ni-single-02"></i></span>
                                 </div>
-                            <?php endforeach; ?>
+                                <select class="form-control form-control-alternative" name="id_guru">
+                                    <?php foreach($guru as $dGuru){ ?>
+                                    <option value="<?php echo $dGuru->id_guru?>"><?php echo $dGuru->nama?></option>
+                                    <?php }?>
+                                </select>
+                            </div>
                         </div>
                     </div>
-
-
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Periode PKL</label>
+                            <div class="input-group input-group-alternative mb-4">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ni ni-watch-time"></i></span>
+                                </div>
+                                <select class="form-control form-control-alternative" name="id_periode">
+                                    <?php foreach($periode as $dPeriode){ ?>
+                                    <option value="<?php echo $dPeriode->id_periode?>"><?php echo $dPeriode->tgl_start?> - <?php echo $dPeriode->tgl_end?></option>
+                                    <?php }?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <?php
+                    $user  = $this->session->userdata('user');
+                    $ambil = $this->db->query("SELECT * FROM tb_siswa WHERE user = '$user' ");
+                    $satu  = $ambil->row();
+                    foreach ($rekomen as $r) :
+                        ?>
+                        <!-- Data Siswa Hidden -->
+                        <input type="hidden" name="id" value="<?php echo $satu->id_siswa; ?>">
+                        <input type="hidden" name="id_rekomendasi" value="<?php echo $r->id_rekomendasi ?>">
+                        <input type="hidden" name="jurusan" value="<?php echo $r->jurusan_perusahaan; ?>">
+                        <input type="hidden" name="alamat" value="<?php echo $r->alamat ?>">
+                        <input type="hidden" name="cp" value="<?= $r->cp ?>">
+                    
+                    <?php endforeach; ?>
                 </div>
 
             </div>
