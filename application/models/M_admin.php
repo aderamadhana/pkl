@@ -352,4 +352,14 @@ class m_admin extends CI_Model
 		$this->db->where($dimana);
 		$this->db->delete('tb_periode');
 	}
+
+	public function sekolahTer($table, $dimana)
+	{
+		return $this->db->get_where($table, $dimana);
+	}
+
+	public function updateProfilSekolah($data, $dimana){
+		$this->db->where($dimana);
+		$this->db->update('tb_sekolah', $data);
+	}
 }

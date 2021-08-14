@@ -1498,4 +1498,61 @@ class Admin extends CI_Controller
 		$this->session->set_tempdata('delete_waktu', 'Data Berhasil Di Hapus!', 0);
 		redirect('admin/aturWaktuPKL');
 	}
+
+	public function editProfilAdmin(){
+		$dimana = array('id_admin' => 1);
+		$data['data_sekolah'] = $this->m_admin->sekolahTer('tb_sekolah', $dimana)->result();
+		
+		$this->load->view('admin/index');
+		$this->load->view('admin/sidebar');
+		$this->load->view('admin/profil', $data);
+	}
+
+	public function updateProfilSekolah(){
+		$config['upload_path'] 			= './assets/img';
+		$config['allowed_types']        = 'png';
+		$config['max_size']             = 100;
+		$config['max_width']            = 0;
+		$config['max_height']           = 0;
+
+		$this->load->library('upload', $config);
+		if (!$this->upload->do_upload('foto')) {
+			$id_sekolah = $this->input->post('id_sekolah');
+			$dimana = array('id_sekolah' => $id_sekolah);
+			$nama_sekolah = $this->input->post('nama_sekolah');
+			$alamat_sekolah = $this->input->post('alamat_sekolah');
+			$cp_sekolah = $this->input->post('cp_sekolah');
+			$foto = $this->input->post('gambar');
+
+			$data = array(
+				'nama_sekolah' => $nama_sekolah,
+				'alamat_sekolah' => $alamat_sekolah,
+				'cp_sekolah' => $cp_sekolah,
+				'logo_sekolah' => $foto
+			);
+
+			$this->m_admin->updateProfilSekolah($data, $dimana);
+			$this->session->set_tempdata('update_profil', 'Profil Sekolah Berhasil di Ubah!', 0);
+			redirect('admin');
+		} else {
+			$id_sekolah = $this->input->post('id_sekolah');
+			$dimana = array('id_sekolah' => $id_sekolah);
+			$nama_sekolah = $this->input->post('nama_sekolah');
+			$alamat_sekolah = $this->input->post('alamat_sekolah');
+			$cp_sekolah = $this->input->post('cp_sekolah');
+			$foto = $this->input->post('gambar');
+			$upload = $this->upload->data();
+
+			$data = array(
+				'nama_sekolah' => $nama_sekolah,
+				'alamat_sekolah' => $alamat_sekolah,
+				'cp_sekolah' => $cp_sekolah,
+				'logo_sekolah' => $upload['file_name']
+			);
+
+			$this->m_admin->updateProfilSekolah($data, $dimana);
+			$this->session->set_tempdata('update_profil', 'Profil Sekolah Berhasil di Ubah!', 0);
+			redirect('admin');
+		}
+	}
 }

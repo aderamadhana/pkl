@@ -56,8 +56,14 @@ if ($this->session->flashdata('login_gagal') == TRUE) { ?>
 	<div class="garis-satu"></div>
 
 	<div class="kotak">
+		<?php 
+          $getNamaSekolah = $this->db->get_where('tb_sekolah', array('id_sekolah' => 1))->result();
+          foreach($getNamaSekolah as $data){
+            $logo = $data->logo_sekolah;
+          }
+        ?>
 		<div class="col-satu">
-			<img src="<?= base_url('assets/img/smk.png') ?>" alt="Foto Sekolah" id="foto-sekolah" class="animated infinite flip slow">
+			<img src="<?= base_url('assets/img/'.$logo) ?>" alt="Foto Sekolah" id="foto-sekolah" class="animated infinite flip slow">
 		</div>
 		<form action="<?php echo base_url('login/CekLogin') ?>" method="POST">
 			<div class="col-dua">
