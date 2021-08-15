@@ -32,11 +32,17 @@ $fetch = $select->row();
 
     </nav>
 
+    <?php 
+        $query = $this->db->get('tb_sekolah')->result();
+        foreach($query as $d){
+            $nama_sekolah = $d->nama_sekolah;
+        }
+    ?>
 
     <div class="bunder"></div>
     <div class="kiri">
         <h1 class="animated bounce" id="judul-selamat">Selamat datang, <?= $this->session->userdata('user') ?>!</h1>
-        <p class="animated fadeIn" id="tulis-des">Ini adalah website untuk aplikasi prakerin siswa Smk Muhammadiyah 1 Sukoharjo. Anda dapat menikmati beberapa fitur yang kami sediakan. Antara lain, absensi, tempat rekomendasi, daftar prakerin dan chatting</p>
+        <p class="animated fadeIn" id="tulis-des">Ini adalah website untuk aplikasi prakerin siswa <?= $nama_sekolah?>. Anda dapat menikmati beberapa fitur yang kami sediakan. Antara lain, absensi, tempat rekomendasi, daftar prakerin dan chatting</p>
         <a href="#menu-oy" class="animated rotateIn" id="btn-oke">Let's Start!</a>
     </div>
 

@@ -27,6 +27,16 @@ class M_siswa extends CI_Model
 		return $this->db->get_where($table, $dimana)->result();
 	}
 
+	public function getPKLSiswa($table, $dimana)
+	{
+		$this->db->select('*');
+		$this->db->from($table);
+		$this->db->join('tb_tempat_rekomendasi', 'tb_tempat_rekomendasi.id_rekomendasi = tb_tempat_siswa.id_rekomendasi');
+		$this->db->join('tb_siswa', 'tb_siswa.id_siswa = tb_tempat_siswa.id_siswa');
+		$this->db->where('tb_tempat_siswa.id_siswa', $dimana);
+		return $this->db->get()->result();
+	}
+	
 	public function get_profile($dimana)
 	{
 		return $this->db->get_where('tb_siswa', $dimana)->result();

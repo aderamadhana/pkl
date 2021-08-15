@@ -279,8 +279,8 @@ class Siswa extends CI_Controller
 
 	public function absensi($id)
 	{
-		$dimana 			= array('id_siswa' => $id);
-		$data['absensi'] 	= $this->m_siswa->get_satu('tb_tempat_siswa', $dimana);
+		$dimana 			= $id;
+		$data['absensi'] 	= $this->m_siswa->getPKLSiswa('tb_tempat_siswa', $dimana);
 		$this->load->view('siswa/header');
 		$this->load->view('siswa/navbar');
 		$this->load->view('siswa/absensi/index', $data);
@@ -293,10 +293,11 @@ class Siswa extends CI_Controller
 		$alamat			= $this->input->post('alamat', true);
 		$siswa 			= $this->input->post('siswa', true);
 		$jurusan		= $this->input->post('jurusan', true);
-		$image 			= $this->input->post('image');
-		$image 			= str_replace('data:image/jpeg;base64,', '', $image);
-		$image 			= base64_decode($image);
-		$filename = 'image_' . time() . '.png';
+		$image = $this->input->post('image');
+		$image = str_replace('data:image/jpeg;base64,','', $image);
+		$image = base64_decode($image);
+		header('Content-Type: bitmap; charset=utf-8');
+		$filename = 'image_'.time().'.png';
 		file_put_contents(FCPATH . '/assets/uploads/absensi/' . $filename, $image);
 		$data 			= array(
 			'perusahaan'		=> $perusahaan,

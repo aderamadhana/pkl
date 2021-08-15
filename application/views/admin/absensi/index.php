@@ -127,7 +127,8 @@
                         <h3 style="text-transform: uppercase; border-bottom: 2px solid #fff; width: 50%; color: white; margin-bottom: 5%;">Cari Absensi dengan kamera</h3>
                         <div class="row">
                             <div class="col-3" id="ju">
-                                <select name="keyword" class="form-control">
+                                <select name="jurusan" class="form-control">
+                                    <option value="">Pilih Jurusan</option>
                                     <?php foreach ($jurusan as $j) : ?>
                                         <option value="<?= $j->nama_singkat ?>"><?= $j->nama_singkat ?></option>
                                     <?php endforeach; ?>
@@ -136,7 +137,8 @@
                             <div class="col-3">
 
                                 <select name="siswa" class="form-control">
-                                    <?php foreach ($siswa as $c) : ?>
+                                    <option value="">Pilih Siswa</option>
+                                    <?php echo print_r($siswa); foreach ($siswa as $c) : ?>
                                         <option value="<?= $c->siswa ?>"><?= $c->siswa ?></option>
                                     <?php endforeach; ?>
                                 </select>
@@ -200,13 +202,13 @@
                                         <th scope="col">
                                             Nama perusahaan
                                         </th>
-                                        <th scope="col">Alamat</th>
 
                                     </tr>
                                 </thead>
 
                                 <tbody class="list">
                                     <?php $no = 1;
+                                    
                                     foreach ($akhir as $a) : ?>
                                         <tr>
                                             <td><?= $no++; ?></td>
@@ -230,9 +232,6 @@
                                             </td>
                                             <td>
                                                 <?= $a->perusahaan; ?>
-                                            </td>
-                                            <td>
-                                                <?= $a->alamat ?>
                                             </td>
 
                                         </tr>
@@ -288,8 +287,6 @@
                                         </th>
                                         <th>Kelas</th>
                                         <th scope="col">Nama Perusahaan</th>
-
-                                        <th scope="col">Alamat</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -314,9 +311,6 @@
                                             </td>
                                             <td>
                                                 <?= $a->nama_perusahaan; ?>
-                                            </td>
-                                            <td>
-                                                <?= $a->alamat; ?>
                                             </td>
                                             <td>
                                                 <?php

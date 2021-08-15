@@ -23,14 +23,15 @@ if ($this->session->tempdata('absen') ==  TRUE) { ?>
         $cekab  = $this->db->query("SELECT * FROM tb_absensi WHERE siswa = '$siswa' ");
 
         ?>
-
+    
         <input type="hidden" value="<?= $a->nama_perusahaan ?>" id="perusahaan" name="perusahaan">
         <input type="hidden" value="<?= $a->alamat ?>" id="alamat" name="alamat">
         <input type="hidden" value="<?= $pecah->nama_siswa; ?>" id="siswa" name="siswa">
         <input type="hidden" value="<?= $pecah->jurusan; ?>" id="jurusan" name="jurusan">
+    
     <?php endforeach; ?>
     <div id="my_camera" class="ml-3 mt-2"></div>
-
+    
     <div class="row mt-2">
         <div class="col-1"></div>
         <div class="col-10 ml-2">
@@ -76,6 +77,7 @@ if ($this->session->tempdata('absen') ==  TRUE) { ?>
         Webcam.snap(function(data_uri) {
             image = data_uri;
         });
+
         $.ajax({
                 url: '<?php echo site_url("siswa/absen"); ?>',
                 type: 'POST',
@@ -95,7 +97,7 @@ if ($this->session->tempdata('absen') ==  TRUE) { ?>
                         title: "Selamat!",
                         text: "anda sudah absen hari ini",
                     });
-                    $('#absensi')[0].reset();
+                    $('#absen')[0].reset();
                 }
             })
             .fail(function() {

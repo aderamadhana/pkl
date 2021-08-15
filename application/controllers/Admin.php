@@ -926,8 +926,9 @@ class Admin extends CI_Controller
 		$data['halaman'] = $this->pagination->create_links();
 		$data['offset']  = $offset;
 		$perPage		 = $config['per_page'];
-		$data['manual']  = $this->db->query("SELECT * FROM tb_tempat_siswa INNER JOIN tb_siswa ON tb_tempat_siswa.id_siswa = tb_siswa.id_siswa ORDER BY jurusan ASC LIMIT $offset, $perPage ")->result();
+		$data['manual']  = $this->db->query("SELECT * FROM tb_tempat_siswa INNER JOIN tb_siswa ON tb_tempat_siswa.id_siswa = tb_siswa.id_siswa INNER JOIN tb_tempat_rekomendasi ON tb_tempat_siswa.id_rekomendasi = tb_tempat_rekomendasi.id_rekomendasi ORDER BY jurusan ASC LIMIT $offset, $perPage ")->result();
 		$data['jurusan'] = $this->m_admin->jur('tb_jurusan')->result();
+		$data['siswa']   = $this->db->get('tb_absensi')->result();
 		$this->load->view('admin/index');
 		$this->load->view('admin/sidebar');
 		$this->load->view('admin/absensi/index', $data);
@@ -937,16 +938,17 @@ class Admin extends CI_Controller
 
 	public function cariAbsen()
 	{
-		$key 			    = $this->input->post('keyword');
-		$dimana				= array('jurusan' => $key);
+		$jurusan			= $this->input->post('jurusan');
+		$siswa 			    = $this->input->post('siswa');
+		$dimana				= array('jurusan' => $jurusan);
 
 
 		$siswa			 = $this->input->post('siswa');
 
 		$data['jurusan'] = $this->m_admin->jur('tb_jurusan')->result();
 		$data['absen'] 	 = $this->m_admin->cariBed('tb_absensi', $dimana);
-		$data['siswa']	 = $this->m_admin->disiswa($key)->result();
-		$data['akhir']	 = $this->m_admin->akhir($siswa, $key);
+		$data['siswa']	 = $this->m_admin->disiswa($jurusan)->result();
+		$data['akhir']	 = $this->m_admin->akhir($siswa, $jurusan);
 
 
 		$this->load->view('admin/index');
