@@ -486,4 +486,12 @@ class Siswa extends CI_Controller
 		$this->session->set_tempdata('delete_kegiatan', 'Kegiatan Berhasil di Hapus!', 0);
 		redirect('siswa/kegiatan');
 	}
+
+	public function nilai(){
+		$data['nilai'] = $this->m_siswa->getNilai();
+
+		$this->load->view('siswa/header');
+		$this->load->view('siswa/navbar');
+		$this->load->view('siswa/nilai/index', $data);
+	}
 }

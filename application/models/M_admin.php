@@ -236,9 +236,9 @@ class m_admin extends CI_Model
 	public function akhir($siswa, $key)
 	{
 		if ($siswa != "") {
-			return $this->db->query("SELECT * FROM tb_absensi WHERE siswa = '$siswa' ")->result();
+			return $this->db->query("SELECT tb_absensi.* FROM tb_absensi JOIN tb_tempat_rekomendasi ON tb_tempat_rekomendasi.nama_perusahaan = tb_absensi.perusahaan JOIN tb_tempat_siswa ON tb_tempat_siswa.id_rekomendasi = tb_tempat_rekomendasi.id_rekomendasi JOIN tb_guru ON tb_guru.id_guru = tb_tempat_siswa.id_guru WHERE tb_guru.user = '".$this->session->userdata('guru')."' AND siswa = '$siswa' ")->result();
 		} else {
-			return $this->db->query("SELECT * FROM tb_absensi WHERE jurusan = '$key'")->result();
+			return $this->db->query("SELECT tb_absensi.* FROM tb_absensi JOIN tb_tempat_rekomendasi ON tb_tempat_rekomendasi.nama_perusahaan = tb_absensi.perusahaan JOIN tb_tempat_siswa ON tb_tempat_siswa.id_rekomendasi = tb_tempat_rekomendasi.id_rekomendasi JOIN tb_guru ON tb_guru.id_guru = tb_tempat_siswa.id_guru WHERE tb_guru.user = '".$this->session->userdata('guru')."' AND jurusan = '$key'")->result();
 		}
 	}
 
@@ -283,9 +283,9 @@ class m_admin extends CI_Model
 	public function nilai($key)
 	{
 		if ($key != "") {
-			return $this->db->query("SELECT * FROM tb_tempat_siswa INNER JOIN tb_siswa ON tb_tempat_siswa.id_siswa = tb_siswa.id_siswa WHERE nama_siswa LIKE '%" . $key . "%' ")->result();
+			return $this->db->query("SELECT * FROM tb_tempat_siswa INNER JOIN tb_siswa ON tb_tempat_siswa.id_siswa = tb_siswa.id_siswa JOIN tb_tempat_rekomendasi ON tb_tempat_rekomendasi.id_rekomendasi = tb_tempat_siswa.id_rekomendasi WHERE nama_siswa LIKE '%" . $key . "%' ")->result();
 		} else {
-			return $this->db->query("SELECT * FROM tb_tempat_siswa INNER JOIN tb_siswa ON tb_tempat_siswa.id_siswa = tb_siswa.id_siswa ")->result();
+			return $this->db->query("SELECT * FROM tb_tempat_siswa INNER JOIN tb_siswa ON tb_tempat_siswa.id_siswa = tb_siswa.id_siswa JOIN tb_tempat_rekomendasi ON tb_tempat_rekomendasi.id_rekomendasi = tb_tempat_siswa.id_rekomendasi")->result();
 		}
 	}
 	public function updateNilai($dimana, $data)
@@ -325,6 +325,7 @@ class m_admin extends CI_Model
 		$this->db->from('tb_nilai');
 		$this->db->join('tb_siswa', 'tb_nilai.id_siswa = tb_siswa.id_siswa');
 		$this->db->join('tb_tempat_siswa', 'tb_nilai.id_siswa = tb_tempat_siswa.id_siswa');
+		$this->db->join('tb_tempat_rekomendasi', 'tb_tempat_siswa.id_rekomendasi = tb_tempat_rekomendasi.id_rekomendasi');
 		$this->db->where('id_nilai', $id);
 		return $this->db->get();
 	}

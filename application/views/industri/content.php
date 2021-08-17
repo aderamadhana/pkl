@@ -69,7 +69,7 @@
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Daftar Siswa</h5>
                       <?php 
-                        $get = $this->db->select('*')->from('tb_tempat_siswa')->group_by('id_siswa')->get();
+                        $get = $this->db->select('*')->from('tb_tempat_siswa')->join('tb_tempat_rekomendasi', 'tb_tempat_rekomendasi.id_rekomendasi = tb_tempat_siswa.id_rekomendasi')->where('tb_tempat_rekomendasi.user', $this->session->userdata('industri'))->group_by('id_siswa')->get();
                         $rows = $get->num_rows(); 
                       ?>
                       <span class="h2 font-weight-bold mb-0"><?php echo $rows; ?></span>
@@ -97,7 +97,7 @@
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Daftar Guru</h5>
                       <?php 
-                        $get = $this->db->select('*')->from('tb_tempat_siswa')->group_by('id_guru')->get();
+                        $get = $this->db->select('*')->from('tb_tempat_siswa')->join('tb_tempat_rekomendasi', 'tb_tempat_rekomendasi.id_rekomendasi = tb_tempat_siswa.id_rekomendasi')->where('tb_tempat_rekomendasi.user', $this->session->userdata('industri'))->group_by('id_guru')->get();
                         $rows = $get->num_rows(); 
                       ?>
                       <span class="h2 font-weight-bold mb-0"><?php echo $rows; ?></span>

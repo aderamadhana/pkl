@@ -75,7 +75,7 @@ class M_siswa extends CI_Model
 	}
 
 	public function getKegiatan(){
-		return $this->db->get('tb_kegiatan_view');
+		return $this->db->get_where('tb_kegiatan_view', array('user_siswa' => $this->session->userdata('user')));
 	}
 
 	public function getKegiatanByUser($id_siswa){
@@ -99,5 +99,9 @@ class M_siswa extends CI_Model
 	public function deleteKegiatan($id_kegiatan){
 		$this->db->where('id_kegiatan', $id_kegiatan);
 		$this->db->delete('tb_kegiatan');
+	}
+
+	public function getNilai(){
+		return $this->db->select('*')->from('tb_nilai')->join('tb_siswa', 'tb_siswa.id_siswa = tb_nilai.id_siswa')->where('tb_siswa.user', $this->session->userdata('user'))->get()->result();
 	}
 }

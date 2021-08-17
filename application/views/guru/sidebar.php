@@ -45,6 +45,10 @@
                     <a class="nav-link" href="<?php echo base_url('guru/nilai') ?>"> <i class="ni ni-paper-diploma"></i> Nilai
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url('login/logout') ?>"> <i class="ni ni-user-run"></i> Logout
+                    </a>
+                </li>
             </ul>
 
         </div>

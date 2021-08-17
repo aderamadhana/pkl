@@ -1289,7 +1289,7 @@ class Admin extends CI_Controller
 		$key			 			= $this->input->post('key');
 		$data['nilai'] 				= $this->m_admin->nilai($key);
 		$perPage					= $config['per_page'];
-		$data['terpilih']			= $this->db->query("SELECT * FROM tb_nilai INNER JOIN tb_siswa ON tb_nilai.id_siswa = tb_siswa.id_siswa INNER JOIN tb_tempat_siswa ON tb_nilai.id_siswa = tb_tempat_siswa.id_siswa LIMIT $offset, $perPage ")->result();
+		$data['terpilih']			= $this->db->query("SELECT * FROM tb_nilai INNER JOIN tb_siswa ON tb_nilai.id_siswa = tb_siswa.id_siswa INNER JOIN tb_tempat_siswa ON tb_nilai.id_siswa = tb_tempat_siswa.id_siswa JOIN tb_tempat_rekomendasi ON tb_tempat_rekomendasi.id_rekomendasi = tb_tempat_siswa.id_rekomendasi LIMIT $offset, $perPage ")->result();
 		$data['jmlTerpilih'] = $this->db->query("SELECT * FROM tb_nilai INNER JOIN tb_siswa ON tb_nilai.id_siswa = tb_siswa.id_siswa INNER JOIN tb_tempat_siswa ON tb_nilai.id_siswa = tb_tempat_siswa.id_siswa")->row();
 		$this->pagination->initialize($config);
 		$data['halaman'] 			= $this->pagination->create_links();
