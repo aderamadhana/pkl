@@ -64,12 +64,12 @@
             <div class="col-xl-3 col-lg-6">
               <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
-                  <a href="<?php echo base_url('admin/daftarSiswa') ?>">
+                  <a href="<?php echo base_url('industri/daftarSiswa') ?>">
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Daftar Siswa</h5>
                       <?php 
-                        $get = $this->db->get('tb_siswa');
+                        $get = $this->db->select('*')->from('tb_tempat_siswa')->group_by('id_siswa')->get();
                         $rows = $get->num_rows(); 
                       ?>
                       <span class="h2 font-weight-bold mb-0"><?php echo $rows; ?></span>
@@ -92,143 +92,31 @@
             <div class="col-xl-4 col-lg-6">
               <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
-                  <a href="<?php echo base_url('admin/tempatSiswa') ?>">
+                  <a href="<?php echo base_url('industri/daftarGuru') ?>">
                   <div class="row">
                     <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Daftar TEMpat PKL SISWA</h5>
+                      <h5 class="card-title text-uppercase text-muted mb-0">Daftar Guru</h5>
                       <?php 
-                        $get = $this->db->get('tb_tempat_siswa');
+                        $get = $this->db->select('*')->from('tb_tempat_siswa')->group_by('id_guru')->get();
                         $rows = $get->num_rows(); 
                       ?>
                       <span class="h2 font-weight-bold mb-0"><?php echo $rows; ?></span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-primary text-white rounded-circle shadow">
-                        <i class="ni ni-building"></i>
+                        <i class="fas fa-address-book"></i>
                       </div>
                     </div>
                   </div>
-                  <p class="mt-3 mb-0 text-muted text-sm"><i>Berisi data-data tempat prakerin siswa</i> <br>
+                  <p class="mt-3 mb-0 text-muted text-sm"><i>Berisi daftar guru pendamping</i> <br>
                     <!-- <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 3.48%</span>!--
                     <span class="text-nowrap">Since last week</span>  !-->
                   </p>
-
-</a>                </div>
-              </div>
-            </div>
-            <div class="col-xl-4 col-lg-6">
-              <div class="card card-stats mb-4 mb-xl-0">
-                <div class="card-body">
-                  <a href="<?php echo base_url('admin/tempatRekomendasi') ?>">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Tempat Rekomendasi</h5>
-                      <?php 
-                        $get = $this->db->get('tb_tempat_rekomendasi');
-                        $rows = $get->num_rows(); 
-                      ?>
-                      <span class="h2 font-weight-bold mb-0"><?php echo $rows; ?></span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
-                        <i class="fas fa-building"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-muted text-sm"><i>Berisi daftar tempat rekomendasi siswa</i><br>
-                   <!--  <span class="text-warning mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
-                    <span class="text-nowrap">Since yesterday</span> -->
-                  </p>
-
-</a>                </div>
+                  </a>                
+                </div>
               </div>
             </div>
           </div>
-          <div class="row mt-4">
-            <div class="col-xl-4 col-lg-6">
-              <div class="card card-stats mb-4 mb-xl-0">
-                <div class="card-body">
-                  <a href="<?php echo base_url('admin/jurusan') ?>">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Jurusan</h5>
-                      <?php 
-                        $get = $this->db->get('tb_jurusan');
-                        $rows = $get->num_rows(); 
-                      ?>
-                      <span class="h2 font-weight-bold mb-0"><?php echo $rows; ?></span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-success text-white rounded-circle shadow">
-                        <i class="ni ni-hat-3"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-muted text-sm"><i>Untuk mengelola jurusan siswa prakerin</i><br>
-                    <!-- <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
-                    <span class="text-nowrap">Since last month</span> -->
-                  </p>
-                </a>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-4 col-lg-6">
-              <div class="card card-stats mb-4 mb-xl-0">
-                <div class="card-body">
-                  <a href="<?php echo base_url('admin/') ?>">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Materi</h5>
-                      <?php 
-                        $get = $this->db->get('tb_siswa');
-                        $rows = $get->num_rows(); 
-                      ?>
-                      <span class="h2 font-weight-bold mb-0"><?php echo $rows; ?></span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-default text-white rounded-circle shadow">
-                        <i class="ni ni-archive-2"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-muted text-sm"><i>Berisi materi untuk siswa-siswa prakerin</i><br>
-                    <!-- <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
-                    <span class="text-nowrap">Since last month</span> -->
-                  </p>
-                </a>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-lg-6">
-              <div class="card card-stats mb-4 mb-xl-0">
-                <div class="card-body">
-                  <a href="<?php echo base_url('admin/daftarBerkas') ?>">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Berkas</h5>
-                      <?php 
-                        $get = $this->db->get('tb_berkas');
-                        $rows = $get->num_rows(); 
-                      ?>
-                      <span class="h2 font-weight-bold mb-0"><?php echo $rows; ?></span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-info text-white rounded-circle shadow">
-                        <i class="ni ni-folder-17"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-muted text-sm"><i>Berisi berkas-berkas prakerin</i><br>
-                    <!-- <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
-                    <span class="text-nowrap">Since last month</span> -->
-                  </p>
-                </a>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
         </div>
       </div>
     </div>

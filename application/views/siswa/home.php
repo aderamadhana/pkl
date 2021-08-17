@@ -26,7 +26,7 @@ $fetch = $select->row();
                 <a href="#menu-oy">Menu</a>
                 <a href="" class="mt--2 float-right" style="font-size: 18px;" id="x">X</a>
             </li>
-            <li><a href="">Berkas Prakerin</a></li>
+            <li><a href="<?= base_url('siswa/berkas') ?>">Berkas Prakerin</a></li>
             <li><a href="<?= base_url('login/logout') ?>">Logout</a></li>
         </ul>
 
@@ -342,37 +342,10 @@ $fetch = $select->row();
                     $angka                      = $sudahDapatTempatPKL->num_rows();
 
                     if ($angka > 0) { ?>
-                    <a href="" class="btn-menu animated infinite bounce delay-2s" data-toggle="modal" data-target="#modal-notificationsatu">
+                    <a href="<?php echo site_url('siswa/kegiatan/') ?>" class="btn-menu animated infinite bounce delay-2s">
                         Lihat Detail!
                     </a>
-                    <div class="modal fade" id="modal-notificationsatu" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
-                        <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
-                            <div class="modal-content bg-gradient-danger">
-
-                                <div class="modal-header">
-                                    <h6 class="modal-title" id="modal-title-notification">Pemberitahuan</h6>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                </div>
-
-                                <div class="modal-body">
-
-                                    <div class="py-3 text-center">
-                                        <i class="ni ni-bell-55 ni-3x"></i>
-                                        <h4 class="heading mt-4">Menu tidak dapat di akses!</h4>
-                                        <p style="font-size: 13px;">Maaf kamu sudah mendapatkan tempat prakerin </p>
-                                    </div>
-
-                                </div>
-
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Oke, Saya paham</button>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
+                    
                     <?php } else { ?>
                     <a href="" class="btn-menu animated infinite bounce delay-2s" data-toggle="modal" data-target="#modal-notificationa">
                         Lihat Detail!

@@ -1,28 +1,28 @@
-<?php
+<?php if ($this->session->tempdata('input_nilai') == TRUE) : ?>
+  <script>
+    Swal.fire({
+      type: 'success',
+      title: 'Berhasil Ditambah!',
+      text: '<?php echo $this->session->tempdata('input_nilai') ?>'
+    });
+  </script>
+  <?php
+  $url = $_SERVER['REQUEST_URI'];
+  header("Refresh: 2; URL=$url");
+endif; ?>
 
-if ($this->session->tempdata('login_guru') == TRUE) { ?>
-    <script>
-        Swal.fire({
-            type: "success",
-            title: "Selamat Datang!",
-            text: "<?= $this->session->tempdata('login_guru') ?>"
-        });
-    </script>
-    <?php $url = $_SERVER['REQUEST_URI'];
-    header("Refresh: 1; URL=$url");
-}
-if ($this->session->tempdata('pesan') == TRUE) { ?>
-    <script>
-        Swal.fire({
-            type: "success",
-            title: "Selamat!",
-            text: "<?= $this->session->tempdata('pesan') ?>"
-        });
-    </script>
-    <?php $url = $_SERVER['REQUEST_URI'];
-    header("Refresh: 1; URL=$url");
-}
-?>
+<?php if ($this->session->tempdata('update_nilai') == TRUE) : ?>
+  <script>
+    Swal.fire({
+      type: 'success',
+      title: 'Berhasil Diupdate!',
+      text: '<?php echo $this->session->tempdata('update_nilai') ?>'
+    });
+  </script>
+  <?php
+  $url = $_SERVER['REQUEST_URI'];
+  header("Refresh: 2; URL=$url");
+endif; ?>
 <div class="main-content">
     <!-- Navbar -->
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
@@ -38,19 +38,23 @@ if ($this->session->tempdata('pesan') == TRUE) { ?>
 
                             <div class="media-body ml-2 d-none d-lg-block">
                                 <?php
-                                $cek    = $this->db->get('tb_sementara');
+                                $cek    = $this->db->get_where('tb_sementara', array('status_pkl' => 0));
                                 $baris  = $cek->num_rows();
 
                                 if ($baris == 0) {
                                     ?>
-                                    <span class="mb-0 text-sm  font-weight-bold">Selamat Datang, <b><?php echo $this->session->userdata('guru') ?></b></span>
+                                    <span class="mb-0 text-sm  font-weight-bold">Selamat Datang, <b><?php echo $this->session->userdata('industri') ?></b></span>
                                 <?php } else { ?>
-                                    <span class="mb-0 text-sm  font-weight-bold">*Selamat Datang, <b><?php echo $this->session->userdata('guru') ?></b></span>
+                                    <span class="mb-0 text-sm  font-weight-bold">*Selamat Datang, <b><?php echo $this->session->userdata('industri') ?></b></span>
                                 <?php } ?>
                             </div>
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+                        <a href="<?php echo base_url('admin/notif') ?>" class="dropdown-item">
+                            <i class="ni ni-notification-70"></i>
+                            <span>Notifikasi (<?php echo $baris; ?>)</span>
+                        </a>
                         <a href="<?php echo base_url('login/logout') ?>" class="dropdown-item">
                             <i class="ni ni-user-run"></i>
                             <span>Logout</span>
@@ -63,33 +67,30 @@ if ($this->session->tempdata('pesan') == TRUE) { ?>
     <!-- End Navbar -->
     <!-- Header -->
     <div class="header bg-gradient-info pt-5 pt-md-8">
-        <div class="row">
-            <div class="col-md-12 ml-4">
-                <form action="<?= base_url('guru') ?>" method="POST">
+        <form action="<?= base_url('industri/nilaiSiswa') ?>" method="POST">
+            <div class="row">
+                <div class="col-md-6 ml-4">
+
                     <div class="form-group">
-                        <h3 style="text-transform: uppercase; border-bottom: 2px solid #fff; width: 50%; color: white; margin-bottom: 5%;">Monitoring siswa</h3>
-                        <div class="row">
-                            <div class="col-4" id="ju">
-                                <div class="form-group">
-                                    <div class="input-group input-group-alternative mb-4">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
-                                        </div>
-                                        <input class="form-control form-control-alternative" placeholder="Cari nama siswa" type="text" name="caro">
-                                    </div>
-                                </div>
+                        <div class="input-group input-group-alternative mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
                             </div>
-                            <div class="col-2">
-                                <button type="submit" class="btn btn-info" id="cari" name="cari"><i class="ni ni-zoom-split-in"></i></button>
-                            </div>
+                            <input class="form-control form-control-alternative" placeholder="Cari nama siswa" type="text" name="key">
                         </div>
-
                     </div>
-                </form>
 
+                </div>
+                <div class="col-md-1">
+                    <button type="submit" class="btn btn-primary">Cari</button>
+                </div>
+                <div class="col-md-2">
+                    <a href="<?= base_url('industri/nilaiSiswa') ?>" class="btn btn-warning">Reset Cari</a>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
+
 
     <div class="row">
         <div class="col-1"></div>
@@ -101,13 +102,10 @@ if ($this->session->tempdata('pesan') == TRUE) { ?>
                             <?php
                             error_reporting(0);
                             ?>
-                            <?php foreach ($guru as $b) : ?>
+                            <?php foreach ($akhir as $b) : ?>
 
                             <?php endforeach; ?>
-                            <h3 class="mb-0">Daftar Siswa Prakerin</h3>
-                        </div>
-                        <div class="col text-right">
-                            <!-- <a href="#!" class="btn btn-sm btn-primary">See all</a> -->
+                            <h3 class="mb-0">Daftar Nilai <b><?= @$b->jurusan ?></b></h3>
                         </div>
                     </div>
                 </div>
@@ -123,23 +121,20 @@ if ($this->session->tempdata('pesan') == TRUE) { ?>
                                         Nama Siswa
                                     </th>
                                     <th scope="col">
-                                        Jurusan
+                                        Status Penilaian
                                     </th>
-                                    <th>Nama Perusahaan</th>
-                                    <th scope="col">Nama Pimpinan</th>
                                     <th scope="col">
-                                        Alamat
+                                        Aksi
                                     </th>
-                                    <th scope="col">Cp</th>
 
                                 </tr>
                             </thead>
 
                             <tbody class="list">
-                                <?php $no = 1;
-                                foreach ($guru as $a) : ?>
+                                <?php $no = $offset;
+                                foreach ($nilai as $a) : ?>
                                     <tr>
-                                        <td><?= $no++; ?></td>
+                                        <td><?= ++$no; ?></td>
                                         <th scope="row" class="name">
                                             <div class="media align-items-center">
                                                 <div class="media-body">
@@ -147,26 +142,27 @@ if ($this->session->tempdata('pesan') == TRUE) { ?>
                                                 </div>
                                             </div>
                                         </th>
-                                        <td class="budget">
-                                            <?= $a->jurusan ?>
-                                        </td>
-                                        <td class="status">
-                                            <?= $a->nama_perusahaan ?>
-                                        </td>
-                                        <td>
-                                            <?= $a->nama_pimpinan; ?>
-                                        </td>
-                                        <td>
-                                            <?= $a->alamat; ?>
-                                        </td>
-                                        <td>
-                                            <?= $a->cp ?>
-                                        </td>
+                                        <?php 
+                                            $query = $this->db->get_where('tb_nilai', array('id_siswa' => $a->id_siswa, 'status_nilai_industri' => 1))->result();
 
-
+                                            if($query == 0){
+                                                $status_penilaian = '<span class="badge badge-warning">Belum Dinilai</span>';
+                                            }else{
+                                                $status_penilaian = '<span class="badge badge-success">Sudah Dinilai</span>';
+                                            }
+                                        ?>
+                                        <th scope="row" class="name">
+                                            <div class="media align-items-center">
+                                                <div class="media-body">
+                                                    <span class="mb-0 text-sm"><?= $status_penilaian ?></span>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <td scope="row" class="name">
+                                            <a href="<?php echo site_url('industri/inputNilai/'.$a->id_siswa)?>" class="btn btn-default">Isi Nilai</a>
+                                        </td>
+                                        
                                     </tr>
-
-
                                 <?php endforeach; ?>
                             </tbody>
 
@@ -175,7 +171,6 @@ if ($this->session->tempdata('pesan') == TRUE) { ?>
 
                 </div>
             </div>
-
             <div class="card-footer">
                 <?= $halaman; ?>
             </div>

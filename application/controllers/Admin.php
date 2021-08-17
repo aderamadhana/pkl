@@ -928,7 +928,7 @@ class Admin extends CI_Controller
 		$perPage		 = $config['per_page'];
 		$data['manual']  = $this->db->query("SELECT * FROM tb_tempat_siswa INNER JOIN tb_siswa ON tb_tempat_siswa.id_siswa = tb_siswa.id_siswa INNER JOIN tb_tempat_rekomendasi ON tb_tempat_siswa.id_rekomendasi = tb_tempat_rekomendasi.id_rekomendasi ORDER BY jurusan ASC LIMIT $offset, $perPage ")->result();
 		$data['jurusan'] = $this->m_admin->jur('tb_jurusan')->result();
-		$data['siswa']   = $this->db->get('tb_absensi')->result();
+		$data['siswa']   = $this->db->select('*')->from('tb_absensi')->group_by('siswa')->get()->result();
 		$this->load->view('admin/index');
 		$this->load->view('admin/sidebar');
 		$this->load->view('admin/absensi/index', $data);
@@ -975,7 +975,7 @@ class Admin extends CI_Controller
 
 	public function absenManual($nis)
 	{
-		$data['manu']	= $this->db->query("SELECT * FROM tb_tempat_siswa INNER JOIN tb_siswa ON tb_tempat_siswa.id_siswa = tb_siswa.id_siswa WHERE nis = '$nis' ")->result();
+		$data['manu']	= $this->db->query("SELECT * FROM tb_tempat_siswa INNER JOIN tb_siswa ON tb_tempat_siswa.id_siswa = tb_siswa.id_siswa INNER JOIN tb_tempat_rekomendasi ON tb_tempat_siswa.id_rekomendasi = tb_tempat_rekomendasi.id_rekomendasi WHERE nis = '$nis' ")->result();
 		$this->load->view('admin/index');
 		$this->load->view('admin/sidebar');
 		$this->load->view('admin/absensi/manual', $data);
@@ -1015,7 +1015,7 @@ class Admin extends CI_Controller
 	{
 		$siswa				= $this->db->query("SELECT * FROM tb_siswa WHERE nis = '$nis' ")->row();
 		$id					= $this->db->query("SELECT * FROM tb_tempat_siswa WHERE id_siswa = '$siswa->id_siswa' ")->row();
-		$data['cek']		= $this->db->query("SELECT * FROM tb_tempat_siswa INNER JOIN tb_siswa ON tb_tempat_siswa.id_siswa WHERE nis = '$nis' AND id = '$id->id'  ")->result();
+		$data['cek']		= $this->db->query("SELECT * FROM tb_tempat_siswa INNER JOIN tb_siswa ON tb_tempat_siswa.id_siswa = tb_siswa.id_siswa INNER JOIN tb_tempat_rekomendasi ON tb_tempat_siswa.id_rekomendasi = tb_tempat_rekomendasi.id_rekomendasi WHERE nis = '$nis' AND id = '$id->id'  ")->result();
 
 		$data['absen']		= $this->db->query("SELECT * FROM tb_absensi_manual WHERE id_siswa = '$siswa->id_siswa' ")->result();
 
@@ -1027,7 +1027,7 @@ class Admin extends CI_Controller
 	public function editManual($id)
 	{
 		$siswa 				= $this->db->query("SELECT * FROM tb_siswa WHERE id_siswa = '$id' ")->row();
-		$data['diri']		= $this->db->query("SELECT * FROM tb_tempat_siswa INNER JOIN tb_siswa ON tb_tempat_siswa.id_siswa = tb_siswa.id_siswa WHERE nis = '$siswa->nis' ")->result();
+		$data['diri']		= $this->db->query("SELECT * FROM tb_tempat_siswa INNER JOIN tb_siswa ON tb_tempat_siswa.id_siswa = tb_siswa.id_siswa INNER JOIN tb_tempat_rekomendasi ON tb_tempat_siswa.id_rekomendasi = tb_tempat_rekomendasi.id_rekomendasi WHERE nis = '$siswa->nis' ")->result();
 
 
 		$this->load->view('admin/index');

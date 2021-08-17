@@ -69,4 +69,35 @@ class M_siswa extends CI_Model
 	{
 		return $this->db->get_where($tabel, $dimana)->result();
 	}
+
+	public function getBerkas(){
+		return $this->db->get('tb_berkas');
+	}
+
+	public function getKegiatan(){
+		return $this->db->get('tb_kegiatan_view');
+	}
+
+	public function getKegiatanByUser($id_siswa){
+		return $this->db->get_where('tb_tempat_siswa', array('id_siswa' => $id_siswa));
+	}
+
+	public function tambahKegiatan($data){
+		$this->db->insert('tb_kegiatan', $data);
+	}
+
+	public function getKegiatanById($id_kegiatan){
+		return $this->db->get_where('tb_kegiatan', array('id_kegiatan' => $id_kegiatan));
+	}
+
+	public function editKegiatan($data, $where){
+		$this->db->set($data);
+		$this->db->where($where);
+		$this->db->update('tb_kegiatan');
+	}
+
+	public function deleteKegiatan($id_kegiatan){
+		$this->db->where('id_kegiatan', $id_kegiatan);
+		$this->db->delete('tb_kegiatan');
+	}
 }

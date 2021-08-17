@@ -82,6 +82,7 @@ if ($this->session->tempdata('absen') ==  TRUE) { ?>
                 url: '<?php echo site_url("siswa/absen"); ?>',
                 type: 'POST',
                 dataType: 'json',
+                enctype: 'multipart/form-data',
                 data: {
                     perusahaan: perusahaan,
                     alamat: alamat,

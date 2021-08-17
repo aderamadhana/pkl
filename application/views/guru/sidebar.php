@@ -34,7 +34,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo base_url('guru/kejadian') ?>"> <i class="ni ni-single-copy-04"></i> Kejadian
+                    <a class="nav-link" href="<?php echo base_url('guru/absensi') ?>"> <i class="ni ni-single-copy-04"></i> Absensi
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url('guru/laporan') ?>"> <i class="ni ni-folder-17"></i> Laporan Kegiatan
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url('guru/nilai') ?>"> <i class="ni ni-paper-diploma"></i> Nilai
                     </a>
                 </li>
             </ul>

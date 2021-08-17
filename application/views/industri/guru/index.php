@@ -1,42 +1,4 @@
-<?php
 
-if ($this->session->tempdata('tambah_guru') == TRUE) : ?>
-    <script>
-        Swal.fire({
-            type: "success",
-            title: "Selamat!",
-            text: "<?= $this->session->tempdata('tambah_guru') ?>"
-        })
-    </script>
-    <?php $url = $_SERVER['REQUEST_URI'];
-    header("Refresh: 2; URL=$url");
-endif;
-
-if ($this->session->tempdata('update_guru') == TRUE) : ?>
-    <script>
-        Swal.fire({
-            type: "success",
-            title: "Update Berhasil!",
-            text: "<?= $this->session->tempdata('update_guru') ?>"
-        })
-    </script>
-    <?php $url = $_SERVER['REQUEST_URI'];
-    header("Refresh: 2; URL=$url");
-endif;
-
-if ($this->session->tempdata('delete_guru') == TRUE) : ?>
-    <script>
-        Swal.fire({
-            type: "success",
-            title: "Delete Berhasil!",
-            text: "<?= $this->session->tempdata('delete_guru') ?>"
-        })
-    </script>
-    <?php $url = $_SERVER['REQUEST_URI'];
-    header("Refresh: 2; URL=$url");
-endif;
-
-?>
 <div class="main-content">
     <!-- Navbar -->
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
@@ -57,9 +19,9 @@ endif;
 
                                 if ($baris == 0) {
                                     ?>
-                                    <span class="mb-0 text-sm  font-weight-bold">Selamat Datang, <b><?php echo $this->session->userdata('nama') ?></b></span>
+                                    <span class="mb-0 text-sm  font-weight-bold">Selamat Datang, <b><?php echo $this->session->userdata('industri') ?></b></span>
                                 <?php } else { ?>
-                                    <span class="mb-0 text-sm  font-weight-bold">*Selamat Datang, <b><?php echo $this->session->userdata('nama') ?></b></span>
+                                    <span class="mb-0 text-sm  font-weight-bold">*Selamat Datang, <b><?php echo $this->session->userdata('industri') ?></b></span>
                                 <?php } ?>
                             </div>
                         </div>
@@ -81,7 +43,7 @@ endif;
     <!-- End Navbar -->
     <!-- Header -->
     <div class="header bg-gradient-info pt-5 pt-md-8">
-        <form action="<?= base_url('admin/daftarGuru') ?>" method="POST">
+        <form action="<?= base_url('industri/daftarGuru') ?>" method="POST">
             <div class="row">
                 <div class="col-md-6 ml-4">
 
@@ -99,7 +61,7 @@ endif;
                     <button type="submit" class="btn btn-primary">Cari</button>
                 </div>
                 <div class="col-md-2">
-                    <a href="<?= base_url('admin/daftarGuru') ?>" class="btn btn-warning">Reset Cari</a>
+                    <a href="<?= base_url('industri/daftarGuru') ?>" class="btn btn-warning">Reset Cari</a>
                 </div>
             </div>
         </form>
@@ -119,10 +81,7 @@ endif;
                             <?php foreach ($akhir as $b) : ?>
 
                             <?php endforeach; ?>
-                            <h3 class="mb-0">Daftar Guru Monitoring <b><?= @$b->jurusan ?></b></h3>
-                        </div>
-                        <div class="col text-right">
-                            <a href="<?= base_url('admin/tambahGuru') ?>" class="btn btn-sm btn-info">Tambah</a>
+                            <h3 class="mb-0">Daftar Guru Pendamping <b><?= @$b->jurusan ?></b></h3>
                         </div>
                     </div>
                 </div>
@@ -138,13 +97,8 @@ endif;
                                         Nama Guru
                                     </th>
                                     <th scope="col">
-                                        User
+                                        Nama Siswa Didik
                                     </th>
-                                    <th scope="col">
-                                        Pass
-                                    </th>
-
-                                    <th scope="col">Aksi</th>
 
                                 </tr>
                             </thead>
@@ -161,20 +115,13 @@ endif;
                                                 </div>
                                             </div>
                                         </th>
-
-
-                                        <td>
-                                            <?= $a->user; ?>
+                                        <td scope="row" class="name">
+                                            <div class="media align-items-center">
+                                                <div class="media-body">
+                                                    <span class="mb-0 text-sm"><?= $a->nama_siswa ?></span>
+                                                </div>
+                                            </div>
                                         </td>
-                                        <td>
-                                            <?= $a->pass; ?>
-                                        </td>
-                                        <td>
-                                            <a href="<?= base_url('admin/updateGuru/') . $a->id_guru ?>" class="btn-sm btn-success">Update</a>
-                                            <a href="<?= base_url('admin/deleteGuru/') . $a->id_guru ?>" class="btn-sm btn-danger">Delete</a>
-                                        </td>
-
-
                                     </tr>
 
 

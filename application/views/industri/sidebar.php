@@ -70,7 +70,7 @@
         
         <li class="nav-item">
           <a class="nav-link " href="<?php echo base_url('industri/laporan') ?>">
-            <i class="ni ni-folder-17"></i> Laporan
+            <i class="ni ni-folder-17"></i> Laporan Kegiatan Siswa
           </a>
         </li>
 

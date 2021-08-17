@@ -106,6 +106,24 @@ foreach ($siswa as $o) :
 			</span>
 		</div>
 
+		<?php 
+			$this->db->select('*');
+			$this->db->from('tb_tempat_siswa');
+			$this->db->join('tb_tempat_rekomendasi', 'tb_tempat_rekomendasi.id_rekomendasi = tb_tempat_siswa.id_rekomendasi');
+			$this->db->join('tb_periode', 'tb_periode.id_periode = tb_tempat_siswa.id_periode');
+			$this->db->join('tb_siswa', 'tb_siswa.id_siswa = tb_tempat_siswa.id_siswa');
+			$this->db->where('tb_siswa.user', $this->session->userdata('user'));
+			$query = $this->db->get()->result();
+			if($query > 0){
+				foreach($query as $data){
+		?>
+		<div class="colo-satu">
+			<i class="ni ni-building" id="icon-pro"></i>
+		</div>
+		<div class="colo-dua">
+			<span class="nama-sis mt--3"><?php echo $data->nama_perusahaan?>, Periode  <?php echo $data->tgl_start?> sd <?php echo $data->tgl_end?> </span>
+		</div>
+		<?php }}?>
 	</div>
 
 	<div class="claer-left"></div>

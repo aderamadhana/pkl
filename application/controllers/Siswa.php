@@ -293,12 +293,14 @@ class Siswa extends CI_Controller
 		$alamat			= $this->input->post('alamat', true);
 		$siswa 			= $this->input->post('siswa', true);
 		$jurusan		= $this->input->post('jurusan', true);
-		$image = $this->input->post('image');
-		$image = str_replace('data:image/jpeg;base64,','', $image);
-		$image = base64_decode($image);
-		header('Content-Type: bitmap; charset=utf-8');
+		$image 			= $this->input->post('image');
+		$image = str_replace('[removed]', '', $image);
+		
+		// $image = str_replace('data:image/jpeg;base64,','', $image);
+		$image_decoded = base64_decode($image);
+		// $image_decoded = imageCreateFromString($image_decoded);
 		$filename = 'image_'.time().'.png';
-		file_put_contents(FCPATH . '/assets/uploads/absensi/' . $filename, $image);
+		file_put_contents(FCPATH . '/assets/uploads/absensi/' . $filename, $image_decoded);
 		$data 			= array(
 			'perusahaan'		=> $perusahaan,
 			'alamat'			=> $alamat,
@@ -380,5 +382,108 @@ class Siswa extends CI_Controller
 		$this->load->view('siswa/header');
 		$this->load->view('siswa/laporan/index');
 		$this->load->view('siswa/footer');
+	}
+
+	public function berkas(){
+		$data['berkas'] = $this->m_siswa->getBerkas()->result();
+
+		$this->load->view('siswa/header');
+		$this->load->view('siswa/navbar');
+		$this->load->view('siswa/berkas/index', $data);
+	}
+
+	public function kegiatan(){
+		$data['kegiatan'] = $this->m_siswa->getKegiatan()->result();
+
+		$this->load->view('siswa/header');
+		$this->load->view('siswa/navbar');
+		$this->load->view('siswa/kegiatan/index', $data);
+	}
+
+	public function tambahKegiatan($id_user){
+		$data['kegiatan'] = $this->m_siswa->getKegiatanByUser($id_user)->result();
+
+		$this->load->view('siswa/header');
+		$this->load->view('siswa/navbar');
+		$this->load->view('siswa/kegiatan/tambah', $data);
+	}
+
+	public function doTambahKegiatan(){
+		$config['upload_path']   = './assets/uploads/kegiatan';
+		$config['allowed_types'] = 'jpg|png|jpeg|gif';
+		$config['max_size'] 		= 1024;
+
+		$this->load->library('upload', $config);
+		$buktiKegiatan = null;
+
+		$upload = $this->upload->data();
+
+		if($this->upload->do_upload('bukti_kegiatan')){ 
+			$dataUpload     	= $this->upload->data();
+			$buktiKegiatan    	= $dataUpload['file_name'];
+		}
+
+		$data = array(
+			'id_siswa' 				=> $this->input->post('id_siswa'),
+			'id_rekomendasi' 		=> $this->input->post('id_rekomendasi'),
+			'nama_kegiatan' 		=> $this->input->post('nama_kegiatan'),
+			'tgl_kegiatan' 			=> $this->input->post('tgl_kegiatan'),
+			'deskripsi_kegiatan' 	=> $this->input->post('deskripsi_kegiatan'),
+			'bukti_kegiatan' 		=> $buktiKegiatan
+		);
+
+		$this->m_siswa->tambahKegiatan($data);
+		$this->session->set_tempdata('tambah_kegiatan', 'Kegiatan Berhasil di Tambah!', 0);
+		redirect('siswa/kegiatan');
+	}
+
+	public function editKegiatan($id_kegiatan){
+		$data['kegiatan'] = $this->m_siswa->getKegiatanById($id_kegiatan)->result();
+
+		$this->load->view('siswa/header');
+		$this->load->view('siswa/navbar');
+		$this->load->view('siswa/kegiatan/edit', $data);
+	}
+
+	public function doEditKegiatan(){
+		$config['upload_path']   = './assets/uploads/kegiatan';
+		$config['allowed_types'] = 'jpg|png|jpeg|gif';
+		$config['max_size'] 		= 1024;
+
+		$this->load->library('upload', $config);
+		$buktiKegiatan = null;
+
+		$upload = $this->upload->data();
+
+		if($this->upload->do_upload('bukti_kegiatan')){ 
+			$dataUpload     	= $this->upload->data();
+			$buktiKegiatan    	= $dataUpload['file_name'];
+			
+			$data = array(
+				'nama_kegiatan' 		=> $this->input->post('nama_kegiatan'),
+				'tgl_kegiatan' 			=> $this->input->post('tgl_kegiatan'),
+				'deskripsi_kegiatan' 	=> $this->input->post('deskripsi_kegiatan'),
+				'bukti_kegiatan' 		=> $buktiKegiatan
+			);
+		}else{
+			$data = array(
+				'nama_kegiatan' 		=> $this->input->post('nama_kegiatan'),
+				'tgl_kegiatan' 			=> $this->input->post('tgl_kegiatan'),
+				'deskripsi_kegiatan' 	=> $this->input->post('deskripsi_kegiatan'),
+				'bukti_kegiatan' 		=> $this->input->post('bukti')
+			);
+		}
+
+		$where = array('id_kegiatan' => $this->input->post('id_kegiatan'));
+
+		$this->m_siswa->editKegiatan($data, $where);
+		$this->session->set_tempdata('update_kegiatan', 'Kegiatan Berhasil di Update!', 0);
+		redirect('siswa/kegiatan');
+	}
+
+	public function deleteKegiatan($id_kegiatan){
+		$this->m_siswa->deleteKegiatan($id_kegiatan);
+		$this->session->set_tempdata('delete_kegiatan', 'Kegiatan Berhasil di Hapus!', 0);
+		redirect('siswa/kegiatan');
 	}
 }
