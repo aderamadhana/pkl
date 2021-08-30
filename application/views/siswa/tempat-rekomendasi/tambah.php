@@ -46,7 +46,7 @@
                                 </div>
                                 <select class="form-control form-control-alternative" name="id_periode">
                                     <?php foreach($periode as $dPeriode){ ?>
-                                    <option value="<?php echo $dPeriode->id_periode?>"><?php echo $dPeriode->tgl_start?> - <?php echo $dPeriode->tgl_end?></option>
+                                    <option value="<?php echo $dPeriode->id_periode?>"><?php echo $dPeriode->periode?></option>
                                     <?php }?>
                                 </select>
                             </div>

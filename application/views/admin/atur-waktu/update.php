@@ -53,7 +53,19 @@
             <?php foreach($data_periode as $a): ?>
             <input type="hidden" value="<?php echo $a->id_periode ?>" name="id_periode">
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-3">
+                <div class="form-group text-white">
+                  <p>Nama Periode</p>
+                  <div class="input-group input-group-alternative mb-4">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-bullet-list-67"></i></span>
+                    </div>
+                    <input class="form-control form-control-alternative" value="<?php echo $a->periode ?>" type="text" name="periode" required>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3">
                 <div class="form-group text-white">
                   <p>Tanggal Mulai</p>
                   <div class="input-group input-group-alternative mb-4">
@@ -65,7 +77,7 @@
                 </div>
               </div>
 
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <div class="form-group text-white">
                 <p>Tanggal Mulai</p>
                   <div class="input-group input-group-alternative mb-4">
@@ -76,7 +88,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <div class="form-group text-white">
                     <p>Status Waktu PKL</p>
                     <div class="input-group input-group-alternative mb-4">

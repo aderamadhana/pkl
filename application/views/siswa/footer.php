@@ -1,5 +1,11 @@
+<?php 
+    $query = $this->db->get('tb_sekolah')->result();
+    foreach($query as $d){
+        $nama_sekolah = $d->nama_sekolah;
+    }
+?>
 <footer>
-    <p>&copy; Copyright Smk muhammadiyah 1 sukoharjo 2019 All right reserved. Code By <a href="https://www.instagram.com/raihannmuhammad_/" target="_blank">Raihan</a> </p>
+    <p>&copy; Copyright <?= $nama_sekolah ?> 2021 All right reserved.</p>
 </footer>
 
 

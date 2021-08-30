@@ -147,7 +147,7 @@ class Siswa extends CI_Controller
 		$config['num_tag_close']    = '</span></li>';
 		$config['cur_tag_open']     = '<li class="page-item active"><span class="page-link" style="background-color: #17a2b8; border-color: transparent;">';
 		$config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
-		$config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
+		$config['next_tag_open']    = '<li class="page-item" ><span class="page-link">';
 		$config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
 		$config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
 		$config['prev_tagl_close']  = '</span>Next</li>';

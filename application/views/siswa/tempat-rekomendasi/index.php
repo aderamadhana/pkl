@@ -22,11 +22,10 @@ if ($this->session->tempdata('update_profile') == TRUE) { ?>
 
     <div class="container" id="menu-oy">
         <div class="row col-md-12">
-			
-		<?php foreach ($rekomendasi as $r) : ?>
-			<div class="col-md-6">
+			<?php foreach ($rekomendasi as $r) : ?>
+			<div class="col-md-4">
 				<div class="back-rekomendasi" style="margin-top: 10%;">
-					<h4 class="text-center text-white pt-5 mb--5" style="font-family: 'exo';">TEMPAT REKOMENDASI</h4>
+					<h4 class="text-center pt-5 mb--5" style="color: #000000; font-family: 'exo';">TEMPAT REKOMENDASI</h4>
 				</div>
 
 				<div class="mb-3">
@@ -110,17 +109,17 @@ if ($this->session->tempdata('update_profile') == TRUE) { ?>
 							<div class="row">
 								<a href="<?php echo base_url('siswa/tambahRekomen/') . $r->id_rekomendasi ?>" class="tombol"><i class="ni ni-send"></i> Daftar</a>
 							</div>
-
 						</div>
 						</form>
-						<?php echo $halaman; ?>
 					</div>
-
-
 				</div>
             </div>
 			
 			<?php endforeach; ?>
+			
         </div>
+		
+		<?php echo $halaman; ?>
+		<br>
     </div>
 

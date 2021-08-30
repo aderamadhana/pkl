@@ -153,6 +153,9 @@ endif; ?>
                         No
                       </th>
                       <th scope="col">
+                        Periode
+                      </th>
+                      <th scope="col">
                         Tanggal Mulai
                       </th>
                       <th scope="col">
@@ -176,6 +179,9 @@ endif; ?>
                     ?>
                       <tr>
                         <td><?php echo $no++; ?></td>
+                        <th scope="row" class="name">
+                          <?php echo $s->periode ?>
+                        </th>
                         <th scope="row" class="name">
                           <?php echo $s->tgl_start ?>
                         </th>

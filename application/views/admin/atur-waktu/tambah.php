@@ -50,7 +50,18 @@
 
         <?php echo form_open_multipart('admin/doTambahWaktuPKL') ?>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="text-white">Nama Periode</label>
+              <div class="input-group input-group-alternative mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-watch-time"></i></span>
+                </div>
+                <input class="form-control form-control-alternative" placeholder="Masukan Nama Periode" type="text" name="periode" required>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
             <div class="form-group">
               <label class="text-white">Tanggal Mulai</label>
               <div class="input-group input-group-alternative mb-4">
@@ -64,7 +75,7 @@
             </div>
           </div>
 
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="form-group">
               <label class="text-white">Tanggal Berakhir</label>
               <div class="input-group input-group-alternative mb-4">

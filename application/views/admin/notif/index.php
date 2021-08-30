@@ -142,7 +142,7 @@ endif; ?>
                     ?>
                   </td>
                   
-                  <td><?= $n->tgl_start ?> sd <?= $n->tgl_end ?></td>
+                  <td><?= $n->periode ?> </td>
                   <td>
                     <a href="<?= base_url('admin/pklOke/' . $bb) ?>" class="btn-sm btn-success">Oke</a>
                     <a href="<?php echo base_url('admin/tolakRekomen/') . $n->id ?>" class="btn-sm btn-danger">Tidak</a>

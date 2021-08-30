@@ -81,11 +81,6 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="navv" href="<?php echo base_url('admin/monitoring') ?>">
-            <i class="ni ni-single-02"></i> Monitoring
-          </a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link " href="<?php echo base_url('admin/tempatSiswa') ?>">
             <i class="ni ni-building"></i> Tempat Pkl Siswa
           </a>

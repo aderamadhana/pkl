@@ -67,7 +67,12 @@ class M_siswa extends CI_Model
 
 	public function get_periode($tabel, $dimana)
 	{
-		return $this->db->get_where($tabel, $dimana)->result();
+		$this->db->select('*');
+		$this->db->from($tabel);
+		$this->db->where($dimana);
+		$this->db->order_by('id_periode', 'desc');
+		$this->db->limit(1);
+		return $this->db->get()->result();
 	}
 
 	public function getBerkas(){
