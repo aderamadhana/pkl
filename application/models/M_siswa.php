@@ -80,7 +80,11 @@ class M_siswa extends CI_Model
 	}
 
 	public function getKegiatan(){
-		return $this->db->get_where('tb_kegiatan_view', array('user_siswa' => $this->session->userdata('user')));
+		$this->db->select('tb_kegiatan.*, tb_siswa.user as user_siswa');
+		$this->db->from('tb_kegiatan');
+		$this->db->join('tb_siswa', 'tb_siswa.id_siswa = tb_kegiatan.id_siswa');
+		$this->db->where('tb_siswa.user', $this->session->userdata('user'));
+		return $this->db->get();
 	}
 
 	public function getKegiatanByUser($id_siswa){

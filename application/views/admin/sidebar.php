@@ -62,18 +62,7 @@
           </a>
         </li>
         <!-- <li class="nav-item">
-          <?php
-          $cuy  = $this->db->query("SELECT * FROM tb_ngungsi")->num_rows();
-          if ($cuy > 0) { ?>
-          <a class="nav-link" id="navv" href="<?php echo base_url('admin/chat') ?>">
-            <i class="fa fa-comments"></i> Chat (<?= $cuy ?>)
-          </a>
-          <?php } else { ?>
-
-          <a class="nav-link" id="navv" href="<?php echo base_url('admin/chat') ?>">
-            <i class="fa fa-comments"></i> Chat
-          </a>
-          <?php } ?>
+          
         </li> -->
         <li class="nav-item">
           <a class="nav-link" id="navv" href="<?php echo base_url('admin/daftarGuru') ?>">

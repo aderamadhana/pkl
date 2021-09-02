@@ -13,6 +13,7 @@
                         <form action="<?php echo site_url('Siswa/doTambahKegiatan') ?>" method="post" enctype="multipart/form-data">
                         <?php foreach($kegiatan as $data){ ?>
                             <input type="hidden" name="id_siswa" value="<?php echo $data->id_siswa?>" required>
+                            <input type="hidden" name="id_guru" value="<?php echo $data->id_guru?>" required>
                             <input type="hidden" name="id_rekomendasi" value="<?php echo $data->id_rekomendasi?>" required>
                                         
                             <div class="row">
@@ -57,7 +58,7 @@
                                         <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-folder-17"></i></span>
                                         </div>
-                                        <input class="form-control form-control-alternative" placeholder="Masukkan Deskripsi Kegiatan" type="file" name="bukti_kegiatan" required>
+                                        <input class="form-control form-control-alternative" placeholder="Masukkan Deskripsi Kegiatan" type="file" name="bukti_kegiatan" accept=".doc, .docx, .pdf" required>
                                     </div>
                                     </div>
                                 </div>

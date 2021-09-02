@@ -930,8 +930,8 @@ class Admin extends CI_Controller
 		$data['jurusan'] = $this->m_admin->jur('tb_jurusan')->result();
 		$data['siswa']   = $this->db->select('*')->from('tb_absensi')->group_by('siswa')->get()->result();
 		$this->load->view('admin/index');
-		$this->load->view('admin/sidebar');
-		$this->load->view('admin/absensi/index', $data);
+        $this->load->view('admin/sidebar');
+        $this->load->view('admin/absensi/index', $data);
 	}
 
 
@@ -948,12 +948,12 @@ class Admin extends CI_Controller
 		$data['jurusan'] = $this->m_admin->jur('tb_jurusan')->result();
 		$data['absen'] 	 = $this->m_admin->cariBed('tb_absensi', $dimana);
 		$data['siswa']	 = $this->m_admin->disiswa($jurusan)->result();
-		$data['akhir']	 = $this->m_admin->akhir($siswa, $jurusan);
+		$data['akhir']	 = $this->m_admin->akhirAbsenAdmin($siswa, $jurusan);
 
 
 		$this->load->view('admin/index');
-		$this->load->view('admin/sidebar');
-		$this->load->view('admin/absensi/index', $data);
+        $this->load->view('admin/sidebar');
+        $this->load->view('admin/absensi/index', $data);
 	}
 
 	public function cetakAbsenKelas()

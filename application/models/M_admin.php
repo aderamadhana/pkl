@@ -233,6 +233,15 @@ class m_admin extends CI_Model
 		return $this->db->query("SELECT DISTINCT siswa FROM tb_absensi WHERE jurusan = '$key' ");
 	}
 
+	public function akhirAbsenAdmin($siswa, $key)
+	{
+		if ($siswa != "") {
+			return $this->db->query("SELECT tb_absensi.* FROM tb_absensi JOIN tb_tempat_rekomendasi ON tb_tempat_rekomendasi.nama_perusahaan = tb_absensi.perusahaan JOIN tb_tempat_siswa ON tb_tempat_siswa.id_rekomendasi = tb_tempat_rekomendasi.id_rekomendasi WHERE siswa = '$siswa' GROUP BY id_absen")->result();
+		} else {
+			return $this->db->query("SELECT tb_absensi.* FROM tb_absensi JOIN tb_tempat_rekomendasi ON tb_tempat_rekomendasi.nama_perusahaan = tb_absensi.perusahaan JOIN tb_tempat_siswa ON tb_tempat_siswa.id_rekomendasi = tb_tempat_rekomendasi.id_rekomendasi WHERE jurusan = '$key' GROUP BY id_absen")->result();
+		}
+	}
+
 	public function akhir($siswa, $key)
 	{
 		if ($siswa != "") {

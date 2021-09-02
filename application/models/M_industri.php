@@ -59,7 +59,11 @@ class m_industri extends CI_Model
 	}
 
 	public function ambil_detail_kegiatan($id_siswa){
-		return $this->db->get_where('tb_kegiatan_view', array('id_siswa' => $id_siswa))->result();
+		$this->db->select('*');
+		$this->db->from('tb_kegiatan');
+		$this->db->join('tb_siswa', 'tb_siswa.id_siswa = tb_kegiatan.id_siswa');
+		$this->db->where('tb_siswa.id_siswa', $id_siswa);
+		return $this->db->get()->result();
 	}
 
 	public function inputNilai($data){

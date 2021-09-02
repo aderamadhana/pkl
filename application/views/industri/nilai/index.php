@@ -143,9 +143,9 @@ endif; ?>
                                             </div>
                                         </th>
                                         <?php 
-                                            $query = $this->db->get_where('tb_nilai', array('id_siswa' => $a->id_siswa, 'status_nilai_industri' => 1))->result();
+                                            $query = $this->db->get_where('tb_nilai', array('id_siswa' => $a->id_siswa))->result();
 
-                                            if($query == 0){
+                                            if(count($query) == 0){
                                                 $status_penilaian = '<span class="badge badge-warning">Belum Dinilai</span>';
                                             }else{
                                                 $status_penilaian = '<span class="badge badge-success">Sudah Dinilai</span>';

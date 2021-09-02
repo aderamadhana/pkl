@@ -410,8 +410,8 @@ class Siswa extends CI_Controller
 
 	public function doTambahKegiatan(){
 		$config['upload_path']   = './assets/uploads/kegiatan';
-		$config['allowed_types'] = 'jpg|png|jpeg|gif';
-		$config['max_size'] 		= 1024;
+		$config['allowed_types'] = 'doc|docx|pdf';
+		$config['max_size'] 		= 2048;
 
 		$this->load->library('upload', $config);
 		$buktiKegiatan = null;
@@ -421,20 +421,26 @@ class Siswa extends CI_Controller
 		if($this->upload->do_upload('bukti_kegiatan')){ 
 			$dataUpload     	= $this->upload->data();
 			$buktiKegiatan    	= $dataUpload['file_name'];
+
+			$data = array(
+				'id_siswa' 				=> $this->input->post('id_siswa'),
+				'id_rekomendasi' 		=> $this->input->post('id_rekomendasi'),
+				'id_guru' 				=> $this->input->post('id_guru'),
+				'nama_kegiatan' 		=> $this->input->post('nama_kegiatan'),
+				'tgl_kegiatan' 			=> $this->input->post('tgl_kegiatan'),
+				'deskripsi_kegiatan' 	=> $this->input->post('deskripsi_kegiatan'),
+				'bukti_kegiatan' 		=> $buktiKegiatan
+			);
+	
+			$this->m_siswa->tambahKegiatan($data);
+			$this->session->set_tempdata('tambah_kegiatan', 'Kegiatan Berhasil di Tambah!', 0);
+			redirect('siswa/kegiatan');
+		}else{
+			$this->session->set_tempdata('tambah_kegiatan', 'Data tidak dapat diupload!', 0);
+			redirect('siswa/kegiatan');
 		}
 
-		$data = array(
-			'id_siswa' 				=> $this->input->post('id_siswa'),
-			'id_rekomendasi' 		=> $this->input->post('id_rekomendasi'),
-			'nama_kegiatan' 		=> $this->input->post('nama_kegiatan'),
-			'tgl_kegiatan' 			=> $this->input->post('tgl_kegiatan'),
-			'deskripsi_kegiatan' 	=> $this->input->post('deskripsi_kegiatan'),
-			'bukti_kegiatan' 		=> $buktiKegiatan
-		);
-
-		$this->m_siswa->tambahKegiatan($data);
-		$this->session->set_tempdata('tambah_kegiatan', 'Kegiatan Berhasil di Tambah!', 0);
-		redirect('siswa/kegiatan');
+		
 	}
 
 	public function editKegiatan($id_kegiatan){
@@ -493,5 +499,16 @@ class Siswa extends CI_Controller
 		$this->load->view('siswa/header');
 		$this->load->view('siswa/navbar');
 		$this->load->view('siswa/nilai/index', $data);
+	}
+
+	public function tempatPKL($id)
+	{
+		$dimana = array('id_siswa' => $id);
+		$data['siswa'] = $this->m_siswa->get_satu('tb_siswa', $dimana);
+
+		$this->load->view('siswa/header');
+		$this->load->view('siswa/navbar');
+		$this->load->view('siswa/tempat-pkl/index', $data);
+		$this->load->view('siswa/footer');
 	}
 }

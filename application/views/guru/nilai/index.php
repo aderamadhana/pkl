@@ -143,11 +143,11 @@ endif; ?>
                                             </div>
                                         </th>
                                         <?php 
-                                            $query = $this->db->get('tb_nilai')->result();
+                                            $query = $this->db->get_where('tb_nilai', array('id_siswa' => $a->id_siswa))->result();
                                             foreach($query as $d){
                                                 $status = $d->status_nilai_industri;
                                             }
-
+                                            
                                             if($status == 1){
                                                 $status_penilaian = '<span class="badge badge-warning">Belum Dinilai</span>';
                                             }else if($status == 2){

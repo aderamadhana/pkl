@@ -32,15 +32,33 @@ class m_guru extends CI_Model
 
     public function ambil_kegiatan($query, $perPage, $offset){
 		if ($query != "") {
-			$oke = $this->db->query("SELECT * FROM tb_kegiatan_view WHERE user_guru = '".$this->session->userdata('guru')."' AND nama_siswa LIKE '%" . $query . "%' group by id_siswa");
+            $this->db->select('*');
+            $this->db->from('tb_kegiatan');
+            $this->db->join('tb_siswa', 'tb_siswa.id_siswa = tb_kegiatan.id_siswa');
+            $this->db->join('tb_guru', 'tb_guru.id_guru = tb_kegiatan.id_guru');
+            $this->db->where('tb_guru.user', $this->session->userdata('guru'));
+            $this->db->like('nama_siswa', $query);
+            $this->db->group_by('tb_kegiatan.id_siswa');
+            $oke= $this->db->get();
 		} else {
-			$oke = $this->db->query("SELECT * FROM tb_kegiatan_view WHERE user_guru = '".$this->session->userdata('guru')."' group by id_siswa");
+			$this->db->select('*');
+            $this->db->from('tb_kegiatan');
+            $this->db->join('tb_siswa', 'tb_siswa.id_siswa = tb_kegiatan.id_siswa');
+            $this->db->join('tb_guru', 'tb_guru.id_guru = tb_kegiatan.id_guru');
+            $this->db->where('tb_guru.user', $this->session->userdata('guru'));
+            $this->db->group_by('tb_kegiatan.id_siswa');
+            $oke= $this->db->get();
 		}
 		return $oke->result();
 	}
 
 	public function ambil_detail_kegiatan($id_siswa){
-		return $this->db->get_where('tb_kegiatan_view', array('id_siswa' => $id_siswa))->result();
+		$this->db->select('*');
+        $this->db->from('tb_kegiatan');
+        $this->db->join('tb_siswa', 'tb_siswa.id_siswa = tb_kegiatan.id_siswa');
+        $this->db->join('tb_guru', 'tb_guru.id_guru = tb_kegiatan.id_guru');
+        $this->db->where('tb_kegiatan.id_siswa', $id_siswa);
+        return $this->db->get()->result();
 	}
 
     public function updateNilai($data, $where){

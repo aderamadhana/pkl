@@ -145,8 +145,8 @@
                                             </div>
                                         </td>
                                         <td scope="row" class="name">
-                                            <a href="<?= base_url('assets/uploads/kegiatan/'.$a->bukti_kegiatan) ?>" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Jessica Doe" data-lightbox="image-1" data-title="Bukti Kegiatan">
-                                                <img alt="Detail Kegiatan" src="<?= base_url('assets/uploads/kegiatan/'.$a->bukti_kegiatan) ?>">
+                                            <a href="<?= base_url('assets/uploads/kegiatan/') . $data->bukti_kegiatan; ?>" class="btn btn-primary" data-toggle="tooltip" data-original-title="Jessica Doe" data-lightbox="image-1" data-title="Bukti Absensi">
+                                            Link
                                             </a>
                                         </td>
                                     </tr>

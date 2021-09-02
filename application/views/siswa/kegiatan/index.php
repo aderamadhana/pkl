@@ -71,8 +71,8 @@ endif; ?>
                                 <td><?= $data->deskripsi_kegiatan ?></td>
                                 <td><?= $data->tgl_kegiatan ?></td>
                                 <td>
-                                    <a href="<?= base_url('assets/uploads/kegiatan/') . $data->bukti_kegiatan; ?>" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Jessica Doe" data-lightbox="image-1" data-title="Bukti Absensi">
-                                        <img alt="Bukti Absensi" src="<?= base_url('assets/uploads/kegiatan/') . $data->bukti_kegiatan; ?>">
+                                    <a href="<?= base_url('assets/uploads/kegiatan/') . $data->bukti_kegiatan; ?>" class="btn btn-primary" data-toggle="tooltip" data-original-title="Jessica Doe" data-lightbox="image-1" data-title="Bukti Absensi">
+                                      Link
                                     </a>
                                 </td>
                                 <td>

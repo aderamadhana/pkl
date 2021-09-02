@@ -43,7 +43,7 @@
     <!-- End Navbar -->
     <!-- Header -->
     <div class="header bg-gradient-info pt-5 pt-md-8">
-        <form action="<?= base_url('industri/laporan') ?>" method="POST">
+        <form action="<?= base_url('guru/laporan') ?>" method="POST">
             <div class="row">
                 <div class="col-md-6 ml-4">
 
@@ -61,7 +61,7 @@
                     <button type="submit" class="btn btn-primary">Cari</button>
                 </div>
                 <div class="col-md-2">
-                    <a href="<?= base_url('industri/laporan') ?>" class="btn btn-warning">Reset Cari</a>
+                    <a href="<?= base_url('guru/laporan') ?>" class="btn btn-warning">Reset Cari</a>
                 </div>
             </div>
         </form>
@@ -145,8 +145,8 @@
                                             </div>
                                         </td>
                                         <td scope="row" class="name">
-                                            <a href="<?= base_url('assets/uploads/kegiatan/'.$a->bukti_kegiatan) ?>" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Jessica Doe" data-lightbox="image-1" data-title="Bukti Kegiatan">
-                                                <img alt="Detail Kegiatan" src="<?= base_url('assets/uploads/kegiatan/'.$a->bukti_kegiatan) ?>">
+                                            <a href="<?= base_url('assets/uploads/kegiatan/') . $a->bukti_kegiatan; ?>" class="btn btn-primary" >
+                                                Link
                                             </a>
                                         </td>
                                     </tr>

@@ -138,7 +138,7 @@
 
                                 <select name="siswa" class="form-control">
                                     <option value="">Pilih Siswa</option>
-                                    <?php echo print_r($siswa); foreach ($siswa as $c) : ?>
+                                    <?php foreach ($siswa as $c) : ?>
                                         <option value="<?= $c->siswa ?>"><?= $c->siswa ?></option>
                                     <?php endforeach; ?>
                                 </select>
