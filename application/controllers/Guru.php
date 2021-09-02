@@ -132,7 +132,7 @@ class Guru extends CI_Controller
 		$perPage		 = $config['per_page'];
 		$data['manual']  = $this->db->query("SELECT * FROM tb_tempat_siswa INNER JOIN tb_siswa ON tb_tempat_siswa.id_siswa = tb_siswa.id_siswa INNER JOIN tb_tempat_rekomendasi ON tb_tempat_siswa.id_rekomendasi = tb_tempat_rekomendasi.id_rekomendasi JOIN tb_guru ON tb_guru.id_guru = tb_tempat_siswa.id_guru WHERE tb_guru.user = '".$this->session->userdata('guru')."' ORDER BY jurusan ASC LIMIT $offset, $perPage ")->result();
 		$data['jurusan'] = $this->m_admin->jur('tb_jurusan')->result();
-		$data['siswa']   = $this->db->select('*')->from('tb_absensi')->group_by('siswa')->get()->result();
+		$data['siswa']   = $this->db->query("SELECT * FROM tb_tempat_siswa INNER JOIN tb_siswa ON tb_tempat_siswa.id_siswa = tb_siswa.id_siswa INNER JOIN tb_tempat_rekomendasi ON tb_tempat_siswa.id_rekomendasi = tb_tempat_rekomendasi.id_rekomendasi JOIN tb_guru ON tb_guru.id_guru = tb_tempat_siswa.id_guru WHERE tb_guru.user = '".$this->session->userdata('guru')."'")->result();
 		$this->load->view('guru/header');
         $this->load->view('guru/sidebar');
         $this->load->view('guru/absensi/index', $data);
@@ -179,7 +179,7 @@ class Guru extends CI_Controller
 
 		$data['jurusan'] = $this->m_admin->jur('tb_jurusan')->result();
 		$data['absen'] 	 = $this->m_admin->cariBed('tb_absensi', $dimana);
-		$data['siswa']	 = $this->m_admin->disiswa($jurusan)->result();
+		$data['siswa']	 = $this->db->query("SELECT * FROM tb_tempat_siswa INNER JOIN tb_siswa ON tb_tempat_siswa.id_siswa = tb_siswa.id_siswa INNER JOIN tb_tempat_rekomendasi ON tb_tempat_siswa.id_rekomendasi = tb_tempat_rekomendasi.id_rekomendasi JOIN tb_guru ON tb_guru.id_guru = tb_tempat_siswa.id_guru WHERE tb_guru.user = '".$this->session->userdata('guru')."' && jurusan='".$jurusan."' ")->result();
 		$data['akhir']	 = $this->m_admin->akhir($siswa, $jurusan);
 
 

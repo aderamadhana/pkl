@@ -82,20 +82,20 @@
                     <div class="form-group">
                         <h3 style="text-transform: uppercase; border-bottom: 2px solid #fff; width: 50%; color: white; margin-bottom: 5%;">Cari Absensi</h3>
                         <div class="row">
-                            <div class="col-3" id="ju">
+                            <!-- <div class="col-3" id="ju">
                                 <select name="jurusan" class="form-control">
                                     <option value="">Pilih Jurusan</option>
                                     <?php foreach ($jurusan as $j) : ?>
                                         <option value="<?= $j->nama_singkat ?>"><?= $j->nama_singkat ?></option>
                                     <?php endforeach; ?>
                                 </select>
-                            </div>
+                            </div> -->
                             <div class="col-3">
 
                                 <select name="siswa" class="form-control">
                                     <option value="">Pilih Siswa</option>
-                                    <?php echo print_r($siswa); foreach ($siswa as $c) : ?>
-                                        <option value="<?= $c->siswa ?>"><?= $c->siswa ?></option>
+                                    <?php foreach ($siswa as $c) : ?>
+                                        <option value="<?= $c->nama_siswa ?>"><?= $c->nama_siswa ?></option>
                                     <?php endforeach; ?>
                                 </select>
 
@@ -134,7 +134,7 @@
                                 <h3 class="mb-0">Daftar Absensi <b><?= @$b->jurusan ?></b></h3>
                             </div>
                             <div class="col text-right">
-                                <a href="<?= site_url('guru/cetakAbsenKelas') ?>" target="_blank" class="btn btn-sm btn-primary">Cetak PDF</a>
+                                <!-- <a href="<?= site_url('guru/cetakAbsenKelas') ?>" target="_blank" class="btn btn-sm btn-primary">Cetak PDF</a> -->
                             </div>
 
                         </div>

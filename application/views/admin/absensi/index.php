@@ -178,7 +178,7 @@
                                 <h3 class="mb-0">Daftar Absensi <b><?= @$b->jurusan ?></b></h3>
                             </div>
                             <div class="col text-right">
-                                <a href="<?= site_url('admin/cetakAbsenKelas') ?>" target="_blank" class="btn btn-sm btn-primary">Cetak PDF</a>
+                                <!-- <a href="<?= site_url('admin/cetakAbsenKelas/'.@$b->jurusan) ?>" target="_blank" class="btn btn-sm btn-primary">Cetak PDF</a> -->
                             </div>
 
                         </div>

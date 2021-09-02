@@ -956,21 +956,13 @@ class Admin extends CI_Controller
         $this->load->view('admin/absensi/index', $data);
 	}
 
-	public function cetakAbsenKelas()
+	public function cetakAbsenKelas($jurusan)
 	{
+		$data = array('jurusan' => $jurusan);
 		$this->load->library('mypdf');
-		$data['cetak'] = $this->m_admin->showCetakNilai();
+		$data['cetak'] = $this->m_admin->showCetakNilai($data);
 
 		$this->mypdf->generate('laporan_pdf', $data);
-
-
-
-
-		// $data['coba']	 = $_GET['jurusan'];
-
-		// $this->pdf->setPaper('A4', 'potrait');
-		// $this->pdf->filename = "laporan-petanikode.pdf";
-		// $this->pdf->load_view('laporan_pdf', $data);
 	}
 
 	public function absenManual($nis)
