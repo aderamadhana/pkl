@@ -15,74 +15,62 @@
                         <!-- Hidden data -->
                         <input type="hidden" value="<?= $d->id_siswa ?>" name="id_siswa">
                         <div class="row">
-                            <div class="col">Nama</div>
-                            <div class="col">:</div>
-                            <div class="col"><?= $d->nama_siswa;  ?></div>
+                            <div class="col-md-3">Nama</div>
+                            <div class="col">: <?= $d->nama_siswa;  ?></div>
                         </div>
                         <div class="row">
-                            <div class="col">Nama Instansi</div>
-                            <div class="col">:</div>
-                            <div class="col text-uppercase"><?= $d->nama_perusahaan;  ?></div>
+                            <div class="col-md-3">Nama Instansi</div>
+                            <div class="col text-uppercase">: <?= $d->nama_perusahaan;  ?></div>
                         </div>
                         <div class="row">
-                            <div class="col">Alamat Instansi</div>
-                            <div class="col">:</div>
-                            <div class="col"><?= $d->alamat;  ?></div>
+                            <div class="col-md-3">Alamat Instansi</div>
+                            <div class="col">: <?= $d->alamat;  ?></div>
                         </div>
                         <div class="row">
-                            <div class="col">Kelas</div>
-                            <div class="col">:</div>
-                            <div class="col"><?= $d->kelas;  ?></div>
+                            <div class="col-md-3">Kelas</div>
+                            <div class="col">: <?= $d->kelas;  ?></div>
                         </div><br>
                         <div class="row">
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    Kerajinan
+                                    Kerajinan : 
                                 </div>
                             </div>
-                            <div class="col-md-1">
-                                :
-                            </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <input type="number" class="form-control" min=0 name="kerajinan">
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    Prestasi
+                                    Prestasi : 
                                 </div>
                             </div>
-                            <div class="col-md-1">:</div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <input type="number" class="form-control" min=0 name="prestasi">
                                 </div>
                             </div>
                             <div class="col-md-2">
-                                Disiplin
+                                Disiplin :
                             </div>
-                            <div class="col-md-1">:</div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <input type="number" class="form-control" min=0 name="disiplin">
                             </div>
                             <div class="col-md-2">
-                                Kerjasama
+                                Kerjasama :
                             </div>
-                            <div class="col-md-1">:</div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <input type="number" class="form-control" min=0 name="kerjasama">
                             </div>
                             <div class="col-md-2">
-                                Inisiatif
+                                Inisiatif :
                             </div>
-                            <div class="col-md-1">:</div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <input type="number" min=0 class="form-control" name="inisiatif">
                             </div>
                             <div class="col-md-2">
-                                Tanggung Jawab
+                                Tanggung Jawab :
                             </div>
-                            <div class="col-md-1">:</div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <input type="number" class="form-control" min=0 name="tanggung_jawab">
                             </div>
                         </div>

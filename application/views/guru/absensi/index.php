@@ -34,7 +34,7 @@
             </div>
         </div>
     </div>
-
+    
     <!-- End Modal Notif -->
     <!-- Navbar -->
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
@@ -277,7 +277,7 @@
 
                                                     <a href="<?= base_url('guru/cekManual/') . $a->nis; ?>" class="btn-sm btn-success">Cek Absensi</a>
                                                 <?php } else { ?>
-                                                    <a href="" data-toggle="modal" data-target="#modal-notification" class="btn-sm btn-success">Cek Absensi</a>
+                                                    <a href="<?= base_url('guru/cekManual/') . $a->nis; ?>" class="btn-sm btn-success">Cek Absensi</a>
                                                 <?php } ?>
                                                 
                                             </td>

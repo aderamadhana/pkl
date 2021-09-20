@@ -13,24 +13,20 @@
                         <!-- Hidden data -->
                         <input type="hidden" value="<?= $e->id_siswa ?>" name="id">
                         <div class="row">
-                            <div class="col">Nama</div>
-                            <div class="col">:</div>
-                            <div class="col"><?= $e->nama_siswa;  ?></div>
+                            <div class="col-md-3">Nama</div>
+                            <div class="col">: <?= $e->nama_siswa;  ?></div>
                         </div>
                         <div class="row">
-                            <div class="col">Nama Instansi</div>
-                            <div class="col">:</div>
-                            <div class="col text-uppercase"><?= $e->nama_perusahaan;  ?></div>
+                            <div class="col-md-3">Nama Instansi</div>
+                            <div class="col text-uppercase">: <?= $e->nama_perusahaan;  ?></div>
                         </div>
                         <div class="row">
-                            <div class="col">Alamat Instansi</div>
-                            <div class="col">:</div>
-                            <div class="col"><?= $e->alamat;  ?></div>
+                            <div class="col-md-3">Alamat Instansi</div>
+                            <div class="col">: <?= $e->alamat;  ?></div>
                         </div>
                         <div class="row">
-                            <div class="col">Kelas</div>
-                            <div class="col">:</div>
-                            <div class="col"><?= $e->kelas;  ?></div>
+                            <div class="col-md-3">Kelas</div>
+                            <div class="col">: <?= $e->kelas;  ?></div>
                         </div>
                     <?php endforeach; ?>
                     <br>

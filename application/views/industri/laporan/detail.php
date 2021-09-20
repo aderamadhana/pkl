@@ -145,7 +145,7 @@
                                             </div>
                                         </td>
                                         <td scope="row" class="name">
-                                            <a href="<?= base_url('assets/uploads/kegiatan/') . $data->bukti_kegiatan; ?>" class="btn btn-primary" data-toggle="tooltip" data-original-title="Jessica Doe" data-lightbox="image-1" data-title="Bukti Absensi">
+                                            <a href="<?= base_url('assets/uploads/kegiatan/')?><?= $a->bukti_kegiatan ?>" class="btn btn-primary" >
                                             Link
                                             </a>
                                         </td>

@@ -68,24 +68,20 @@
                                     <!-- Hidden data -->
                                     <input type="hidden" value="<?= $n->id_nilai ?>" name="id_nilai">
                                     <div class="row">
-                                        <div class="col">Nama</div>
-                                        <div class="col">:</div>
-                                        <div class="col"><?= $d->nama_siswa;  ?></div>
+                                        <div class="col-md-3">Nama</div>
+                                        <div class="col">: <?= $d->nama_siswa;  ?></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col">Nama Instansi</div>
-                                        <div class="col">:</div>
-                                        <div class="col text-uppercase"><?= $d->nama_perusahaan;  ?></div>
+                                        <div class="col-md-3">Nama Instansi</div>
+                                        <div class="col text-uppercase">: <?= $d->nama_perusahaan;  ?></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col">Alamat Instansi</div>
-                                        <div class="col">:</div>
-                                        <div class="col"><?= $d->alamat;  ?></div>
+                                        <div class="col-md-3">Alamat Instansi</div>
+                                        <div class="col">: <?= $d->alamat;  ?></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col">Kelas</div>
-                                        <div class="col">:</div>
-                                        <div class="col"><?= $d->kelas;  ?></div>
+                                        <div class="col-md-3">Kelas</div>
+                                        <div class="col">: <?= $d->kelas;  ?></div>
                                     </div><br>
                                     <div class="row">
                                         <div class="col-md-2">

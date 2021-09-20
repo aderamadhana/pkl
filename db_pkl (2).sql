@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 21, 2021 at 09:40 AM
+-- Generation Time: Sep 20, 2021 at 05:31 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -45,7 +45,9 @@ CREATE TABLE `tb_absensi` (
 INSERT INTO `tb_absensi` (`id_absen`, `perusahaan`, `alamat`, `tanggal`, `jam`, `siswa`, `jurusan`, `foto`) VALUES
 (145, 'PLN', 'Malang', '2021-08-16', '09:49:14', 'Ade Ramadhana Pratama', 'RPL', 'image_1629082154.png'),
 (146, 'PLN', 'Malang', '2021-08-15', '09:49:14', 'Ade Ramadhana Pratama', 'RPL', 'image_1629082154.png'),
-(147, 'PLN', 'Malang', '2021-08-17', '21:07:49', 'Ade Ramadhana Pratama', 'RPL', 'image_1629209269.png');
+(147, 'PLN', 'Malang', '2021-08-17', '21:07:49', 'Ade Ramadhana Pratama', 'RPL', 'image_1629209269.png'),
+(148, 'PLN', 'Malang', '2021-09-02', '22:06:19', 'tes', 'RPL', 'image_1630595179.png'),
+(149, 'PLN', 'Malang', '2021-09-20', '10:11:03', 'samsul', 'RPL', 'image_1632107463.png');
 
 -- --------------------------------------------------------
 
@@ -115,20 +117,6 @@ INSERT INTO `tb_berkas` (`id_berkas`, `nama_berkas`, `file_berkas`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_chat`
---
-
-CREATE TABLE `tb_chat` (
-  `id_chat` int(11) NOT NULL,
-  `id_siswa` int(11) NOT NULL,
-  `pesan` text NOT NULL,
-  `kepada` varchar(100) NOT NULL,
-  `id_guru` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tb_guru`
 --
 
@@ -180,6 +168,7 @@ CREATE TABLE `tb_kegiatan` (
   `id_kegiatan` int(11) NOT NULL,
   `id_siswa` int(11) NOT NULL,
   `id_rekomendasi` int(11) NOT NULL,
+  `id_guru` int(11) NOT NULL,
   `nama_kegiatan` varchar(200) NOT NULL,
   `deskripsi_kegiatan` varchar(255) NOT NULL,
   `tgl_kegiatan` date NOT NULL,
@@ -190,9 +179,12 @@ CREATE TABLE `tb_kegiatan` (
 -- Dumping data for table `tb_kegiatan`
 --
 
-INSERT INTO `tb_kegiatan` (`id_kegiatan`, `id_siswa`, `id_rekomendasi`, `nama_kegiatan`, `deskripsi_kegiatan`, `tgl_kegiatan`, `bukti_kegiatan`) VALUES
-(3, 29, 10, 'Kegiatan 1', 'dsadsa', '2021-08-17', 'gambar1.PNG'),
-(4, 29, 10, 'Kegiatan 3', 'deadea', '2021-08-16', 'gambar2.PNG');
+INSERT INTO `tb_kegiatan` (`id_kegiatan`, `id_siswa`, `id_rekomendasi`, `id_guru`, `nama_kegiatan`, `deskripsi_kegiatan`, `tgl_kegiatan`, `bukti_kegiatan`) VALUES
+(6, 29, 10, 9, 'Kegiatan 1', 'adeeda', '2021-09-02', 'test.docx'),
+(7, 29, 10, 9, 'Kegiatan 2', 'deadea', '2021-09-02', 'test_(1).docx'),
+(8, 30, 10, 1, 'Kegiatan 1', 'deadea', '2021-09-02', 'test1.docx'),
+(9, 31, 10, 9, 'Kegiatan', 'deadea', '2021-09-02', 'test_(1)1.docx'),
+(10, 32, 10, 9, 'Kegiatan', 'ade', '2021-09-20', '171111020_FRS.pdf');
 
 -- --------------------------------------------------------
 
@@ -218,34 +210,6 @@ CREATE TABLE `tb_kegiatan_view` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_monitoring`
---
-
-CREATE TABLE `tb_monitoring` (
-  `id` int(11) NOT NULL,
-  `id_siswa` int(11) NOT NULL,
-  `id_guru` int(11) NOT NULL,
-  `nama_perusahaan` varchar(100) NOT NULL,
-  `kejadian` text NOT NULL,
-  `keterangan` text NOT NULL,
-  `rekomendasi` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_ngungsi`
---
-
-CREATE TABLE `tb_ngungsi` (
-  `id` int(11) NOT NULL,
-  `kepada` varchar(100) NOT NULL,
-  `id_siswa` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tb_nilai`
 --
 
@@ -267,7 +231,10 @@ CREATE TABLE `tb_nilai` (
 --
 
 INSERT INTO `tb_nilai` (`id_nilai`, `kerajinan`, `prestasi`, `disiplin`, `kerjasama`, `inisiatif`, `tanggung_jawab`, `ujian_prakerin`, `id_siswa`, `status_nilai_industri`) VALUES
-(7, 90, 90, 85, 90, 90, 90, 80, 29, 2);
+(9, 90, 90, 90, 90, 90, 90, 100, 29, 2),
+(10, 90, 90, 90, 90, 90, 90, 0, 30, 1),
+(11, 100, 100, 100, 100, 21, 32, 100, 31, 2),
+(12, 100, 100, 100, 100, 100, 100, 0, 32, 1);
 
 -- --------------------------------------------------------
 
@@ -287,7 +254,10 @@ CREATE TABLE `tb_notif` (
 --
 
 INSERT INTO `tb_notif` (`id`, `nama_perusahaan`, `pesan`, `id_siswa`) VALUES
-(36, '10', 'Selamat tempat pkl anda telah terkonfirmasi!', '29');
+(36, '10', 'Selamat tempat pkl anda telah terkonfirmasi!', '29'),
+(38, '10', 'Selamat tempat pkl anda telah terkonfirmasi!', '30'),
+(39, '10', 'Selamat tempat pkl anda telah terkonfirmasi!', '31'),
+(40, '10', 'Selamat tempat pkl anda telah terkonfirmasi!', '32');
 
 -- --------------------------------------------------------
 
@@ -297,6 +267,7 @@ INSERT INTO `tb_notif` (`id`, `nama_perusahaan`, `pesan`, `id_siswa`) VALUES
 
 CREATE TABLE `tb_periode` (
   `id_periode` int(11) NOT NULL,
+  `periode` varchar(100) NOT NULL,
   `tgl_start` date NOT NULL,
   `tgl_end` date NOT NULL,
   `status_periode` int(11) NOT NULL
@@ -306,8 +277,9 @@ CREATE TABLE `tb_periode` (
 -- Dumping data for table `tb_periode`
 --
 
-INSERT INTO `tb_periode` (`id_periode`, `tgl_start`, `tgl_end`, `status_periode`) VALUES
-(4, '2021-08-30', '2021-08-31', 1);
+INSERT INTO `tb_periode` (`id_periode`, `periode`, `tgl_start`, `tgl_end`, `status_periode`) VALUES
+(4, 'Ganjil 2021', '2021-08-30', '2021-08-31', 1),
+(6, 'Genap 2021', '2021-08-31', '2021-09-11', 1);
 
 -- --------------------------------------------------------
 
@@ -374,19 +346,10 @@ CREATE TABLE `tb_siswa` (
 --
 
 INSERT INTO `tb_siswa` (`id_siswa`, `nis`, `nama_siswa`, `kelas`, `jurusan`, `user`, `pass`, `foto`, `jk`, `diskripsi`) VALUES
-(29, 171111020, 'Ade Ramadhana Pratama', 'XI RPL B', 'RPL', 'sanade2034', 'bcd724d15cde8c47650fda962968f102', 'DSC_6609_edd2.jpg', 'L', 'saya seorang kapiten mantap jaya');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_tampung`
---
-
-CREATE TABLE `tb_tampung` (
-  `id` int(11) NOT NULL,
-  `kepada` varchar(100) NOT NULL,
-  `id_siswa` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+(29, 171111020, 'Ade Ramadhana Pratama', 'XI RPL B', 'RPL', 'sanade2034', 'bcd724d15cde8c47650fda962968f102', 'DSC_6609_edd2.jpg', 'L', 'saya seorang kapiten mantap jaya'),
+(30, 0, 'tes', 'XI RPL B', 'RPL', 'tes', '28b662d883b6d76fd96e4ddc5e9ba780', 'man.png', 'L', ''),
+(31, 21562516, 'sam', 'XI RPL B', 'RPL', 'sam', '332532dcfaa1cbf61e2a266bd723612c', 'man.png', 'L', ''),
+(32, 12787312, 'samsul', 'XI RPL B', 'RPL', 'samsul', 'bcd724d15cde8c47650fda962968f102', 'man.png', 'L', 'Samsul');
 
 -- --------------------------------------------------------
 
@@ -413,8 +376,9 @@ CREATE TABLE `tb_tempat_rekomendasi` (
 
 INSERT INTO `tb_tempat_rekomendasi` (`id_rekomendasi`, `nama_perusahaan`, `jurusan_perusahaan`, `visi`, `misi`, `alamat`, `foto`, `cp`, `user`, `pass`) VALUES
 (9, 'Hummasoft', 'RPL', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'Karangploso, Malang', 'ESJPvJlWAAIjbcU.jpg', 'Rizal 08932189', 'hummasoft', 'industri'),
-(10, 'PLN', 'RPL, TKJ, Metro', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', 'Malang', 'download.jpg', '768931', 'pln', 'industri'),
-(11, 'Gojek', 'Metro, Elin', 'aaaa', 'bbbbbb', 'Blimbing, Malang', 'About_1_desktop.jpg', '67833', 'gojek', 'industri');
+(10, 'PLN', 'RPL, TKJ, Metro', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'Malang', 'download.jpg', '768931', 'pln', 'industri'),
+(11, 'Gojek', 'Metro, Elin', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'Blimbing, Malang', 'About_1_desktop.jpg', '67833', 'gojek', 'industri'),
+(13, 'tes', 'RPL, TKJ', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'tes', 'DSC_6609_edd.jpg', 'tes', 'tes', 'tes');
 
 -- --------------------------------------------------------
 
@@ -436,7 +400,10 @@ CREATE TABLE `tb_tempat_siswa` (
 --
 
 INSERT INTO `tb_tempat_siswa` (`id`, `id_rekomendasi`, `id_guru`, `id_siswa`, `id_periode`, `status_pkl`) VALUES
-(20, 10, 9, 29, 4, 0);
+(20, 10, 9, 29, 4, 0),
+(21, 10, 1, 30, 4, 0),
+(22, 10, 9, 31, 6, 0),
+(23, 10, 9, 32, 6, 0);
 
 -- --------------------------------------------------------
 
@@ -476,12 +443,6 @@ ALTER TABLE `tb_berkas`
   ADD PRIMARY KEY (`id_berkas`);
 
 --
--- Indexes for table `tb_chat`
---
-ALTER TABLE `tb_chat`
-  ADD PRIMARY KEY (`id_chat`);
-
---
 -- Indexes for table `tb_guru`
 --
 ALTER TABLE `tb_guru`
@@ -498,18 +459,6 @@ ALTER TABLE `tb_jurusan`
 --
 ALTER TABLE `tb_kegiatan`
   ADD PRIMARY KEY (`id_kegiatan`);
-
---
--- Indexes for table `tb_monitoring`
---
-ALTER TABLE `tb_monitoring`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tb_ngungsi`
---
-ALTER TABLE `tb_ngungsi`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tb_nilai`
@@ -548,12 +497,6 @@ ALTER TABLE `tb_siswa`
   ADD PRIMARY KEY (`id_siswa`);
 
 --
--- Indexes for table `tb_tampung`
---
-ALTER TABLE `tb_tampung`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `tb_tempat_rekomendasi`
 --
 ALTER TABLE `tb_tempat_rekomendasi`
@@ -573,7 +516,7 @@ ALTER TABLE `tb_tempat_siswa`
 -- AUTO_INCREMENT for table `tb_absensi`
 --
 ALTER TABLE `tb_absensi`
-  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
+  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
 
 --
 -- AUTO_INCREMENT for table `tb_absensi_manual`
@@ -594,12 +537,6 @@ ALTER TABLE `tb_berkas`
   MODIFY `id_berkas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `tb_chat`
---
-ALTER TABLE `tb_chat`
-  MODIFY `id_chat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
-
---
 -- AUTO_INCREMENT for table `tb_guru`
 --
 ALTER TABLE `tb_guru`
@@ -615,37 +552,25 @@ ALTER TABLE `tb_jurusan`
 -- AUTO_INCREMENT for table `tb_kegiatan`
 --
 ALTER TABLE `tb_kegiatan`
-  MODIFY `id_kegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `tb_monitoring`
---
-ALTER TABLE `tb_monitoring`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `tb_ngungsi`
---
-ALTER TABLE `tb_ngungsi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id_kegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tb_nilai`
 --
 ALTER TABLE `tb_nilai`
-  MODIFY `id_nilai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_nilai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tb_notif`
 --
 ALTER TABLE `tb_notif`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `tb_periode`
 --
 ALTER TABLE `tb_periode`
-  MODIFY `id_periode` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_periode` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tb_sekolah`
@@ -657,31 +582,25 @@ ALTER TABLE `tb_sekolah`
 -- AUTO_INCREMENT for table `tb_sementara`
 --
 ALTER TABLE `tb_sementara`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `tb_siswa`
 --
 ALTER TABLE `tb_siswa`
-  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
-
---
--- AUTO_INCREMENT for table `tb_tampung`
---
-ALTER TABLE `tb_tampung`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `tb_tempat_rekomendasi`
 --
 ALTER TABLE `tb_tempat_rekomendasi`
-  MODIFY `id_rekomendasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_rekomendasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tb_tempat_siswa`
 --
 ALTER TABLE `tb_tempat_siswa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

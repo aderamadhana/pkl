@@ -142,7 +142,7 @@ class Guru extends CI_Controller
 	{
 		$siswa				= $this->db->query("SELECT * FROM tb_siswa WHERE nis = '$nis' ")->row();
 		$id					= $this->db->query("SELECT * FROM tb_tempat_siswa WHERE id_siswa = '$siswa->id_siswa' ")->row();
-		$data['cek']		= $this->db->query("SELECT * FROM tb_tempat_siswa INNER JOIN tb_siswa ON tb_tempat_siswa.id_siswa = tb_siswa.id_siswa INNER JOIN tb_tempat_rekomendasi ON tb_tempat_siswa.id_rekomendasi = tb_tempat_rekomendasi.id_rekomendasi JOIN tb_guru ON tb_guru.id_guru = tb_tempat_siswa.id_guru  WHERE tb_guru.user = '".$this->session->userdata('guru')."' WHERE nis = '$nis' AND id = '$id->id'  ")->result();
+		$data['cek']		= $this->db->query("SELECT * FROM tb_tempat_siswa INNER JOIN tb_siswa ON tb_tempat_siswa.id_siswa = tb_siswa.id_siswa INNER JOIN tb_tempat_rekomendasi ON tb_tempat_siswa.id_rekomendasi = tb_tempat_rekomendasi.id_rekomendasi JOIN tb_guru ON tb_guru.id_guru = tb_tempat_siswa.id_guru  WHERE tb_guru.user = '".$this->session->userdata('guru')."' AND nis = '$nis' AND id = '$id->id'  ")->result();
 
 		$data['absen']		= $this->db->query("SELECT * FROM tb_absensi_manual WHERE id_siswa = '$siswa->id_siswa' ")->result();
 

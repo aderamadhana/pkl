@@ -58,7 +58,9 @@
                     </div>
                     <div class="card-body">
                     
-                    <?php foreach ($cek->result() as $d) : ?>
+                    <?php 
+                    if(count($cek->result()) > 0){
+                    foreach ($cek->result() as $d) : ?>
                     <!-- Hidden data -->
                     <input type="hidden" value="<?= $d->id_siswa ?>" name="id">
                     dsadas
@@ -137,7 +139,9 @@
                     </div>
                     <hr>
 
-                    <?php endforeach; ?>
+                    <?php endforeach; }else{ ?>
+                        Absensi belum di input oleh admin
+                        <?php }?>
                     </div>
                 </div>
 
